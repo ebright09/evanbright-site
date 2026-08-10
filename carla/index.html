@@ -26,6 +26,86 @@
   a:hover { color: #16181c; }
   input, textarea, select, button { font-family: inherit; font-size: inherit; color: inherit; }
   ::selection { background: #d8c9a8; }
+
+  /* ===================================================================
+     RESPONSIVE LAYER
+
+     The page body is authored as ~284 inline style attributes with no
+     breakpoints of its own, and inline styles cannot carry media
+     queries — so this block is the only place mobile layout can live.
+
+     Two consequences shape everything below:
+
+     1. Inline styles beat stylesheet rules on specificity, so every
+        declaration here needs !important.
+     2. Selectors key off the *rendered* style attribute, which the
+        browser normalises to "prop: value" — with a space after the
+        colon — regardless of how it was authored. Where a value is
+        matched literally, both spacings are listed so the rule holds
+        if the markup is ever re-serialised.
+     =================================================================== */
+
+  @media (max-width: 860px) {
+
+    /* Every multi-column grid collapses to one column. Twenty grids in
+       this page assume desktop width; the worst is "220px 1fr 200px",
+       420px of fixed track inside a 295px viewport. */
+    [style*="grid-template-columns"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* The results band reads better as 2x2 than as four tall rows. */
+    [style*="repeat(4,1fr)"],
+    [style*="repeat(4, 1fr)"] {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Section gutters: 40px a side costs 21% of a 375px screen. */
+    [style*="max-width:1240px"],
+    [style*="max-width: 1240px"] {
+      padding-left: 22px !important;
+      padding-right: 22px !important;
+    }
+
+    /* Vertical rhythm scaled down. Matched per-value rather than as a
+       blanket padding rule, so the header's own "0 40px" is untouched
+       and keeps its fixed height. */
+    [style*="padding: 104px 40px"] { padding-top: 64px !important; padding-bottom: 64px !important; }
+    [style*="padding: 96px 40px 88px"] { padding-top: 48px !important; padding-bottom: 56px !important; }
+    [style*="padding: 64px 40px 40px"] { padding-top: 44px !important; padding-bottom: 32px !important; }
+    [style*="padding: 56px 40px 44px"] { padding-top: 40px !important; padding-bottom: 32px !important; }
+
+    /* Stacked rows don't need a 40px trench between their parts. */
+    [style*="220px 1fr 200px"] { gap: 6px !important; }
+
+    /* Section headers pair a display heading with an intro paragraph in a
+       nowrap flex row, which squeezes the heading to ~73px ("What / we /
+       handle" stacked one word per line). Keyed on align-items:flex-end so
+       the sticky site header — same space-between, but align-items:center —
+       keeps its horizontal layout. */
+    [style*="align-items: flex-end"][style*="justify-content: space-between"] {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 18px !important;
+    }
+
+    /* Header: six nav links cannot fit beside the wordmark, and the
+       header's fixed 78px height means wrapping would overflow rather
+       than grow. Keep the wordmark and the contact button; the links
+       all point at sections reachable by scrolling. */
+    header nav > *:not(:last-child) { display: none !important; }
+    header [style*="font-size: 23px"] { font-size: 16px !important; }
+    header [style*="padding: 0px 40px"] { padding-left: 18px !important; padding-right: 18px !important; }
+
+    /* Display type authored at fixed 58/46/38px, unreadable at 375px. */
+    [style*="font-size: 58px"] { font-size: clamp(32px, 9vw, 58px) !important; }
+    [style*="font-size: 46px"] { font-size: clamp(28px, 7.5vw, 46px) !important; }
+    [style*="font-size: 38px"] { font-size: clamp(24px, 6.5vw, 38px) !important; }
+
+    /* Media fills its column instead of overflowing it. */
+    img { max-width: 100% !important; height: auto !important; }
+    iframe { width: 100% !important; aspect-ratio: 16 / 9 !important; height: auto !important; }
+  }
 </style>
 </helmet>
 
@@ -62,15 +142,15 @@
         </div>
         <div style="margin-top:52px; display:flex; align-items:center; gap:26px; flex-wrap:wrap">
           <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(246,244,240,0.42)">Recognized by</span>
-          <img src="https://static.wixstatic.com/media/5b9a06_61131bc551e945af9c6121e63bee6356~mv2.png/v1/fill/w_246,h_206,al_c,lg_1,q_85,enc_avif,quality_auto/5b9a06_61131bc551e945af9c6121e63bee6356~mv2.png" alt="Super Lawyers" style="height:56px; width:auto; object-fit:contain; filter:brightness(1.35) contrast(1.05)">
-          <img src="https://static.wixstatic.com/media/5b9a06_c8bac6503c964b12b987812246b13f13~mv2.png/v1/fill/w_336,h_274,al_c,q_85,enc_avif,quality_auto/5b9a06_c8bac6503c964b12b987812246b13f13~mv2.png" alt="Award badge" style="height:52px; width:auto; object-fit:contain; filter:brightness(1.35) contrast(1.05)">
-          <img src="https://static.wixstatic.com/media/5b9a06_7de63f1687de4d48ad4790ea8e4e69ee~mv2.png/v1/fill/w_365,h_163,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-11-27%20at%209_32_37%20AM.png" alt="Top Lawyers in California" style="height:38px; width:auto; object-fit:contain">
+          <img decoding="async" src="https://static.wixstatic.com/media/5b9a06_61131bc551e945af9c6121e63bee6356~mv2.png/v1/fill/w_246,h_206,al_c,lg_1,q_85,enc_avif,quality_auto/5b9a06_61131bc551e945af9c6121e63bee6356~mv2.png" alt="Super Lawyers" style="height:56px; width:auto; object-fit:contain; filter:brightness(1.35) contrast(1.05)">
+          <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/5b9a06_c8bac6503c964b12b987812246b13f13~mv2.png/v1/fill/w_336,h_274,al_c,q_85,enc_avif,quality_auto/5b9a06_c8bac6503c964b12b987812246b13f13~mv2.png" alt="Award badge" style="height:52px; width:auto; object-fit:contain; filter:brightness(1.35) contrast(1.05)">
+          <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/5b9a06_7de63f1687de4d48ad4790ea8e4e69ee~mv2.png/v1/fill/w_365,h_163,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-11-27%20at%209_32_37%20AM.png" alt="Top Lawyers in California" style="height:38px; width:auto; object-fit:contain">
         </div>
       </div>
       <div style="position:relative; display:grid; grid-template-columns:1fr 1fr; gap:14px">
-        <img src="https://static.wixstatic.com/media/5b9a06_8029779b2dd64a42a90ec9998aad7692.jpg/v1/fill/w_560,h_648,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5b9a06_8029779b2dd64a42a90ec9998aad7692.jpg" alt="Carla Minnard" style="grid-column:1 / -1; width:100%; height:380px; object-fit:cover; object-position:center 22%; filter:grayscale(0.25) contrast(1.04)">
-        <img src="https://static.wixstatic.com/media/5b9a06_eace3a4592a84b239844ef170e0715e7~mv2.jpg/v1/fill/w_674,h_596,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-12-11%20at%206_edited.jpg" alt="Carla Minnard in the press" style="width:100%; height:170px; object-fit:cover; filter:grayscale(0.25)">
-        <img src="https://static.wixstatic.com/media/5b9a06_9712d08a0cd04e64bd0ef117f2d01160~mv2.jpg/v1/fill/w_494,h_428,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-12-11%20at%206_51_edited.jpg" alt="Carla Minnard on television" style="width:100%; height:170px; object-fit:cover; filter:grayscale(0.25)">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/5b9a06_8029779b2dd64a42a90ec9998aad7692.jpg/v1/fill/w_560,h_648,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5b9a06_8029779b2dd64a42a90ec9998aad7692.jpg" alt="Carla Minnard" style="grid-column:1 / -1; width:100%; height:380px; object-fit:cover; object-position:center 22%; filter:grayscale(0.25) contrast(1.04)">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/5b9a06_eace3a4592a84b239844ef170e0715e7~mv2.jpg/v1/fill/w_674,h_596,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-12-11%20at%206_edited.jpg" alt="Carla Minnard in the press" style="width:100%; height:170px; object-fit:cover; filter:grayscale(0.25)">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/5b9a06_9712d08a0cd04e64bd0ef117f2d01160~mv2.jpg/v1/fill/w_494,h_428,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-12-11%20at%206_51_edited.jpg" alt="Carla Minnard on television" style="width:100%; height:170px; object-fit:cover; filter:grayscale(0.25)">
       </div>
     </div>
   </section>
@@ -265,7 +345,7 @@
       <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#a8874f; margin-bottom:20px">04 — Attorney</div>
       <div style="display:grid; grid-template-columns:0.72fr 1.28fr; gap:80px; align-items:start">
         <div style="position:sticky; top:118px">
-          <img src="https://static.wixstatic.com/media/5b9a06_67e2841f269549c5b4b5e62d208c6c76~mv2.png/v1/fill/w_726,h_1005,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-11-27%20at%209_28_12%20AM.png" alt="Carla Minnard" style="width:100%; height:auto; display:block; filter:grayscale(0.15)">
+          <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/5b9a06_67e2841f269549c5b4b5e62d208c6c76~mv2.png/v1/fill/w_726,h_1005,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-11-27%20at%209_28_12%20AM.png" alt="Carla Minnard" style="width:100%; height:auto; display:block; filter:grayscale(0.15)">
           <div style="margin-top:24px; padding-top:20px; border-top:1px solid rgba(22,24,28,0.18); display:flex; flex-direction:column; gap:8px">
             <a href="tel:5107611266" style="font-size:15px; color:#16181c" style-hover="color:#7a2230">510-761-1266</a>
             <a href="mailto:carlaminnard@minnardlaw.com" style="font-size:15px; color:#16181c; word-break:break-all" style-hover="color:#7a2230">carlaminnard@minnardlaw.com</a>
@@ -300,9 +380,9 @@
           </div>
 
           <div style="display:flex; align-items:center; gap:28px; flex-wrap:wrap; padding-top:32px; border-top:1px solid rgba(22,24,28,0.18)">
-            <img src="https://static.wixstatic.com/media/5b9a06_efeb12fff9734fe6933941f396f0bfe3~mv2.png/v1/fill/w_702,h_1018,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-11-27%20at%209_30_02%20AM.png" alt="Super Lawyers selection" style="height:120px; width:auto; object-fit:contain">
-            <img src="https://static.wixstatic.com/media/5b9a06_0ab8eba357e549eb9b80561f559e5259.png/v1/fill/w_508,h_692,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5b9a06_0ab8eba357e549eb9b80561f559e5259.png" alt="Award badge" style="height:120px; width:auto; object-fit:contain">
-            <img src="https://static.wixstatic.com/media/5b9a06_93e6a98471424367b29ff458f30eaefc~mv2_d_2436_3572_s_4_2.jpg/v1/fill/w_336,h_492,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5b9a06_93e6a98471424367b29ff458f30eaefc~mv2_d_2436_3572_s_4_2.jpg" alt="Press feature" style="height:120px; width:auto; object-fit:contain">
+            <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/5b9a06_efeb12fff9734fe6933941f396f0bfe3~mv2.png/v1/fill/w_702,h_1018,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-11-27%20at%209_30_02%20AM.png" alt="Super Lawyers selection" style="height:120px; width:auto; object-fit:contain">
+            <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/5b9a06_0ab8eba357e549eb9b80561f559e5259.png/v1/fill/w_508,h_692,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5b9a06_0ab8eba357e549eb9b80561f559e5259.png" alt="Award badge" style="height:120px; width:auto; object-fit:contain">
+            <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/5b9a06_93e6a98471424367b29ff458f30eaefc~mv2_d_2436_3572_s_4_2.jpg/v1/fill/w_336,h_492,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5b9a06_93e6a98471424367b29ff458f30eaefc~mv2_d_2436_3572_s_4_2.jpg" alt="Press feature" style="height:120px; width:auto; object-fit:contain">
           </div>
         </div>
       </div>
@@ -321,7 +401,7 @@
 
       <div style="display:grid; grid-template-columns:1.4fr 1fr; gap:24px; margin-bottom:24px">
         <div style="border:1px solid rgba(22,24,28,0.14); background:#f6f4f0">
-          <img src="https://static.wixstatic.com/media/5b9a06_8a13f640ca3045548edd44e7bcee82b4~mv2.png/v1/fill/w_1032,h_580,al_c,q_85,enc_avif,quality_auto/Screen%20Shot%202023-12-11%20at%207_06_11%20AM.png" alt="2022 Netflix documentary" style="width:100%; height:320px; object-fit:cover; display:block">
+          <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/5b9a06_8a13f640ca3045548edd44e7bcee82b4~mv2.png/v1/fill/w_1032,h_580,al_c,q_85,enc_avif,quality_auto/Screen%20Shot%202023-12-11%20at%207_06_11%20AM.png" alt="2022 Netflix documentary" style="width:100%; height:320px; object-fit:cover; display:block">
           <div style="padding:28px 30px">
             <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#7a2230; margin-bottom:12px">Documentary · 2022</div>
             <h3 style="font-family:'Newsreader',serif; font-weight:400; font-size:26px; margin:0 0 10px">2022 Netflix Documentary</h3>
@@ -348,7 +428,7 @@
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px">
         <div style="border:1px solid rgba(22,24,28,0.14); background:#f6f4f0">
           <div style="aspect-ratio:16 / 9; background:#16181c">
-            <iframe src="https://www.youtube.com/embed/k5JuASIOBH8?rel=0" title="Personal injury case profiled on Bay Area local news" allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen="true" style="width:100%; height:100%; border:0; display:block"></iframe>
+            <iframe loading="lazy" src="https://www.youtube.com/embed/k5JuASIOBH8?rel=0" title="Personal injury case profiled on Bay Area local news" allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen="true" style="width:100%; height:100%; border:0; display:block"></iframe>
           </div>
           <div style="padding:24px 28px">
             <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#7a2230; margin-bottom:10px">Bay Area local news</div>
@@ -357,7 +437,7 @@
         </div>
         <div style="border:1px solid rgba(22,24,28,0.14); background:#f6f4f0">
           <div style="aspect-ratio:16 / 9; background:#16181c">
-            <iframe src="https://player.vimeo.com/video/166506251" title="Jury verdict featured on Channel 7 News Los Angeles" allow="fullscreen; picture-in-picture" allowfullscreen="true" style="width:100%; height:100%; border:0; display:block"></iframe>
+            <iframe loading="lazy" src="https://player.vimeo.com/video/166506251" title="Jury verdict featured on Channel 7 News Los Angeles" allow="fullscreen; picture-in-picture" allowfullscreen="true" style="width:100%; height:100%; border:0; display:block"></iframe>
           </div>
           <div style="padding:24px 28px">
             <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#7a2230; margin-bottom:10px">Channel 7 News · Los Angeles</div>
