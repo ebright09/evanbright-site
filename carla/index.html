@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Minnard Law Firm — website redesign concept</title>
+<meta name="description" content="An unaffiliated website redesign concept for The Minnard Law Firm. Not the firm's official site.">
+<!-- Demo work on a personal domain: keep it out of search results so it is
+     never mistaken for the firm's real site at minnardlaw.com. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f6f4f0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 fill=%22%2316181c%22/><text x=%2216%22 y=%2222%22 text-anchor=%22middle%22 fill=%22%23e6d7b8%22 font-family=%22Georgia,serif%22 font-size=%2213%22>TMLF</text></svg>">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&amp;family=Libre+Franklin:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #f6f4f0; color: #16181c; font-family: 'Libre Franklin', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #7a2230; text-decoration: none; }
+  a:hover { color: #16181c; }
+  input, textarea, select, button { font-family: inherit; font-size: inherit; color: inherit; }
+  ::selection { background: #d8c9a8; }
+</style>
+</helmet>
+
+<div style="background:#f6f4f0; color:#16181c; overflow-x:hidden">
+
+  <header style="position:sticky; top:0; z-index:50; background:rgba(246,244,240,0.94); backdrop-filter:blur(10px); borderBottom:1px solid rgba(22,24,28,0.14)">
+    <div style="max-width:1240px; margin:0 auto; padding:0 40px; height:78px; display:flex; align-items:center; justify-content:space-between; gap:32px">
+      <a href="#top" style="display:flex; align-items:baseline; gap:12px; color:#16181c">
+        <span style="font-family: 'Newsreader',serif; font-size: 23px; letter-spacing: 0.01em; font-weight: 400; text-transform: uppercase">The Minnard Law Firm</span>
+      </a>
+      <nav style="display:flex; align-items:center; gap:30px">
+        <a href="#firm" style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#4a4f57; font-weight:500" style-hover="color:#7a2230">ABOUT US</a>
+        <a href="#practice" style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#4a4f57; font-weight:500" style-hover="color:#7a2230">Practice</a>
+        <a href="#results" style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#4a4f57; font-weight:500" style-hover="color:#7a2230">Results</a>
+        <a href="#attorney" style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#4a4f57; font-weight:500" style-hover="color:#7a2230">Attorney</a>
+        <a href="#press" style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#4a4f57; font-weight:500" style-hover="color:#7a2230">Press</a>
+        <a href="#contact" style="display:inline-flex; align-items:center; height:42px; padding:0 22px; background:#7a2230; color:#f6f4f0; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; font-weight:500" style-hover="background:#16181c; color:#f6f4f0">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="top" data-screen-label="Hero" style="background:#16181c; color:#f6f4f0; position:relative">
+    <div style="max-width:1240px; margin:0 auto; padding:96px 40px 88px; display:grid; grid-template-columns:1.15fr 0.85fr; gap:72px; align-items:center">
+      <div>
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:34px">
+          <span style="width:34px; height:1px; background:#a8874f"></span>
+          <span style="font-family: 'JetBrains Mono',monospace; font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: #a8874f">Employment &amp; Healthcare Litigation · California</span>
+        </div>
+        <h1 style="font-family:'Newsreader',serif; font-weight:300; font-size:78px; line-height:1.02; letter-spacing:-0.02em; margin:0 0 30px; text-wrap:balance">Trusted Advisors.<br><em style="font-style:italic; color:#e6d7b8">Tireless Advocates.</em></h1>
+        <p style="font-size:18px; line-height:1.65; color:rgba(246,244,240,0.72); max-width:540px; margin:0 0 40px; text-wrap:pretty">Founded by trial attorney Carla Minnard, we represent employees against the institutions that wronged them — and counsel the physicians, practices and employers who need to get it right the first time.</p>
+        <div style="display:flex; gap:16px; flex-wrap:wrap">
+          <a href="#contact" style="display:inline-flex; align-items:center; height:54px; padding:0 30px; background:#f6f4f0; color:#16181c; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; font-weight:600" style-hover="background:#e6d7b8; color:#16181c">Request a Case Review</a>
+          <a href="#practice" style="display:inline-flex; align-items:center; height:54px; padding:0 30px; border:1px solid rgba(246,244,240,0.35); color:#f6f4f0; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; font-weight:500" style-hover="border-color:#e6d7b8; color:#e6d7b8">Practice Areas</a>
+        </div>
+        <div style="margin-top:52px; display:flex; align-items:center; gap:26px; flex-wrap:wrap">
+          <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(246,244,240,0.42)">Recognized by</span>
+          <img src="https://static.wixstatic.com/media/5b9a06_61131bc551e945af9c6121e63bee6356~mv2.png/v1/fill/w_246,h_206,al_c,lg_1,q_85,enc_avif,quality_auto/5b9a06_61131bc551e945af9c6121e63bee6356~mv2.png" alt="Super Lawyers" style="height:56px; width:auto; object-fit:contain; filter:brightness(1.35) contrast(1.05)">
+          <img src="https://static.wixstatic.com/media/5b9a06_c8bac6503c964b12b987812246b13f13~mv2.png/v1/fill/w_336,h_274,al_c,q_85,enc_avif,quality_auto/5b9a06_c8bac6503c964b12b987812246b13f13~mv2.png" alt="Award badge" style="height:52px; width:auto; object-fit:contain; filter:brightness(1.35) contrast(1.05)">
+          <img src="https://static.wixstatic.com/media/5b9a06_7de63f1687de4d48ad4790ea8e4e69ee~mv2.png/v1/fill/w_365,h_163,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-11-27%20at%209_32_37%20AM.png" alt="Top Lawyers in California" style="height:38px; width:auto; object-fit:contain">
+        </div>
+      </div>
+      <div style="position:relative; display:grid; grid-template-columns:1fr 1fr; gap:14px">
+        <img src="https://static.wixstatic.com/media/5b9a06_8029779b2dd64a42a90ec9998aad7692.jpg/v1/fill/w_560,h_648,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5b9a06_8029779b2dd64a42a90ec9998aad7692.jpg" alt="Carla Minnard" style="grid-column:1 / -1; width:100%; height:380px; object-fit:cover; object-position:center 22%; filter:grayscale(0.25) contrast(1.04)">
+        <img src="https://static.wixstatic.com/media/5b9a06_eace3a4592a84b239844ef170e0715e7~mv2.jpg/v1/fill/w_674,h_596,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-12-11%20at%206_edited.jpg" alt="Carla Minnard in the press" style="width:100%; height:170px; object-fit:cover; filter:grayscale(0.25)">
+        <img src="https://static.wixstatic.com/media/5b9a06_9712d08a0cd04e64bd0ef117f2d01160~mv2.jpg/v1/fill/w_494,h_428,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-12-11%20at%206_51_edited.jpg" alt="Carla Minnard on television" style="width:100%; height:170px; object-fit:cover; filter:grayscale(0.25)">
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showResults }}" hint-placeholder-val="{{ true }}">
+  <section id="results-band" data-screen-label="Results band" style="background:#f6f4f0; border-bottom:1px solid rgba(22,24,28,0.14)">
+    <div style="max-width:1240px; margin:0 auto; padding:64px 40px 40px">
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid rgba(22,24,28,0.18); border-bottom:1px solid rgba(22,24,28,0.18)">
+        <div style="padding:38px 32px 38px 0; border-right:1px solid rgba(22,24,28,0.12)">
+          <div style="font-family:'Newsreader',serif; font-size:58px; font-weight:300; line-height:1; letter-spacing:-0.02em; color:#7a2230">$19M+</div>
+          <div style="margin-top:14px; font-size:13px; line-height:1.5; color:#4a4f57">Recovered in verdicts and settlements for clients</div>
+        </div>
+        <div style="padding:38px 32px; border-right:1px solid rgba(22,24,28,0.12)">
+          <div style="font-family:'Newsreader',serif; font-size:58px; font-weight:300; line-height:1; letter-spacing:-0.02em; color:#7a2230">$1.355M</div>
+          <div style="margin-top:14px; font-size:13px; line-height:1.5; color:#4a4f57">Whistleblower retaliation verdict, Marin County Superior Court</div>
+        </div>
+        <div style="padding:38px 32px; border-right:1px solid rgba(22,24,28,0.12)">
+          <div style="font-family:'Newsreader',serif; font-size:58px; font-weight:300; line-height:1; letter-spacing:-0.02em; color:#7a2230">13 yrs</div>
+          <div style="margin-top:14px; font-size:13px; line-height:1.5; color:#4a4f57">Named a Northern California Super Lawyer, 2014–2026 — top 5% of the state's attorneys</div>
+        </div>
+        <div style="padding:38px 0 38px 32px">
+          <div style="font-family:'Newsreader',serif; font-size:58px; font-weight:300; line-height:1; letter-spacing:-0.02em; color:#7a2230">30 yrs</div>
+          <div style="margin-top:14px; font-size:13px; line-height:1.5; color:#4a4f57">Trying employment, civil rights and healthcare cases in California courts</div>
+        </div>
+      </div>
+      <p style="margin:22px 0 0; font-size:11.5px; line-height:1.6; color:#7c828b; max-width:900px">Prior results do not guarantee or predict a similar outcome in any future matter. Each case is decided on its own facts. The information on this page is for general information only and is not legal advice.</p>
+    </div>
+  </section>
+  </sc-if>
+
+  <section id="firm" data-screen-label="The firm" style="background:#f6f4f0">
+    <div style="max-width:1240px; margin:0 auto; padding:104px 40px; display:grid; grid-template-columns:0.72fr 1.28fr; gap:80px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#a8874f; margin-bottom:20px">01 — The Firm</div>
+        <h2 style="font-family:'Newsreader',serif; font-weight:300; font-size:46px; line-height:1.1; letter-spacing:-0.02em; margin:0; text-wrap:balance">Built case by case.</h2>
+      </div>
+      <div>
+        <p style="font-size:21px; line-height:1.6; margin:0 0 26px; color:#16181c; text-wrap:pretty">The Minnard Law Firm was founded by Carla Minnard, a highly experienced, successful trial attorney who has tried countless cases, including many which resulted in multimillion dollar verdicts.</p>
+        <p style="font-size:16px; line-height:1.75; margin:0 0 22px; color:#4a4f57; text-wrap:pretty">The firm has built its reputation case by case, with unwavering commitment and sound, practical judgment. Carla Minnard has been named a Super Lawyer every year since 2014 — an honor bestowed upon no more than 5% of the state's lawyers, based on peer nomination and evaluation of significant professional accomplishments. She has also been named one of the “Top Lawyers in California” by American Lawyer Media and nominated for “Woman Trial Lawyer of the Year” by Consumer Attorneys of California and “Trial Lawyer of the Year” by Public Justice.</p>
+        <p style="font-size:16px; line-height:1.75; margin:0 0 40px; color:#4a4f57; text-wrap:pretty">In addition to litigating cases, we offer a broad range of services to employers and employees — from hourly consultations to comprehensive reviews of human resource policies and practices — designed to improve processes and mitigate risk in California's rapidly changing legal environment.</p>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(22,24,28,0.14); border:1px solid rgba(22,24,28,0.14)">
+          <div style="background:#f6f4f0; padding:26px 24px">
+            <div style="font-family:'Newsreader',serif; font-size:15px; margin-bottom:8px">Statewide practice</div>
+            <div style="font-size:13px; line-height:1.6; color:#4a4f57">Clients represented throughout California, from the East Bay to Sacramento and beyond.</div>
+          </div>
+          <div style="background:#f6f4f0; padding:26px 24px">
+            <div style="font-family:'Newsreader',serif; font-size:15px; margin-bottom:8px">Tried, not just filed</div>
+            <div style="font-size:13px; line-height:1.6; color:#4a4f57">Cases prepared for trial from day one — which is what makes settlements meaningful.</div>
+          </div>
+          <div style="background:#f6f4f0; padding:26px 24px">
+            <div style="font-family:'Newsreader',serif; font-size:15px; margin-bottom:8px">Both sides of the table</div>
+            <div style="font-size:13px; line-height:1.6; color:#4a4f57">Two decades advising California employers and employees alike informs every case.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="practice" data-screen-label="Practice areas" style="background:#ffffff; border-top:1px solid rgba(22,24,28,0.14); border-bottom:1px solid rgba(22,24,28,0.14)">
+    <div style="max-width:1240px; margin:0 auto; padding:104px 40px">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:40px; margin-bottom:56px">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#a8874f; margin-bottom:20px">02 — Practice Areas</div>
+          <h2 style="font-family:'Newsreader',serif; font-weight:300; font-size:46px; line-height:1.1; letter-spacing:-0.02em; margin:0">What we handle</h2>
+        </div>
+        <p style="font-size:14px; line-height:1.7; color:#4a4f57; max-width:380px; margin:0">We have been advising California employers and employees for more than 20 years, and counsel providers across the full spectrum of healthcare law.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:56px">
+        <div>
+          <div style="display:flex; align-items:baseline; gap:14px; padding-bottom:18px; border-bottom:2px solid #16181c">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#a8874f">A</span>
+            <h3 style="font-family:'Newsreader',serif; font-weight:400; font-size:28px; margin:0; letter-spacing:-0.01em">Employment</h3>
+          </div>
+          <p style="font-size:14.5px; line-height:1.7; color:#4a4f57; margin:20px 0 26px">We handle all aspects of employment law, representing clients throughout the state of California.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 28px">
+            <div style="display:flex; flex-direction:column">
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Discrimination</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Harassment</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Retaliation</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Wrongful termination</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Hostile workplace</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Whistleblowing</span>
+            </div>
+            <div style="display:flex; flex-direction:column">
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Wage &amp; hour violations</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Rest and meal breaks</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Breach of contract</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Disability &amp; reasonable accommodation</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">FMLA, disability &amp; sick leave violations</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Severance &amp; contract negotiation</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex; align-items:baseline; gap:14px; padding-bottom:18px; border-bottom:2px solid #16181c">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#a8874f">B</span>
+            <h3 style="font-family:'Newsreader',serif; font-weight:400; font-size:28px; margin:0; letter-spacing:-0.01em">Healthcare Law &amp; Litigation</h3>
+          </div>
+          <p style="font-size:14.5px; line-height:1.7; color:#4a4f57; margin:20px 0 26px">We provide comprehensive counsel to hospitals, physician groups, physician/hospital organizations, independent practice associations, individual, group and multidisciplinary practices, and businesses servicing the healthcare industry.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 28px">
+            <div style="display:flex; flex-direction:column">
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">HIPAA privacy &amp; security</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">HITECH Act compliance</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Corporate compliance programs</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Medical staff bylaws &amp; peer review</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Medicare &amp; Medicaid billing, certification, audits</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Anti-kickback laws &amp; regulations</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Stark Law &amp; physician self-referral</span>
+            </div>
+            <div style="display:flex; flex-direction:column">
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Internal &amp; external audits</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Professional misconduct &amp; ethics</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">DEA and FDA matters</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Equal employment opportunity</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Employee &amp; executive compensation</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Medical Board licensing &amp; discipline</span>
+              <span style="padding:11px 0; border-bottom:1px solid rgba(22,24,28,0.1); font-size:14px">Executive, medical staff &amp; physician disputes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:56px; padding:32px 36px; background:#f6f4f0; border-left:2px solid #7a2230; display:flex; gap:40px; align-items:center; flex-wrap:wrap">
+        <div style="flex:1 1 420px">
+          <div style="font-family:'Newsreader',serif; font-size:20px; margin-bottom:8px">Advisory &amp; transactional work</div>
+          <p style="margin:0; font-size:14.5px; line-height:1.7; color:#4a4f57">Formation of professional medical corporations, healthcare employment issues, licensing and intellectual property protection for healthcare products, liability and risk management, and comprehensive reviews of HR policies and practices.</p>
+        </div>
+        <a href="#contact" style="font-size:12px; letter-spacing:0.16em; text-transform:uppercase; font-weight:600; border-bottom:1px solid #7a2230; padding-bottom:4px">Discuss a matter</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="results" data-screen-label="Notable results" style="background:#1b2028; color:#f6f4f0">
+    <div style="max-width:1240px; margin:0 auto; padding:104px 40px">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#a8874f; margin-bottom:20px">03 — Notable Results</div>
+      <h2 style="font-family:'Newsreader',serif; font-weight:300; font-size:46px; line-height:1.1; letter-spacing:-0.02em; margin:0 0 54px">Verdicts and matters of record</h2>
+
+      <div style="display:flex; flex-direction:column">
+        <div style="display:grid; grid-template-columns:220px 1fr 200px; gap:40px; padding:30px 0; border-top:1px solid rgba(246,244,240,0.18); align-items:baseline">
+          <div style="font-family:'Newsreader',serif; font-size:38px; font-weight:300; color:#e6d7b8; letter-spacing:-0.02em">$1,355,000</div>
+          <div>
+            <div style="font-size:17px; margin-bottom:8px">Whistleblower retaliation verdict</div>
+            <div style="font-size:14px; line-height:1.65; color:rgba(246,244,240,0.62)">Jury verdict for the firm's client in Marin County Superior Court in a whistleblower retaliation action against his former employer.</div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(246,244,240,0.45); text-align:right">Marin County</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:220px 1fr 200px; gap:40px; padding:30px 0; border-top:1px solid rgba(246,244,240,0.18); align-items:baseline">
+          <div style="font-family:'Newsreader',serif; font-size:38px; font-weight:300; color:#e6d7b8; letter-spacing:-0.02em">Confidential</div>
+          <div>
+            <div style="font-size:17px; margin-bottom:8px">Sexual harassment trial against Bikram Choudhury</div>
+            <div style="font-size:14px; line-height:1.65; color:rgba(246,244,240,0.62)">Carla Minnard served on the plaintiff's trial team alongside Mark Quigley and Aaron Osten of Greene Broillet &amp; Wheeler, obtaining a significant result for a client harassed by the yoga founder. The litigation is the subject of a 2022 Netflix documentary.</div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(246,244,240,0.45); text-align:right">Los Angeles County</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:220px 1fr 200px; gap:40px; padding:30px 0; border-top:1px solid rgba(246,244,240,0.18); align-items:baseline">
+          <div style="font-family:'Newsreader',serif; font-size:38px; font-weight:300; color:#e6d7b8; letter-spacing:-0.02em">Record verdict</div>
+          <div>
+            <div style="font-size:17px; margin-bottom:8px">Race discrimination, San Francisco County</div>
+            <div style="font-size:14px; line-height:1.65; color:rgba(246,244,240,0.62)">One of the highest verdicts obtained in a decade in San Francisco County in a race discrimination case.</div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(246,244,240,0.45); text-align:right">San Francisco County</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:220px 1fr 200px; gap:40px; padding:30px 0; border-top:1px solid rgba(246,244,240,0.18); align-items:baseline">
+          <div style="font-family:'Newsreader',serif; font-size:38px; font-weight:300; color:#e6d7b8; letter-spacing:-0.02em">7 figures</div>
+          <div>
+            <div style="font-size:17px; margin-bottom:8px">Unanimous jury verdict, punitive damages</div>
+            <div style="font-size:14px; line-height:1.65; color:rgba(246,244,240,0.62)">Unanimous verdict for an employee on claims of sexual harassment, discrimination, retaliation and wrongful termination, including an award of punitive damages.</div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(246,244,240,0.45); text-align:right">California</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:220px 1fr 200px; gap:40px; padding:30px 0; border-top:1px solid rgba(246,244,240,0.18); border-bottom:1px solid rgba(246,244,240,0.18); align-items:baseline">
+          <div style="font-family:'Newsreader',serif; font-size:38px; font-weight:300; color:#e6d7b8; letter-spacing:-0.02em">Record verdict</div>
+          <div>
+            <div style="font-size:17px; margin-bottom:8px">Piedmont property dispute</div>
+            <div style="font-size:14px; line-height:1.65; color:rgba(246,244,240,0.62)">A record-setting verdict in a property dispute matter between neighbors in Piedmont.</div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(246,244,240,0.45); text-align:right">Alameda County</div>
+        </div>
+      </div>
+      <p style="margin:26px 0 0; font-size:11.5px; line-height:1.6; color:rgba(246,244,240,0.45); max-width:900px">Verdicts and settlements described above were obtained by Carla Minnard, in some matters as co-counsel with other firms. Prior results do not guarantee or predict a similar outcome in any future matter.</p>
+    </div>
+  </section>
+
+  <section id="attorney" data-screen-label="Attorney" style="background:#f6f4f0">
+    <div style="max-width:1240px; margin:0 auto; padding:104px 40px">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#a8874f; margin-bottom:20px">04 — Attorney</div>
+      <div style="display:grid; grid-template-columns:0.72fr 1.28fr; gap:80px; align-items:start">
+        <div style="position:sticky; top:118px">
+          <img src="https://static.wixstatic.com/media/5b9a06_67e2841f269549c5b4b5e62d208c6c76~mv2.png/v1/fill/w_726,h_1005,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-11-27%20at%209_28_12%20AM.png" alt="Carla Minnard" style="width:100%; height:auto; display:block; filter:grayscale(0.15)">
+          <div style="margin-top:24px; padding-top:20px; border-top:1px solid rgba(22,24,28,0.18); display:flex; flex-direction:column; gap:8px">
+            <a href="tel:5107611266" style="font-size:15px; color:#16181c" style-hover="color:#7a2230">510-761-1266</a>
+            <a href="mailto:carlaminnard@minnardlaw.com" style="font-size:15px; color:#16181c; word-break:break-all" style-hover="color:#7a2230">carlaminnard@minnardlaw.com</a>
+            <span style="font-size:13px; color:#7c828b">Fax 415-358-5588</span>
+          </div>
+        </div>
+        <div>
+          <h2 style="font-family:'Newsreader',serif; font-weight:300; font-size:56px; line-height:1.05; letter-spacing:-0.02em; margin:0 0 10px">Carla V. Minnard</h2>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#7a2230; margin-bottom:32px">Founder &amp; Trial Attorney</div>
+          <p style="font-size:18px; line-height:1.7; color:#16181c; margin:0 0 22px; text-wrap:pretty">Carla Minnard has been selected as a Super Lawyer in Northern California Super Lawyers magazine every year since 2014 — an annual list of the top attorneys in the region, bestowed on no more than 5 percent of the state's lawyers. Selection is based on peer nomination and evaluation of the lawyer's professional accomplishments.</p>
+          <p style="font-size:16px; line-height:1.75; color:#4a4f57; margin:0 0 22px; text-wrap:pretty">She has also been named one of the “Top Lawyers in California” by American Lawyer Media and nominated for other prestigious awards including “Woman Trial Lawyer of the Year” by the Consumer Attorneys of California and “Trial Lawyer of the Year” by Public Justice, for outstanding verdicts contributing to the mission of Public Justice.</p>
+          <p style="font-size:16px; line-height:1.75; color:#4a4f57; margin:0 0 22px; text-wrap:pretty">For three decades her practice has focused on employment law, civil rights litigation and healthcare law. She has tried numerous cases to verdict and obtained more than $19 million in verdicts and settlements on behalf of her clients. Her verdicts have been featured in numerous publications, including <em>Million Dollar Verdicts</em>.</p>
+          <p style="font-size:16px; line-height:1.75; color:#4a4f57; margin:0 0 40px; text-wrap:pretty">Carla's work and cases have been featured in local, national and international news in both print and television media. She has appeared on Dateline, Vanity Fair Confidential and 20/20, and her work has been featured on HBO and ESPN broadcasts and, most recently, in a Netflix documentary.</p>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(22,24,28,0.14); border:1px solid rgba(22,24,28,0.14); margin-bottom:40px">
+            <div style="background:#f6f4f0; padding:24px">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#7c828b; margin-bottom:10px">Education</div>
+              <div style="font-size:15px; line-height:1.6">Golden Gate University School of Law, J.D. 1994</div>
+            </div>
+            <div style="background:#f6f4f0; padding:24px">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#7c828b; margin-bottom:10px">Admitted</div>
+              <div style="font-size:15px; line-height:1.6">State Bar of California, 1995 · Bar No. 176015</div>
+            </div>
+            <div style="background:#f6f4f0; padding:24px">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#7c828b; margin-bottom:10px">Practice</div>
+              <div style="font-size:15px; line-height:1.6">Employment &amp; Labor · Health Care · Business &amp; General Litigation</div>
+            </div>
+            <div style="background:#f6f4f0; padding:24px">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#7c828b; margin-bottom:10px">Recognition</div>
+              <div style="font-size:15px; line-height:1.6">Super Lawyers 2014–2026 · Northern California Top 100</div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:28px; flex-wrap:wrap; padding-top:32px; border-top:1px solid rgba(22,24,28,0.18)">
+            <img src="https://static.wixstatic.com/media/5b9a06_efeb12fff9734fe6933941f396f0bfe3~mv2.png/v1/fill/w_702,h_1018,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screen%20Shot%202023-11-27%20at%209_30_02%20AM.png" alt="Super Lawyers selection" style="height:120px; width:auto; object-fit:contain">
+            <img src="https://static.wixstatic.com/media/5b9a06_0ab8eba357e549eb9b80561f559e5259.png/v1/fill/w_508,h_692,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5b9a06_0ab8eba357e549eb9b80561f559e5259.png" alt="Award badge" style="height:120px; width:auto; object-fit:contain">
+            <img src="https://static.wixstatic.com/media/5b9a06_93e6a98471424367b29ff458f30eaefc~mv2_d_2436_3572_s_4_2.jpg/v1/fill/w_336,h_492,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5b9a06_93e6a98471424367b29ff458f30eaefc~mv2_d_2436_3572_s_4_2.jpg" alt="Press feature" style="height:120px; width:auto; object-fit:contain">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="press" data-screen-label="News and press" style="background:#ffffff; border-top:1px solid rgba(22,24,28,0.14)">
+    <div style="max-width:1240px; margin:0 auto; padding:104px 40px">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:40px; margin-bottom:52px">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#a8874f; margin-bottom:20px">05 — News &amp; Press</div>
+          <h2 style="font-family:'Newsreader',serif; font-weight:300; font-size:46px; line-height:1.1; letter-spacing:-0.02em; margin:0">In the press</h2>
+        </div>
+        <p style="font-size:14px; line-height:1.7; color:#4a4f57; max-width:380px; margin:0">Carla Minnard's cases have been covered by Netflix, Vanity Fair, Nightline, Dateline, 20/20, HBO and ESPN.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1.4fr 1fr; gap:24px; margin-bottom:24px">
+        <div style="border:1px solid rgba(22,24,28,0.14); background:#f6f4f0">
+          <img src="https://static.wixstatic.com/media/5b9a06_8a13f640ca3045548edd44e7bcee82b4~mv2.png/v1/fill/w_1032,h_580,al_c,q_85,enc_avif,quality_auto/Screen%20Shot%202023-12-11%20at%207_06_11%20AM.png" alt="2022 Netflix documentary" style="width:100%; height:320px; object-fit:cover; display:block">
+          <div style="padding:28px 30px">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#7a2230; margin-bottom:12px">Documentary · 2022</div>
+            <h3 style="font-family:'Newsreader',serif; font-weight:400; font-size:26px; margin:0 0 10px">2022 Netflix Documentary</h3>
+            <p style="margin:0 0 18px; font-size:14.5px; line-height:1.7; color:#4a4f57">The firm's sexual harassment litigation against Bikram Choudhury is the subject of a feature-length Netflix documentary. Vanity Fair covered the case in print.</p>
+            <a href="https://www.minnardlaw.com/_files/ugd/5b9a06_8250d894c16541ed94426eecf76f07d9.pdf" target="_blank" rel="noopener" style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; font-weight:600; border-bottom:1px solid #7a2230; padding-bottom:3px">Read the Vanity Fair article (PDF)</a>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:24px">
+          <div style="border:1px solid rgba(22,24,28,0.14); background:#f6f4f0; padding:28px 30px; flex:1; display:flex; flex-direction:column; justify-content:center">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#7a2230; margin-bottom:12px">ABC Nightline</div>
+            <h3 style="font-family:'Newsreader',serif; font-weight:400; font-size:24px; margin:0 0 10px">Sexual Harassment Verdict Featured on Nightline</h3>
+            <p style="margin:0; font-size:14px; line-height:1.7; color:#4a4f57">National broadcast coverage of a jury verdict obtained for a harassment plaintiff.</p>
+          </div>
+          <div style="border:1px solid rgba(22,24,28,0.14); background:#f6f4f0; padding:28px 30px; flex:1; display:flex; flex-direction:column; justify-content:center">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#7a2230; margin-bottom:12px">Television &amp; Film</div>
+            <h3 style="font-family:'Newsreader',serif; font-weight:400; font-size:24px; margin:0 0 10px">Dateline · 20/20 · Vanity Fair Confidential · HBO · ESPN</h3>
+            <p style="margin:0; font-size:14px; line-height:1.7; color:#4a4f57">Carla Minnard's work has been featured across national broadcast and documentary programming.</p>
+          </div>
+        </div>
+      </div>
+
+      <sc-if value="{{ showMedia }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px">
+        <div style="border:1px solid rgba(22,24,28,0.14); background:#f6f4f0">
+          <div style="aspect-ratio:16 / 9; background:#16181c">
+            <iframe src="https://www.youtube.com/embed/k5JuASIOBH8?rel=0" title="Personal injury case profiled on Bay Area local news" allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen="true" style="width:100%; height:100%; border:0; display:block"></iframe>
+          </div>
+          <div style="padding:24px 28px">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#7a2230; margin-bottom:10px">Bay Area local news</div>
+            <h3 style="font-family:'Newsreader',serif; font-weight:400; font-size:22px; margin:0">Personal Injury Case Profiled on Bay Area Local News</h3>
+          </div>
+        </div>
+        <div style="border:1px solid rgba(22,24,28,0.14); background:#f6f4f0">
+          <div style="aspect-ratio:16 / 9; background:#16181c">
+            <iframe src="https://player.vimeo.com/video/166506251" title="Jury verdict featured on Channel 7 News Los Angeles" allow="fullscreen; picture-in-picture" allowfullscreen="true" style="width:100%; height:100%; border:0; display:block"></iframe>
+          </div>
+          <div style="padding:24px 28px">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#7a2230; margin-bottom:10px">Channel 7 News · Los Angeles</div>
+            <h3 style="font-family:'Newsreader',serif; font-weight:400; font-size:22px; margin:0">Jury Verdict Featured on Channel 7 News Los Angeles</h3>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section id="contact" data-screen-label="Contact" style="background:#16181c; color:#f6f4f0">
+    <div style="max-width:1240px; margin:0 auto; padding:104px 40px">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#a8874f; margin-bottom:20px">06 — Contact</div>
+      <div style="display:grid; grid-template-columns:1.15fr 0.85fr; gap:80px; align-items:start">
+        <div>
+          <h2 style="font-family:'Newsreader',serif; font-weight:300; font-size:46px; line-height:1.1; letter-spacing:-0.02em; margin:0 0 18px">Tell us what happened.</h2>
+          <p style="font-size:16px; line-height:1.75; color:rgba(246,244,240,0.68); margin:0 0 40px; max-width:560px">For any potential case inquiry, send us the details below or email us directly. The more specific you can be about dates, people and documents, the faster we can assess your matter.</p>
+
+          <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ onSubmit }}" style="display:grid; grid-template-columns:1fr 1fr; gap:22px">
+            <label style="display:flex; flex-direction:column; gap:9px">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(246,244,240,0.5)">Full name</span>
+              <input name="name" type="text" required="true" onChange="{{ onField }}" style="background:transparent; border:0; border-bottom:1px solid rgba(246,244,240,0.3); padding:10px 0; font-size:16px; color:#f6f4f0; outline:none" style-focus="border-bottom-color:#e6d7b8">
+            </label>
+            <label style="display:flex; flex-direction:column; gap:9px">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(246,244,240,0.5)">Email</span>
+              <input name="email" type="email" required="true" onChange="{{ onField }}" style="background:transparent; border:0; border-bottom:1px solid rgba(246,244,240,0.3); padding:10px 0; font-size:16px; color:#f6f4f0; outline:none" style-focus="border-bottom-color:#e6d7b8">
+            </label>
+            <sc-if value="{{ fullForm }}" hint-placeholder-val="{{ true }}">
+            <label style="display:flex; flex-direction:column; gap:9px">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(246,244,240,0.5)">Phone</span>
+              <input name="phone" type="tel" onChange="{{ onField }}" style="background:transparent; border:0; border-bottom:1px solid rgba(246,244,240,0.3); padding:10px 0; font-size:16px; color:#f6f4f0; outline:none" style-focus="border-bottom-color:#e6d7b8">
+            </label>
+            </sc-if>
+            <sc-if value="{{ fullForm }}" hint-placeholder-val="{{ true }}">
+            <label style="display:flex; flex-direction:column; gap:9px">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(246,244,240,0.5)">Employer</span>
+              <input name="employer" type="text" onChange="{{ onField }}" style="background:transparent; border:0; border-bottom:1px solid rgba(246,244,240,0.3); padding:10px 0; font-size:16px; color:#f6f4f0; outline:none" style-focus="border-bottom-color:#e6d7b8">
+            </label>
+            </sc-if>
+            <label style="grid-column:1 / -1; display:flex; flex-direction:column; gap:9px">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(246,244,240,0.5)">Type of matter</span>
+              <select name="matter" onChange="{{ onField }}" style="background:transparent; border:0; border-bottom:1px solid rgba(246,244,240,0.3); padding:10px 0; font-size:16px; color:#f6f4f0; outline:none" style-focus="border-bottom-color:#e6d7b8">
+                <option style="color:#16181c">Wrongful termination</option>
+                <option style="color:#16181c">Discrimination</option>
+                <option style="color:#16181c">Harassment</option>
+                <option style="color:#16181c">Retaliation / whistleblowing</option>
+                <option style="color:#16181c">Wage &amp; hour</option>
+                <option style="color:#16181c">Disability / leave / accommodation</option>
+                <option style="color:#16181c">Severance or contract review</option>
+                <option style="color:#16181c">Healthcare law matter</option>
+                <option style="color:#16181c">Other</option>
+              </select>
+            </label>
+            <label style="grid-column:1 / -1; display:flex; flex-direction:column; gap:9px">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(246,244,240,0.5)">What happened</span>
+              <textarea name="message" rows="5" required="true" onChange="{{ onField }}" style="background:transparent; border:0; border-bottom:1px solid rgba(246,244,240,0.3); padding:10px 0; font-size:16px; line-height:1.6; color:#f6f4f0; outline:none; resize:vertical" style-focus="border-bottom-color:#e6d7b8"></textarea>
+            </label>
+            <div style="grid-column:1 / -1; display:flex; align-items:center; gap:28px; flex-wrap:wrap; margin-top:8px">
+              <button type="submit" style="height:54px; padding:0 34px; background:#e6d7b8; color:#16181c; border:0; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; font-weight:600; cursor:pointer" style-hover="background:#f6f4f0">Send inquiry</button>
+              <span style="font-size:12px; line-height:1.6; color:rgba(246,244,240,0.5); max-width:360px">Submitting this form does not create an attorney–client relationship between you and The Minnard Law Firm.</span>
+            </div>
+          </form>
+          </sc-if>
+
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="border:1px solid #e6d7b8; padding:44px 40px">
+            <div style="font-family:'Newsreader',serif; font-size:32px; font-weight:300; color:#e6d7b8; margin-bottom:14px">Message received.</div>
+            <p style="margin:0 0 8px; font-size:16px; line-height:1.7; color:rgba(246,244,240,0.78)">Thank you — we will review your inquiry and respond as soon as possible. If your matter is time-sensitive, call 510-761-1266.</p>
+            <p style="margin:0; font-size:12px; color:rgba(246,244,240,0.5)">Submitting this form does not create an attorney–client relationship between you and The Minnard Law Firm.</p>
+          </div>
+          </sc-if>
+        </div>
+
+        <aside style="border:1px solid rgba(246,244,240,0.22); padding:40px 36px">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#a8874f; margin-bottom:24px">Direct contact</div>
+          <div style="display:flex; flex-direction:column; gap:26px">
+            <div>
+              <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(246,244,240,0.45); margin-bottom:7px">Email</div>
+              <a href="mailto:carlaminnard@minnardlaw.com" style="font-size:17px; color:#e6d7b8; word-break:break-all" style-hover="color:#f6f4f0">carlaminnard@minnardlaw.com</a>
+            </div>
+            <div>
+              <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(246,244,240,0.45); margin-bottom:7px">Telephone</div>
+              <a href="tel:5107611266" style="font-size:17px; color:#e6d7b8" style-hover="color:#f6f4f0">510-761-1266</a>
+              <div style="font-size:13px; color:rgba(246,244,240,0.5); margin-top:6px">Fax 415-358-5588</div>
+            </div>
+            <div style="padding-top:24px; border-top:1px solid rgba(246,244,240,0.18)">
+              <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(246,244,240,0.45); margin-bottom:7px">Offices</div>
+              <div style="font-size:15px; line-height:1.65; color:rgba(246,244,240,0.85)">Oakland &amp; the East Bay<br>Sacramento — 8359 Elk Grove Florin Road, Suite 103-404, Sacramento, CA 95829</div>
+              <div style="font-size:13px; line-height:1.6; color:rgba(246,244,240,0.5); margin-top:12px">Consultations by appointment. We represent clients throughout the State of California.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#0f1114; color:rgba(246,244,240,0.55)">
+    <div style="max-width:1240px; margin:0 auto; padding:56px 40px 44px">
+      <div style="display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap; padding-bottom:32px; border-bottom:1px solid rgba(246,244,240,0.14)">
+        <div style="font-family:'Newsreader',serif; font-size:22px; color:#f6f4f0">The Minnard Law Firm</div>
+        <nav style="display:flex; gap:26px; flex-wrap:wrap">
+          <a href="#firm" style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(246,244,240,0.6)" style-hover="color:#e6d7b8">Firm</a>
+          <a href="#practice" style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(246,244,240,0.6)" style-hover="color:#e6d7b8">Practice</a>
+          <a href="#results" style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(246,244,240,0.6)" style-hover="color:#e6d7b8">Results</a>
+          <a href="#attorney" style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(246,244,240,0.6)" style-hover="color:#e6d7b8">Attorney</a>
+          <a href="#press" style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(246,244,240,0.6)" style-hover="color:#e6d7b8">Press</a>
+          <a href="#contact" style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(246,244,240,0.6)" style-hover="color:#e6d7b8">Contact</a>
+        </nav>
+      </div>
+      <div style="display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap; padding-top:28px">
+        <p style="margin:0; font-size:11.5px; line-height:1.7; max-width:760px">This website is an advertisement for legal services. The information provided is for general informational purposes only and does not constitute legal advice. Contacting the firm, including by submitting the inquiry form, does not create an attorney–client relationship. Prior results do not guarantee or predict a similar outcome in any future matter.</p>
+        <div style="font-size:11.5px">© {{ year }} The Minnard Law Firm</div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showResultsBand&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showMediaEmbeds&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;formVariant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;full&quot;,&quot;short&quot;],&quot;default&quot;:&quot;full&quot;,&quot;tsType&quot;:&quot;'full' | 'short'&quot;,&quot;section&quot;:&quot;Intake form&quot;}}">
+class Component extends DCLogic {
+  state = { sent: false, f: {} };
+  renderVals() {
+    return {
+      year: new Date().getFullYear(),
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      showResults: this.props.showResultsBand ?? true,
+      showMedia: this.props.showMediaEmbeds ?? true,
+      fullForm: (this.props.formVariant ?? "full") === "full",
+      onField: (e) => {
+        const { name, value } = e.target;
+        this.setState((s) => ({ f: { ...s.f, [name]: value } }));
+      },
+      onSubmit: (e) => {
+        e.preventDefault();
+        this.setState({ sent: true });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

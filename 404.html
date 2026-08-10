@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not found — evanbrig.ht</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0d0f13">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 fill=%22%230d0f13%22/><circle cx=%2216%22 cy=%2216%22 r=%224%22 fill=%22%23d8a25a%22/></svg>">
+<style>
+  :root {
+    --bg: #0d0f13;
+    --fg: #f2efe9;
+    --muted: #7d8590;
+    --accent: #d8a25a;
+    --rule: rgba(242, 239, 233, 0.12);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    -webkit-font-smoothing: antialiased;
+    display: grid;
+    place-items: center;
+    padding: 32px;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 120% 80% at 50% -20%, rgba(216, 162, 90, 0.13), transparent 70%);
+    pointer-events: none;
+  }
+  main { position: relative; width: 100%; max-width: 480px; text-align: center; }
+  h1 {
+    margin: 0;
+    font-size: clamp(30px, 8vw, 46px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  h1 span { color: var(--accent); }
+  .rule {
+    width: 56px;
+    height: 1px;
+    margin: 28px auto;
+    background: var(--accent);
+    opacity: 0.55;
+  }
+  p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+  a { color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  a:hover { border-bottom-color: var(--accent); }
+</style>
+</head>
+<body>
+  <main>
+    <h1>404<span>.</span></h1>
+    <div class="rule"></div>
+    <p>Nothing at this address.<br><a href="/">Back to the homepage</a></p>
+  </main>
+</body>
+</html>

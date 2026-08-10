@@ -1,0 +1,9 @@
+# The Carla / Minnard Law page is unaffiliated demo work living on a personal
+# domain. Keeping it out of search results means it can never be mistaken for
+# the firm's real site at minnardlaw.com. The page also carries its own
+# <meta name="robots" content="noindex">, which is what actually enforces this —
+# robots.txt only asks crawlers not to fetch it.
+User-agent: *
+Disallow: /carla/
+
+Allow: /
