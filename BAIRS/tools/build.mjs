@@ -156,10 +156,11 @@ const NAV = [
 function head({ title, description, page }) {
   const url = site.canonical + (page === "index" ? "" : `${page}.html`);
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="access-locked">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>html.access-locked{overflow:hidden}html.access-locked body>:not(.access-gate){display:none!important}</style>
 <title>${esc(title)}</title>
 <meta name="description" content="${attr(description)}">
 ${site.noindex ? '<meta name="robots" content="noindex,nofollow">\n' : ""}<link rel="canonical" href="${attr(url)}">
@@ -176,12 +177,33 @@ ${site.noindex ? '<meta name="robots" content="noindex,nofollow">\n' : ""}<link 
 <link rel="preload" href="assets/fonts/newsreader-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="alternate" type="text/calendar" href="series.ics" title="${attr(site.name)} — talks">
 <link rel="stylesheet" href="styles.css?v=${assetVersion("styles.css")}">
+<link rel="stylesheet" href="access.css?v=${assetVersion("access.css")}">
+<script src="access.js?v=${assetVersion("access.js")}" defer></script>
 </head>
 <body>
+${accessGate()}
 <a class="skip" href="#main">Skip to content</a>
 ${site.proposalNotice ? notice() : ""}
 ${header()}
 <main id="main">`;
+}
+
+function accessGate() {
+  return `<div class="access-gate" id="access-gate" role="dialog" aria-modal="true" aria-labelledby="access-title">
+    <div class="access-gate__box">
+      <p class="access-gate__brand">Berkeley<span>AI Risk Speaker Series</span></p>
+      <h1 id="access-title">Preview access</h1>
+      <p class="access-gate__intro">Enter the password to view the proposed website.</p>
+      <form id="access-form" method="post">
+        <label for="access-password">Password</label>
+        <input id="access-password" type="password" autocomplete="current-password" required disabled aria-describedby="access-error">
+        <p class="access-gate__error" id="access-error" role="alert" hidden></p>
+        <button class="btn access-gate__submit" type="submit" id="access-submit" disabled>View the site</button>
+      </form>
+      <noscript><p class="access-gate__error">JavaScript is required to open this preview.</p></noscript>
+      <p class="access-gate__fine"><a href="${attr(site.officialSite)}">Visit the official Berkeley AI Risk website</a></p>
+    </div>
+  </div>`;
 }
 
 function notice() {
@@ -237,7 +259,7 @@ function footer() {
     </div>
     <div class="ftr__base">
       <span>&copy; ${new Date().getFullYear()} Berkeley AI Risk. Talks are recorded and published by the <a href="https://kavlicenter.berkeley.edu">Kavli Center for Ethics, Science, and the Public</a>.</span>
-      <span>Redesign proposal &middot; <a href="${attr(site.officialSite)}">official site</a></span>
+      <span>Redesign proposal &middot; <a href="${attr(site.officialSite)}">official site</a><button class="access-lock-btn" type="button" data-lock-preview>Lock preview</button></span>
     </div>
   </div>
 </footer>

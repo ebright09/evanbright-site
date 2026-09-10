@@ -87,3 +87,9 @@ Deploy by copying this directory into the repository's `BAIRS/`, reviewing that 
 ## Validation for this redesign
 
 The build and JavaScript syntax checks pass. Local checks cover the three page routes, internal anchors and assets, all 15 headshots, nine recordings, unchanged original abstracts, all 15 calendar dates and daylight-saving offsets, and the updated organizer and sponsor links. No live form submissions were made. Browser interaction and visual checks are separate from these source checks.
+
+## Review password gate
+
+All generated HTML pages show a password gate before displaying content. `access.js` compares a SHA-256 password digest locally and remembers the successful check in session storage for the current browser tab. The footer’s **Lock preview** clears it. The plaintext password is not saved in the source or browser storage.
+
+This is a casual visitor gate, explicitly chosen for the review copy. It is not server-side access control: static files, data, assets and public repository history remain accessible, and the gate can be bypassed. Disabling JavaScript leaves the ordinary page view locked. Do not use this setup for confidential material. To change the password, update its SHA-256 digest in `access.js` and rebuild.
