@@ -94,7 +94,8 @@
       "email": "wfithian@berkeley.edu",
       "website": "https://www.stat.berkeley.edu/~wfithian/",
       "linkedin": "",
-      "x": "https://x.com/wfithian"
+      "x": "https://x.com/wfithian",
+      "scholar": "https://scholar.google.com/citations?user=zVSwZIAAAAAJ&hl=en"
     },
     {
       "name": "Wes Holliday",
@@ -102,7 +103,7 @@
       "photo": "assets/speakers/wes-holliday.jpg",
       "email": "wesholliday@berkeley.edu",
       "website": "https://wesholliday.net",
-      "linkedin": "",
+      "linkedin": "https://www.linkedin.com/in/wesleyholliday/",
       "x": ""
     }
   ],
@@ -133,12 +134,11 @@
       "key": "brsl"
     },
     {
-      "name": "Sutardja Center for Entrepreneurship & Technology",
-      "short": "SCET",
-      "url": "https://scet.berkeley.edu",
-      "logo": "assets/logos/scet.svg",
-      "key": "scet",
-      "unconfirmed": true
+      "name": "CITRIS and the Banatao Institute",
+      "short": "CITRIS",
+      "url": "https://citris-uc.org/",
+      "logo": "assets/logos/citris.png",
+      "key": "citris"
     }
   ],
   "accessibility": "If you require an accommodation in order to fully participate in an event, please contact Will Fithian (wfithian@berkeley.edu) with as much advance notice as possible, and at least 5 days before the event.",

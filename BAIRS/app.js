@@ -1,9 +1,8 @@
 /* ==========================================================================
    Berkeley AI Risk — interaction layer
 
-   No dependencies, no third-party requests. Everything degrades: with
-   JavaScript off you still get the full talk list, every abstract, the RSVP
-   links, the ICS subscribe link and a plain link to the mailing-list form.
+   No dependencies or third-party requests on initial load.
+   Native details, calendar links and form links work without JavaScript.
    ========================================================================== */
 
 (function () {
@@ -21,12 +20,6 @@
     dept: "entry.2055940634"
   };
 
-  // Open the mailing-list modal once, unprompted, on a visitor's first read.
-  // Set to false to make the modal purely click-triggered.
-  var AUTO_OPEN = true;
-  var AUTO_OPEN_DELAY = 25000;   // ms
-  var AUTO_OPEN_SCROLL = 0.5;    // fraction of the page
-
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
@@ -39,11 +32,7 @@
     return null;
   }
 
-  /* Served over http(s), but a calendar client needs the webcal scheme to offer
-     a subscription rather than a one-off import. Computed up front because the
-     calendar menus below are built from it. */
-  var WEBCAL = new URL("series.ics", location.href).href.replace(/^https?:/, "webcal:");
-  document.body.setAttribute("data-webcal", WEBCAL);
+  var WEBCAL = new URL('series.ics', $('link[rel="canonical"]').href).href.replace(/^https?:/, 'webcal:');
 
   var TALKS = {};
   try {
@@ -75,134 +64,69 @@
     burger.addEventListener("click", function () {
       var open = burger.getAttribute("aria-expanded") === "true";
       burger.setAttribute("aria-expanded", String(!open));
-      nav.hidden = open;
+      nav.classList.toggle("is-open", !open);
     });
     nav.addEventListener("click", function (e) {
       if (e.target.tagName === "A" && window.matchMedia("(max-width: 900px)").matches) {
         burger.setAttribute("aria-expanded", "false");
-        nav.hidden = true;
+        nav.classList.remove("is-open");
       }
     });
   }
 
-  /* --- Upcoming rows: accordion ------------------------------------------ */
-
-  $$(".row__toggle").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var open = btn.getAttribute("aria-expanded") === "true";
-      btn.setAttribute("aria-expanded", String(!open));
-      var panel = document.getElementById(btn.getAttribute("aria-controls"));
-      if (panel) panel.hidden = open;
-      hideCard();
-    });
-  });
-
-  /* --- Upcoming rows: elapsed guard -------------------------------------- */
-
-  /* Upcoming vs past is decided at build time and baked into the HTML, so
-     between a talk finishing and the next rebuild a finished talk would still
-     sit under "Upcoming" offering an RSVP. Catch that in the browser. */
-  (function () {
-    var now = Date.now();
-    $$(".row").forEach(function (row) {
-      var t = TALKS[row.getAttribute("data-slug")];
-      if (!t || !t.endUtc || Date.parse(t.endUtc) > now) return;
-      row.classList.add("is-elapsed");
-      var cta = $(".row__cta", row);
-      if (cta) cta.innerHTML = '<span class="tag">This talk has taken place</span>';
-    });
-  })();
-
-  /* --- Upcoming rows: hover preview -------------------------------------- */
-
-  /* Hover is a desktop-only enhancement. On touch, the same content is one tap
-     away in the accordion panel, so nothing is hidden behind a hover state. */
-  var canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
-  var card = $("#hovercard");
-  var cardTimer = null;
-
-  function hideCard() {
-    if (cardTimer) { clearTimeout(cardTimer); cardTimer = null; }
-    if (card) card.setAttribute("data-show", "0");
-  }
-
-  function showCard(btn) {
-    if (!card) return;
-    var talk = TALKS[btn.closest(".row").getAttribute("data-slug")];
-    if (!talk || !talk.summary) return;
-
-    card.innerHTML =
-      '<div class="hovercard__title"></div><div class="hovercard__sum"></div>' +
-      '<div class="hovercard__foot"></div>';
-    $(".hovercard__title", card).textContent = talk.title;
-    $(".hovercard__sum", card).textContent = talk.summary;
-    $(".hovercard__foot", card).textContent =
-      talk.longDate + " · " + talk.timeLabel + " · " + talk.location + " — click for full details";
-
-    // Prefer the right of the row; fall back to the left when there is no room.
-    var r = btn.getBoundingClientRect();
-    card.setAttribute("data-show", "1");
-    var w = card.offsetWidth, h = card.offsetHeight, pad = 16;
-    var left = r.right + pad;
-    if (left + w + pad > window.innerWidth) left = Math.max(pad, r.left - w - pad);
-    var top = Math.min(
-      Math.max(pad, r.top + r.height / 2 - h / 2),
-      window.innerHeight - h - pad
-    );
-    card.style.left = left + "px";
-    card.style.top = top + "px";
-  }
-
-  if (card && canHover.matches) {
-    $$(".row__toggle").forEach(function (btn) {
-      btn.addEventListener("pointerenter", function (e) {
-        if (e.pointerType !== "mouse") return;
-        if (btn.getAttribute("aria-expanded") === "true") return;
-        if (window.innerWidth < 900) return;
-        cardTimer = setTimeout(function () { showCard(btn); }, 150);
-      });
-      btn.addEventListener("pointerleave", hideCard);
-      btn.addEventListener("focus", hideCard);
-    });
-    window.addEventListener("scroll", hideCard, { passive: true });
-  }
-
-  /* --- Archive cards ----------------------------------------------------- */
-
-  function openCard(article) {
-    var panel = $(".card__panel", article);
-    var toggles = $$('[aria-controls="' + (panel && panel.id) + '"]', article);
-    var open = article.classList.contains("is-open");
-
-    article.classList.toggle("is-open", !open);
-    if (panel) panel.hidden = open;
-    toggles.forEach(function (t) { t.setAttribute("aria-expanded", String(!open)); });
-
-    // Swap the thumbnail for the player only on first open — nothing is
-    // requested from YouTube until someone actually asks for the video.
-    if (!open) {
-      var media = $(".card__media", article);
-      var id = article.getAttribute("data-video");
-      if (media && id && !$(".card__frame", article)) {
-        var frame = document.createElement("div");
-        frame.className = "card__frame";
-        var iframe = document.createElement("iframe");
-        iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
-        iframe.title = $(".card__title", article).textContent;
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture";
-        iframe.referrerPolicy = "strict-origin-when-cross-origin";
-        iframe.allowFullscreen = true;
-        frame.appendChild(iframe);
-        media.replaceWith(frame);
+  /* Move completed talks to the archive between static rebuilds. */
+  function refreshSchedule() {
+    $$(".row").forEach(function(row) {
+      var talk = TALKS[row.dataset.slug];
+      if (!talk || Date.parse(talk.endUtc) > Date.now()) return;
+      var template = $('template[data-elapsed="' + talk.slug + '"]');
+      if (!template) return;
+      var season = $$('.season').find(function(s) { return s.dataset.season === template.dataset.season; });
+      if (!season) {
+        season = document.createElement('div');
+        season.className = 'season';
+        season.dataset.season = template.dataset.season;
+        var heading = document.createElement('h3');
+        heading.className = 'season__h'; heading.textContent = template.dataset.season;
+        var list = document.createElement('div'); list.className = 'talks';
+        season.append(heading, list); $('#archive-seasons').prepend(season);
       }
-    }
-  }
-
-  $$(".card").forEach(function (article) {
-    $$(".card__media, .card__toggle", article).forEach(function (t) {
-      t.addEventListener("click", function () { openCard(article); });
+      $('.talks', season).prepend(template.content.cloneNode(true));
+      row.remove(); template.remove();
+      $('.heading-count').textContent = $$('#archive-seasons .talk').length;
     });
+    if ($('.rows') && !$('.rows .row')) $('.schedule-note').innerHTML = 'The next talks are being scheduled. Use “Join mailing list” above to receive updates.';
+  }
+  refreshSchedule();
+  setInterval(refreshSchedule, 60000);
+
+  /* Details are native HTML. Loading a recording is a separate action. */
+  document.addEventListener('click', function(e) {
+    var button = e.target.closest('.video__play');
+    if (!button) return;
+    var talk = button.closest('.talk');
+    var video = button.closest('.video');
+    if (!video.dataset.original) video.dataset.original = video.innerHTML;
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + talk.dataset.video + '?autoplay=1&rel=0';
+    iframe.title = $('.talk__speaker', talk).textContent + ' — recording';
+    iframe.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin'; iframe.allowFullscreen = true;
+    button.replaceWith(iframe);
   });
+  document.addEventListener('toggle', function(e) {
+    if (!e.target.matches('.talk') || e.target.open) return;
+    var video = $('.video', e.target);
+    if (video && $('iframe', video)) video.innerHTML = video.dataset.original;
+  }, true);
+  $$('.video').forEach(function(video) { video.dataset.original = video.innerHTML; });
+  function openHash() {
+    var id;
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch(e) { return; }
+    var target = document.getElementById(id);
+    if (target && target.matches('.talk')) { target.open = true; target.scrollIntoView(); }
+  }
+  window.addEventListener('hashchange', openHash); openHash();
 
   /* --- Add to calendar --------------------------------------------------- */
 
@@ -212,19 +136,25 @@
       .replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
   }
 
-  // RFC 5545 caps lines at 75 octets; long abstracts must be folded or the
-  // file is rejected by strict parsers (Outlook among them).
+  // RFC 5545 lines are folded at 75 UTF-8 bytes.
   function fold(line) {
-    if (line.length <= 73) return line;
-    var out = line.slice(0, 73), rest = line.slice(73);
-    while (rest.length > 72) { out += "\r\n " + rest.slice(0, 72); rest = rest.slice(72); }
-    return out + "\r\n " + rest;
+    var result = '', count = 0;
+    for (var ch of line) {
+      var bytes = new TextEncoder().encode(ch).length;
+      if (count + bytes > 75) { result += '\r\n '; count = 1; }
+      result += ch; count += bytes;
+    }
+    return result;
   }
 
   function stamp(iso) { return iso.replace(/[-:]/g, "").replace(/\.\d{3}/, ""); }
 
+  function calendarDescription(talk) {
+    return talk.summary + (talk.onlineUrl ? "\n\nZoom: " + talk.onlineUrl : "") + (talk.rsvpUrl ? "\n\nRSVP: " + talk.rsvpUrl : "");
+  }
+
   function singleIcs(talk) {
-    var body = talk.summary + (talk.rsvpUrl ? "\n\nRSVP: " + talk.rsvpUrl : "") +
+    var body = calendarDescription(talk) +
       "\n\n" + location.href.split("#")[0];
     return [
       "BEGIN:VCALENDAR", "VERSION:2.0",
@@ -255,7 +185,7 @@
       action: "TEMPLATE",
       text: "Berkeley AI Risk — " + talk.speaker,
       dates: stamp(talk.startUtc) + "/" + stamp(talk.endUtc),
-      details: talk.summary + (talk.rsvpUrl ? "\n\nRSVP: " + talk.rsvpUrl : ""),
+      details: calendarDescription(talk),
       location: talk.location,
       ctz: "America/Los_Angeles"
     });
@@ -267,17 +197,18 @@
       path: "/calendar/action/compose", rru: "addevent",
       subject: "Berkeley AI Risk — " + talk.speaker,
       startdt: talk.startUtc, enddt: talk.endUtc,
-      body: talk.summary + (talk.rsvpUrl ? "\n\nRSVP: " + talk.rsvpUrl : ""),
+      body: calendarDescription(talk),
       location: talk.location
     });
     return "https://outlook." + host + "/calendar/0/deeplink/compose?" + p;
   }
 
   var openMenu = null;
-  function closeMenu() {
+  function closeMenu(restoreFocus) {
     if (!openMenu) return;
     $(".cal__menu", openMenu).hidden = true;
     $(".cal__btn", openMenu).setAttribute("aria-expanded", "false");
+    if (restoreFocus) $(".cal__btn", openMenu).focus();
     openMenu = null;
   }
 
@@ -286,6 +217,7 @@
     var talk = TALKS[wrap.getAttribute("data-slug")];
     if (!btn || !menu || !talk) { if (btn) btn.hidden = true; return; }
 
+    btn.hidden = false;
     menu.innerHTML =
       '<a data-k="g" href="' + googleUrl(talk) + '" target="_blank" rel="noopener">Google Calendar</a>' +
       '<a data-k="o" href="' + outlookUrl(talk, "live.com") + '" target="_blank" rel="noopener">Outlook.com</a>' +
@@ -316,7 +248,10 @@
     if (openMenu && !openMenu.contains(e.target)) closeMenu();
   });
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") closeMenu();
+    if (e.key === "Escape") {
+      closeMenu(true);
+      if (nav && nav.classList.contains("is-open")) { nav.classList.remove("is-open"); burger.setAttribute("aria-expanded", "false"); burger.focus(); }
+    }
   });
 
   /* --- Mailing list modal ------------------------------------------------ */
@@ -337,6 +272,9 @@
     function openModal(trigger) {
       lastFocus = trigger || document.activeElement;
       modal.hidden = false;
+      $("#main").inert = true;
+      $(".hdr").inert = true;
+      $(".ftr").inert = true;
       document.body.style.overflow = "hidden";
       store("bair.sub.seen", "1");
       var f = focusables();
@@ -345,6 +283,9 @@
 
     function closeModal() {
       modal.hidden = true;
+      $("#main").inert = false;
+      $(".hdr").inert = false;
+      $(".ftr").inert = false;
       document.body.style.overflow = "";
       if (lastFocus && lastFocus.focus) lastFocus.focus();
     }
@@ -403,11 +344,11 @@
       if ($("#sub-company").value) { form.hidden = true; okPanel.hidden = false; return; }
 
       var submit = $("#sub-submit");
+      $("#sub-error").hidden = true;
       submit.disabled = true;
       submit.textContent = "Signing you up…";
 
       submitSubscriber({ name: nameEl.value.trim(), email: mail, dept: deptEl.value.trim() })
-        .catch(function () { /* opaque responses reject in some browsers; treat as sent */ })
         .then(function () {
           form.hidden = true;
           okPanel.hidden = false;
@@ -415,28 +356,35 @@
           store("bair.sub.done", "1");
           okPanel.setAttribute("tabindex", "-1");
           okPanel.focus();
+        }).catch(function () {
+          var error = $('#sub-error');
+          error.textContent = 'Your request could not be sent. Please try again or use the Google Form below.';
+          error.hidden = false;
+        }).finally(function () {
+          submit.disabled = false; submit.textContent = 'Sign me up';
         });
     });
 
-    // One unprompted open, ever, per browser.
-    if (AUTO_OPEN && !store("bair.sub.seen") && !store("bair.sub.done")) {
-      var fired = false;
-      var fire = function () {
-        if (fired || !modal.hidden) return;
-        fired = true;
-        window.removeEventListener("scroll", onScroll);
-        openModal(null);
-      };
-      var onScroll = function () {
-        var max = document.documentElement.scrollHeight - window.innerHeight;
-        if (max > 0 && window.scrollY / max >= AUTO_OPEN_SCROLL) fire();
-      };
-      window.addEventListener("scroll", onScroll, { passive: true });
-      setTimeout(fire, AUTO_OPEN_DELAY);
-    }
   }
 
-  /* --- webcal:// ---------------------------------------------------------- */
-
-  $$("[data-webcal-link]").forEach(function (a) { a.href = WEBCAL; });
+  /* Copy the series URL for Google Calendar's From URL subscription. */
+  $$('.copy-calendar').forEach(function(button) {
+    button.addEventListener('click', async function() {
+      var wrap = button.closest('.series-calendar__google');
+      var input = $('input', wrap), status = $('.copy-status', wrap);
+      try {
+        await navigator.clipboard.writeText(input.value);
+        status.textContent = 'Address copied';
+      } catch(e) {
+        input.focus(); input.select(); status.textContent = 'Select and copy the address above.';
+      }
+    });
+  });
+  document.addEventListener('click', function(e) {
+    $$('.series-calendar[open]').forEach(function(menu) { if (!menu.contains(e.target)) menu.open = false; });
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Escape') return;
+    $$('.series-calendar[open]').forEach(function(menu) { menu.open = false; $('summary', menu).focus(); });
+  });
 })();

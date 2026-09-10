@@ -18,6 +18,7 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), "utf8"));
 const write = (p, s) => {
+  if (p.endsWith(".html")) s = s.replace(/[ \t]+$/gm, "");
   fs.writeFileSync(path.join(ROOT, p), s);
   console.log(`  ${p.padEnd(24)} ${String(Buffer.byteLength(s)).padStart(7)} bytes`);
 };
@@ -89,6 +90,7 @@ function decorate(t) {
   const endMs = startMs + (t.durationMinutes || 90) * 60000;
   return {
     ...t,
+    summary: endMs <= Date.now() && t.pastSummary ? t.pastSummary : t.summary,
     title: t.title === "TBA" ? TBA : t.title,
     y, mo, d,
     dow: F.dow.format(dt), dowLong: F.dowLong.format(dt),
@@ -103,11 +105,11 @@ function decorate(t) {
     endLocal: new Date(endMs).toISOString(),
     // Berkeley's academic calendar splits at the summer, so month >= 8 is Fall.
     season: `${mo >= 8 ? "Fall" : "Spring"} ${y}`,
-    isPast: t.date < TODAY,
+    isPast: endMs <= Date.now(),
   };
 }
 
-const all = talks.map(decorate);
+const all = talks.map(decorate).sort((a, b) => a.startUtc.localeCompare(b.startUtc));
 const upcoming = all.filter((t) => !t.isPast);
 const past = all.filter((t) => t.isPast).reverse();
 
@@ -146,7 +148,6 @@ const NAV = [
   ["index.html#archive", "Past talks"],
   ["reading-group.html", "Reading group"],
   ["index.html#about", "About"],
-  ["index.html#organizers", "Organizers"],
 ];
 
 function head({ title, description, page }) {
@@ -159,7 +160,7 @@ function head({ title, description, page }) {
 <title>${esc(title)}</title>
 <meta name="description" content="${attr(description)}">
 ${site.noindex ? '<meta name="robots" content="noindex,nofollow">\n' : ""}<link rel="canonical" href="${attr(url)}">
-<meta name="theme-color" content="#fdfdfb">
+<meta name="theme-color" content="#002676">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${attr(site.name)}">
 <meta property="og:title" content="${attr(title)}">
@@ -183,7 +184,7 @@ ${header()}
 function notice() {
   return `<div class="notice" id="notice">
   <div class="notice__in">
-    <span><strong>Proposed redesign.</strong> Not the official site — the live one is <a href="${attr(site.officialSite)}">ai-risk.berkeley.edu</a>.</span>
+    <span>Design proposal &nbsp;·&nbsp; Official site: <a href="${attr(site.officialSite)}">ai-risk.berkeley.edu</a>.</span>
     <button class="notice__x" type="button" aria-label="Dismiss">&times;</button>
   </div>
 </div>`;
@@ -192,11 +193,11 @@ function notice() {
 function header() {
   return `<header class="hdr">
   <div class="hdr__in">
-    <a class="brand" href="index.html"><span class="brand__dot"></span>Berkeley AI Risk</a>
+    <a class="brand" href="index.html"><span class="brand__berkeley">Berkeley</span><span class="brand__series">AI Risk Series</span></a>
     <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu"><span></span></button>
-    <nav class="nav" id="nav" hidden>
+    <nav class="nav" id="nav" aria-label="Main navigation">
       ${NAV.map(([h, l]) => `<a href="${attr(h)}">${esc(l)}</a>`).join("\n      ")}
-      <a href="#" data-subscribe>Join mailing list</a>
+      <a href="${attr(site.mailingListForm)}" data-subscribe>Join mailing list</a>
     </nav>
     <a class="btn btn--sm hdr__cta" href="${attr(site.mailingListForm)}" data-subscribe>Join mailing list</a>
   </div>
@@ -220,13 +221,13 @@ function footer() {
           <li><a href="index.html#archive">Past talks</a></li>
           <li><a href="reading-group.html">Reading group</a></li>
           <li><a href="${attr(site.youtubePlaylist)}">Video archive</a></li>
-          <li><a href="series.ics" data-webcal-link>Subscribe to the calendar</a></li>
+          <li>${seriesCalendar()}</li>
         </ul>
       </div>
       <div>
         <h4>Get in touch</h4>
         <ul>
-          <li><a href="#" data-subscribe>Join the mailing list</a></li>
+          <li><a href="${attr(site.mailingListForm)}" data-subscribe>Join the mailing list</a></li>
           ${site.organizers.map((o) => `<li><a href="mailto:${attr(o.email)}">${esc(o.name)}</a></li>`).join("\n          ")}
         </ul>
       </div>
@@ -238,11 +239,11 @@ function footer() {
   </div>
 </footer>
 ${modal()}
-<div class="hovercard" id="hovercard" data-show="0" aria-hidden="true"></div>
+
 <script type="application/json" id="talk-data">${JSON.stringify(
     all.map((t) => ({
       slug: t.slug, speaker: t.speaker, title: t.title, summary: t.summary,
-      location: t.location, longDate: t.longDate, timeLabel: t.timeLabel,
+      location: t.location, onlineUrl: site.zoom, longDate: t.longDate, timeLabel: t.timeLabel,
       startUtc: t.startUtc, endUtc: t.endUtc, rsvpUrl: t.rsvpUrl,
     }))
   ).replace(/</g, "\\u003c")}</script>
@@ -258,9 +259,10 @@ function modal() {
     <div class="modal__head">
       <button class="modal__x" type="button" data-close aria-label="Close">&times;</button>
       <h2 id="sub-h">Join the mailing list</h2>
-      <p class="modal__sub">One email before each talk. Nothing else, and no forwarding of your address.</p>
+      <p class="modal__sub">Receive announcements about upcoming talks and reading-group sessions.</p>
     </div>
     <form id="sub-form" novalidate>
+      <p class="form-error" id="sub-error" role="alert" hidden></p>
       <div class="field">
         <label for="sub-name">Name</label>
         <input id="sub-name" name="name" type="text" autocomplete="name" required aria-describedby="sub-name-err">
@@ -282,8 +284,8 @@ function modal() {
     <div id="sub-ok" hidden>
       <div class="modal__ok">
         <div class="tick" aria-hidden="true">&#10003;</div>
-        <h2 style="font-size:23px;margin-bottom:8px">You&rsquo;re on the list</h2>
-        <p class="modal__sub" style="margin-bottom:20px">We&rsquo;ll write to <strong id="sub-ok-mail"></strong> before the next talk.</p>
+        <h2 style="font-size:23px;margin-bottom:8px">Signup request sent</h2>
+        <p class="modal__sub" style="margin-bottom:20px">Your request for <strong id="sub-ok-mail"></strong> has been sent. This page cannot confirm that it was accepted. You can also <a href="${attr(site.mailingListForm)}" target="_blank" rel="noopener">sign up directly</a>.</p>
         <button class="btn btn--ghost" type="button" data-close>Close</button>
       </div>
     </div>
@@ -299,88 +301,58 @@ function rsvpButton(t, size = "") {
   if (site.lumaCalendar) return `<a class="${cls}" href="${attr(site.lumaCalendar)}" target="_blank" rel="noopener">RSVP</a>`;
   // No RSVP target configured yet, so offer the next most useful thing rather
   // than a dead button. Replace by filling in rsvpUrl or site.lumaCalendar.
-  return `<button class="${cls}" type="button" data-subscribe>Notify me</button>`;
+  return `<button class="${cls}" type="button" data-subscribe>Get talk updates</button>`;
+}
+
+function seriesCalendar() {
+  const url = site.canonical + 'series.ics';
+  return `<details class="series-calendar"><summary>Subscribe to the calendar</summary><div class="series-calendar__menu">
+    <a href="${attr(url.replace(/^https?:/, 'webcal:'))}">Apple Calendar / Outlook</a>
+    <a href="series.ics" download>Download all dates (.ics)</a>
+    <div class="series-calendar__google"><strong>Google Calendar</strong><p>In <a href="https://calendar.google.com/calendar/u/0/r/settings/addbyurl" target="_blank" rel="noopener">From URL</a>, paste this calendar address:</p><input aria-label="Calendar subscription address" type="text" readonly value="${attr(url)}"><button type="button" class="copy-calendar">Copy address</button><span class="copy-status" role="status"></span></div>
+  </div></details>`;
 }
 
 function calMenu(t) {
   return `<div class="cal" data-slug="${attr(t.slug)}">
-        <button class="cal__btn btn btn--ghost btn--sm" type="button" aria-expanded="false" aria-haspopup="true" hidden>Add to calendar</button>
+        <button class="cal__btn btn btn--ghost btn--sm" type="button" aria-expanded="false" hidden>Add to calendar</button>
         <div class="cal__menu" hidden></div>
       </div>`;
 }
 
 function upcomingRow(t) {
-  const pid = `p-${t.slug}`;
-  return `<li class="row" data-slug="${attr(t.slug)}">
+  return `<li class="row" id="${attr(t.slug)}" data-slug="${attr(t.slug)}">
     <div class="row__main">
-      <time class="badge" datetime="${attr(t.date)}">
-        <span class="dow">${esc(t.dow)}</span><span class="mon">${esc(t.mon)}</span><span class="day">${t.day}</span>
-      </time>
-      <button class="row__toggle" type="button" aria-expanded="false" aria-controls="${pid}">
-        ${face(t, "row__face")}
-        <span class="row__txt">
-          <span class="row__speaker">${esc(t.speaker)} <span class="row__affil">(${esc(t.affiliation)})</span></span>
-          <span class="row__title">${esc(t.title)}</span>
-        </span>
-        <span class="row__chev">${ICON.chev}</span>
-      </button>
-      <div class="row__cta">${rsvpButton(t)}</div>
+      <time class="badge" datetime="${attr(t.date)}"><span class="dow">${esc(t.dow)}</span><span class="day">${t.day}</span><span class="mon">${esc(t.mon)} ${t.y}</span></time>
+      ${face(t, "row__face")}
+      <div class="row__txt"><h3 class="row__speaker">${esc(t.speaker)}</h3><p class="row__affil">${esc(t.affiliation)}</p><p class="row__title">${esc(t.title)}</p><p class="row__time">${esc(t.timeLabel)} PT &nbsp;·&nbsp; ${esc(t.location)}${site.zoom ? ` &nbsp;·&nbsp; <a href="${attr(site.zoom)}" target="_blank" rel="noopener">Join on Zoom</a>` : ""}</p></div>
+      <div class="row__cta">${rsvpButton(t)}${!t.rsvpUrl && !site.lumaCalendar ? '<span class="rsvp-note">Registration link forthcoming</span>' : ''}${calMenu(t)}</div>
     </div>
-    <div class="row__panel" id="${pid}" hidden>
-      <div class="row__meta">
-        <span><strong>${esc(t.longDate)}</strong></span>
-        <span>${esc(t.timeLabel)} PT</span>
-        <span>${esc(t.location)}</span>
-      </div>
-      <p>${esc(t.summary)}</p>
-      ${t.abstract ? `<div style="margin-top:16px"><div class="abstract-label">Abstract &mdash; in the speaker&rsquo;s words</div>${t.abstract}</div>` : ""}
-      <div class="card__links">
-        ${t.website ? `<a class="btn btn--ghost btn--sm" href="${attr(t.website)}" target="_blank" rel="noopener">Speaker&rsquo;s site</a>` : ""}
-        ${calMenu(t)}
-      </div>
-    </div>
+    <div class="row__description"><p>${esc(t.summary)}</p>${t.abstract ? `<details class="abstract"><summary>Read the speaker’s abstract</summary><div class="abstract__body">${t.abstract}</div></details>` : ''}${t.website ? `<a class="text-link" href="${attr(t.website)}" target="_blank" rel="noopener">About ${esc(t.speaker)}</a>` : ''}</div>
   </li>`;
 }
 
 function archiveCard(t) {
-  const pid = `c-${t.slug}`;
-  const media = t.videoId
-    ? `<button class="card__media" type="button" aria-expanded="false" aria-controls="${pid}" aria-label="Play the recording of ${attr(t.speaker)}&rsquo;s talk">
-        <img src="assets/thumbs/${attr(t.slug)}.jpg" alt="" width="640" height="360" loading="lazy" decoding="async">
-        <span class="play" aria-hidden="true"><span></span></span>
-      </button>`
-    : `<button class="card__media card__media--none" type="button" aria-expanded="false" aria-controls="${pid}">
-        <span class="m0">Berkeley AI Risk</span><span class="m2">Recording not available</span>
-      </button>`;
-
-  return `<article class="card"${t.videoId ? ` data-video="${attr(t.videoId)}"` : ""}>
-    ${media}
-    <div class="card__body">
-      <div class="card__when">${esc(t.shortDate)}</div>
-      <div class="card__who">
-        ${face(t, "card__face")}
-        <span><span class="card__name">${esc(t.speaker)}</span><br><span class="card__affil">${esc(t.affiliation)}</span></span>
-      </div>
-      <button class="card__toggle" type="button" aria-expanded="false" aria-controls="${pid}">
-        <h3 class="card__title">${esc(t.title)}</h3>
-        <p class="card__sum">${esc(t.summary)}</p>
-      </button>
-      <div class="card__panel" id="${pid}" hidden>
-        ${t.abstract ? `<div class="abstract-label">Abstract &mdash; in the speaker&rsquo;s words</div>${t.abstract}` : "<p>No abstract was published for this talk.</p>"}
-        <div class="card__links">
-          ${t.videoId ? `<a class="btn btn--ghost btn--sm" href="https://www.youtube.com/watch?v=${attr(t.videoId)}" target="_blank" rel="noopener">Watch on YouTube</a>` : ""}
-          ${t.slidesUrl ? `<a class="btn btn--ghost btn--sm" href="${attr(t.slidesUrl)}" target="_blank" rel="noopener">Slides (PDF)</a>` : ""}
-          ${t.website ? `<a class="btn btn--ghost btn--sm" href="${attr(t.website)}" target="_blank" rel="noopener">Speaker&rsquo;s site</a>` : ""}
-        </div>
-      </div>
+  return `<details class="talk" id="${attr(t.slug)}"${t.videoId ? ` data-video="${attr(t.videoId)}"` : ''}>
+    <summary class="talk__row">
+      <time class="talk__date" datetime="${attr(t.date)}"><span>${esc(t.mon)}</span><strong>${t.day}</strong></time>
+      ${face(t, "talk__face")}
+      <span class="talk__text"><span class="talk__speaker">${esc(t.speaker)}<span class="talk__affil">${esc(t.affiliation)}</span></span><span class="talk__title">${esc(t.title)}</span></span>
+      <span class="talk__action">${t.videoId ? 'Recording' : 'Details'}<span class="talk__plus" aria-hidden="true">+</span></span>
+    </summary>
+    <div class="talk__content">
+      <p class="talk__summary">${esc(t.summary)}</p>
+      ${t.videoId ? `<div class="video"><button class="video__play" type="button" aria-label="Play ${attr(t.speaker)}’s talk"><img src="assets/thumbs/${attr(t.slug)}.jpg" alt="" width="640" height="360" loading="lazy"><span class="video__label"><span aria-hidden="true">▶</span> Watch recording</span></button></div>` : '<p class="recording-note">Recording not yet available.</p>'}
+      ${t.abstract ? `<details class="abstract"><summary>Read the speaker’s abstract</summary><div class="abstract__body"><p class="abstract-label">Original abstract · in the speaker’s words</p>${t.abstract}</div></details>` : ''}
+      <div class="card__links">${t.videoId ? `<a href="https://www.youtube.com/watch?v=${attr(t.videoId)}" target="_blank" rel="noopener">Watch on YouTube</a>` : ''}${t.slidesUrl ? `<a href="${attr(t.slidesUrl)}" target="_blank" rel="noopener">Slides (PDF)</a>` : ''}${t.website ? `<a href="${attr(t.website)}" target="_blank" rel="noopener">Speaker’s website</a>` : ''}</div>
     </div>
-  </article>`;
+  </details>`;
 }
 
 function personCard(o) {
   const links = [
     o.linkedin && iconLink(o.linkedin, `${o.name} on LinkedIn`, ICON.linkedin, "iconbtn--li"),
-    o.x && iconLink(o.x, `${o.name} on X`, ICON.x),
+    o.x && iconLink(o.x, `${o.name} on Twitter / X`, ICON.x),
   ].filter(Boolean).join("\n          ");
 
   return `<div class="person">
@@ -390,7 +362,8 @@ function personCard(o) {
       <div class="person__role">${esc(o.role)}</div>
       <div class="person__links">
         <a class="btn btn--ghost btn--sm" href="mailto:${attr(o.email)}">${esc(o.email)}</a>
-        ${o.website ? `<a class="btn btn--ghost btn--sm" href="${attr(o.website)}" target="_blank" rel="noopener">Faculty page</a>` : ""}
+        ${o.website ? `<a class="btn btn--ghost btn--sm" href="${attr(o.website)}" target="_blank" rel="noopener">${o.name === "Will Fithian" ? "Berkeley page" : "Faculty page"}</a>` : ""}
+        ${o.scholar ? `<a class="btn btn--ghost btn--sm" href="${attr(o.scholar)}" target="_blank" rel="noopener">Google Scholar</a>` : ""}
       </div>
     </div>
   </div>`;
@@ -446,102 +419,41 @@ function indexPage() {
     description: `${site.tagline}. Talks by researchers from academia, civil society and industry, with the full archive of past talks and recordings.`,
     page: "index",
   }) + `
-<section class="hero">
-  <div class="wrap hero__grid">
-    <div>
-      <p class="eyebrow">UC Berkeley &middot; Speaker series</p>
-      <h1>Berkeley AI&nbsp;Risk</h1>
-      <p class="lede">${esc(site.tagline)}.</p>
-      <div class="btn-row">
-        <a class="btn btn--lg" href="#" data-subscribe>Join the mailing list</a>
-        <a class="btn btn--ghost btn--lg" href="series.ics" data-webcal-link>Subscribe to the calendar</a>
-      </div>
-    </div>
-    ${next ? `<div class="next">
-      <div class="next__label">Next talk</div>
-      <div class="next__when">${esc(next.longDate)} &middot; ${esc(next.timeLabel)} PT &middot; ${esc(next.location)}</div>
-      <div class="next__who">${esc(next.speaker)}</div>
-      <div class="next__affil">${esc(next.affiliation)}</div>
-      <div class="next__title">${esc(next.title)}</div>
-      <div class="btn-row">${rsvpButton(next)}<a class="btn btn--ghost" href="#upcoming">Details</a></div>
-    </div>` : `<div class="next"><div class="next__label">Next talk</div><p class="next__none">The next season is being scheduled. Join the mailing list and we&rsquo;ll write when dates are set.</p><div class="btn-row" style="margin-top:16px"><a class="btn" href="#" data-subscribe>Join the mailing list</a></div></div>`}
+<section class="masthead">
+  <div class="wrap masthead__grid">
+    <div class="masthead__title"><p class="eyebrow">University of California, Berkeley</p><h1>AI <span>RISK</span></h1><div class="masthead__rule"><span>Speaker series</span><span>${next ? esc(next.season) : new Date().getFullYear()}</span></div></div>
+    <div class="masthead__intro"><p class="masthead__statement">What does AI put at stake?</p><p>Researchers from across disciplines examine the risks of artificial intelligence—and how we can respond.</p><a class="text-link" href="#archive">Explore the conversations <span aria-hidden="true">↓</span></a></div>
   </div>
 </section>
 
-<section id="upcoming">
+<section id="upcoming" class="programme">
   <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <p class="eyebrow">Click a name for details</p>
-        <h2>Upcoming speakers</h2>
-        <p>Hover or click any name to read what the talk is about. The RSVP button works from anywhere in the row.</p>
-      </div>
-      <a class="btn btn--ghost btn--sm" href="series.ics" data-webcal-link>Subscribe to the calendar</a>
-    </div>
-    ${upcoming.length ? `<ul class="rows">
-    ${upcoming.map(upcomingRow).join("\n    ")}
-    </ul>` : ""}
-    ${upcoming.length < 3 ? `<div class="thin-note">
-      <span>${upcoming.length ? "More talks for this season are still being scheduled." : "No talks are scheduled right now."} Mailing-list subscribers hear first.</span>
-      <button class="btn btn--sm" type="button" data-subscribe>Join the mailing list</button>
-    </div>` : ""}
+    <div class="section-heading"><h2>Upcoming speakers</h2>${seriesCalendar()}</div>
+    <ul class="rows">${upcoming.map(upcomingRow).join('')}</ul>
+    <p class="schedule-note">${upcoming.length ? 'More dates will be announced.' : 'The next talks are being scheduled.'} <a href="${attr(site.mailingListForm)}" data-subscribe>Join the mailing list</a> for updates.</p>
   </div>
 </section>
 
-<section id="archive" class="band">
+<section id="archive" class="archive">
   <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <p class="eyebrow">${past.filter((t) => t.videoId).length} recordings &middot; ${past.length} talks</p>
-        <h2>Past talks</h2>
-        <p>Every talk in the series, with the recording where one exists. Click any talk to play it here and read the full abstract.</p>
-      </div>
-      <a class="btn btn--ghost btn--sm" href="${attr(site.youtubePlaylist)}" target="_blank" rel="noopener">Full playlist on YouTube</a>
-    </div>
-    ${seasons.map((s) => `<div class="season">
-      <div class="season__h">${esc(s.name)}</div>
-      <div class="cards">
-        ${s.items.map(archiveCard).join("\n        ")}
-      </div>
-    </div>`).join("\n    ")}
+    <div class="section-heading"><h2>Past talks<span class="heading-count">${past.length}</span></h2><a class="text-link" href="${attr(site.youtubePlaylist)}" target="_blank" rel="noopener">${past.filter(t => t.videoId).length} recordings on YouTube <span aria-hidden="true">↗</span></a></div>
+    <div id="archive-seasons">${seasons.map(s => `<div class="season" data-season="${attr(s.name)}"><h3 class="season__h">${esc(s.name)}</h3><div class="talks">${s.items.map(archiveCard).join('')}</div></div>`).join('')}</div>
+    ${upcoming.map(t => `<template data-elapsed="${attr(t.slug)}" data-season="${attr(t.season)}">${archiveCard({...t, summary:t.pastSummary || `The scheduled talk by ${t.speaker}. ${t.title === TBA ? 'A title and abstract were not published.' : ''}`})}</template>`).join('')}
   </div>
 </section>
 
-<section id="about">
+<section id="about" class="about">
+  <div class="wrap about-grid">
+    <div><p class="eyebrow">Across disciplines. Across campus.</p><h2>A shared question.<br>Many perspectives.</h2>${site.about.map(p => `<p>${esc(p)}</p>`).join('')}<details class="disclose"><summary>Our campus community</summary><div class="depts">${site.departments.map(d => `<span>${esc(d)}</span>`).join('')}</div></details><a class="reading-link" href="reading-group.html"><span><strong>The reading group</strong><span>Papers and discussion on AI risk, safety and alignment.</span></span><span aria-hidden="true">↗</span></a></div>
+    <div class="questions"><p class="eyebrow">Questions we explore</p><ol class="qs">${site.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ol></div>
+  </div>
+</section>
+
+<section id="organizers">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">About</p><h2>An interdisciplinary community</h2></div></div>
-    <div style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(28px,5vw,60px);align-items:start" class="about-grid">
-      <div>
-        ${site.about.map((p) => `<p class="lede" style="margin-bottom:18px">${esc(p)}</p>`).join("\n        ")}
-        <details class="disclose">
-          <summary>${site.departments.length} departments, schools and centers are represented</summary>
-          <div class="depts">${site.departments.map((d) => `<span>${esc(d)}</span>`).join("")}</div>
-        </details>
-      </div>
-      <div>
-        <p class="eyebrow">Key questions</p>
-        <ol class="qs">${site.questions.map((q) => `<li>${esc(q)}</li>`).join("")}</ol>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="organizers" class="band">
-  <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Organizers</p><h2>Who runs the series</h2></div></div>
-    <div class="people">${site.organizers.map(personCard).join("\n    ")}</div>
-    <hr class="hr" style="margin:clamp(36px,5vw,56px) 0 30px">
-    <p class="eyebrow">Co-sponsored by</p>
-    <div class="sponsors">${site.sponsors.map(sponsorMark).join("\n      ")}</div>
-  </div>
-</section>
-
-<section id="reading-group">
-  <div class="wrap wrap--narrow" style="text-align:center">
-    <p class="eyebrow">Also from Berkeley AI Risk</p>
-    <h2>Reading group</h2>
-    <p class="lede" style="color:var(--muted);margin:14px auto 24px;max-width:52ch">Discussions of papers and research on AI risk, safety, ethics and alignment, run alongside the speaker series.</p>
-    <div class="btn-row" style="justify-content:center"><a class="btn btn--ghost" href="reading-group.html">See the sessions</a></div>
+    <div class="section-heading"><h2>Meet the organizers</h2><p>Statistics, philosophy, and a common concern.</p></div>
+    <div class="people">${site.organizers.map(personCard).join('')}</div>
+    <div class="support"><div><p class="eyebrow">Co-sponsored by</p><div class="sponsors">${site.sponsors.filter(s => !s.unconfirmed).map(sponsorMark).join('')}</div></div>${site.sponsors.some(s => s.unconfirmed) ? `<div class="affiliated"><p class="eyebrow">Campus connection</p><div class="sponsors">${site.sponsors.filter(s => s.unconfirmed).map(sponsorMark).join('')}</div></div>` : ''}</div>
   </div>
 </section>
 ${jsonLd()}
@@ -566,9 +478,9 @@ function readingPage() {
   <div class="wrap wrap--narrow">
     <p class="eyebrow">Berkeley AI Risk</p>
     <h1>Reading group</h1>
-    <p class="lede" style="color:var(--muted);max-width:46ch;margin-top:16px">Discussions of papers and research on AI risk, safety, ethics and alignment.</p>
+    <p class="lede" style="max-width:46ch;margin-top:16px">Discussions of papers and research on AI risk, safety, ethics and alignment.</p>
     <div class="btn-row" style="margin-top:26px">
-      <a class="btn" href="#" data-subscribe>Join the mailing list</a>
+      <a class="btn" href="${attr(site.mailingListForm)}" data-subscribe>Join the mailing list</a>
       <a class="btn btn--ghost" href="index.html#upcoming">Speaker series</a>
     </div>
   </div>
@@ -601,7 +513,7 @@ function notFoundPage() {
   <div class="wrap wrap--narrow">
     <p class="eyebrow">404</p>
     <h1>Page not found</h1>
-    <p class="lede" style="color:var(--muted);margin-top:16px">That page doesn&rsquo;t exist here.</p>
+    <p class="lede" style="margin-top:16px">That page doesn&rsquo;t exist here.</p>
     <div class="btn-row" style="margin-top:26px">
       <a class="btn" href="index.html">Back to the series</a>
       <a class="btn btn--ghost" href="index.html#archive">Past talks</a>

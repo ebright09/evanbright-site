@@ -29,38 +29,37 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:david-krueger@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20250909T163000
 DTEND;TZID=America/Los_Angeles:20250909T180000
 SUMMARY:Berkeley AI Risk — David Krueger (University of Montreal)
-DESCRIPTION:Krueger gave a whirlwind tour of AI safety as a set of concer
- ns\, concepts and communities — the history of the field\, his own pat
- h through it\, and the case that academics across disciplines can and sh
- ould help shape where AI goes next.\n\nZoom: https://berkeley.zoom.us/j/
- 96396540012\n\nRecording: https://www.youtube.com/watch?v=NX2YROCIJNQ\n\
- nhttps://www.evanbrig.ht/BAIRS/
+DESCRIPTION:Krueger introduced the concerns\, ideas and research communit
+ ies that make up AI safety\, and discussed how academics across discipli
+ nes can contribute.\n\nZoom: https://berkeley.zoom.us/j/96396540012\n\nR
+ ecording: https://www.youtube.com/watch?v=NX2YROCIJNQ\n\nhttps://www.eva
+ nbrig.ht/BAIRS/
 LOCATION:621 Sutardja Dai Hall
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:nikola-jurkovic@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20250923T163000
 DTEND;TZID=America/Los_Angeles:20250923T180000
 SUMMARY:Berkeley AI Risk — Nikola Jurkovic (METR)
-DESCRIPTION:Jurkovic walked through METR's work evaluating frontier model
- s\, using their GPT-5 evaluation as a case study\, and asked what a cred
- ible safety case for a frontier model should actually look like.\n\nZoom
- : https://berkeley.zoom.us/j/96396540012\n\nRecording: https://www.youtu
- be.com/watch?v=oiM5ZUg22UI\n\nhttps://www.evanbrig.ht/BAIRS/
+DESCRIPTION:Jurkovic discussed METR’s evaluations of frontier AI models
+ \, including GPT-5\, and the evidence needed to support a credible safet
+ y case.\n\nZoom: https://berkeley.zoom.us/j/96396540012\n\nRecording: ht
+ tps://www.youtube.com/watch?v=oiM5ZUg22UI\n\nhttps://www.evanbrig.ht/BAI
+ RS/
 LOCATION:621 Sutardja Dai Hall
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:bharat-chandar@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20251007T163000
 DTEND;TZID=America/Los_Angeles:20251007T180000
 SUMMARY:Berkeley AI Risk — Bharat Chandar (Stanford University)
@@ -76,184 +75,174 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:stuart-russell@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20251021T163000
 DTEND;TZID=America/Los_Angeles:20251021T180000
 SUMMARY:Berkeley AI Risk — Stuart Russell (UC Berkeley)
-DESCRIPTION:Russell argued that Turing was right to worry about losing co
- ntrol of machines that exceed human capabilities\, but wrong to treat do
- om as inevitable — and set out the technical and regulatory directions
-  he believes lead somewhere better.\n\nZoom: https://berkeley.zoom.us/j/
- 96396540012\n\nRecording: https://www.youtube.com/watch?v=9ITf6JilEAc\n\
- nhttps://www.evanbrig.ht/BAIRS/
+DESCRIPTION:Russell discussed the risk of losing control of increasingly 
+ capable AI systems and outlined technical and regulatory approaches to p
+ reventing it.\n\nZoom: https://berkeley.zoom.us/j/96396540012\n\nRecordi
+ ng: https://www.youtube.com/watch?v=9ITf6JilEAc\n\nhttps://www.evanbrig.
+ ht/BAIRS/
 LOCATION:621 Sutardja Dai Hall
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:jessica-newman@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20251118T163000
 DTEND;TZID=America/Los_Angeles:20251118T180000
 SUMMARY:Berkeley AI Risk — Jessica Newman (UC Berkeley)
-DESCRIPTION:Newman measured the fast-moving AI governance landscape — t
- he General-Purpose AI Code of Practice\, a dozen-plus corporate frontier
-  safety frameworks — against the risk picture shifting underneath it\,
-  and named the priorities she thinks are being missed.\n\nZoom: https://
- berkeley.zoom.us/j/96396540012\n\nRecording: https://www.youtube.com/wat
- ch?v=WHJK-NfWXCY\n\nhttps://www.evanbrig.ht/BAIRS/
+DESCRIPTION:Newman reviewed recent AI governance initiatives\, including 
+ the General-Purpose AI Code of Practice and corporate safety frameworks\
+ , and considered gaps in their approach to risk.\n\nZoom: https://berkel
+ ey.zoom.us/j/96396540012\n\nRecording: https://www.youtube.com/watch?v=W
+ HJK-NfWXCY\n\nhttps://www.evanbrig.ht/BAIRS/
 LOCATION:Zoom only
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:deborah-raji@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20251202T163000
 DTEND;TZID=America/Los_Angeles:20251202T180000
 SUMMARY:Berkeley AI Risk — Deborah Raji (UC Berkeley)
-DESCRIPTION:Raji argued that most working definitions of “AI safety” 
- fail to capture the sociotechnical nature of these systems\, and so mana
- ge to overstate some risks while understating others.\n\nZoom: https://b
- erkeley.zoom.us/j/96396540012\n\nRecording: https://www.youtube.com/watc
- h?v=Hh0BowuitF0\n\nhttps://www.evanbrig.ht/BAIRS/
+DESCRIPTION:Raji examined definitions of AI safety and argued for an appr
+ oach that accounts for the social contexts in which AI systems are devel
+ oped and used.\n\nZoom: https://berkeley.zoom.us/j/96396540012\n\nRecord
+ ing: https://www.youtube.com/watch?v=Hh0BowuitF0\n\nhttps://www.evanbrig
+ .ht/BAIRS/
 LOCATION:621 Sutardja Dai Hall
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:holly-elmore@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20251209T163000
 DTEND;TZID=America/Los_Angeles:20251209T180000
 SUMMARY:Berkeley AI Risk — Holly Elmore (PauseAI US)
-DESCRIPTION:Elmore traced PauseAI's theory of change back to her own trai
- ning in evolutionary biology\, arguing that arbitrary intelligence means
-  arbitrary power\, and that the resulting disruption is a social problem
-  rather than a bug awaiting a fix.\n\nZoom: https://berkeley.zoom.us/j/9
- 6396540012\n\nRecording: https://www.youtube.com/watch?v=RaBQfgQY6JU\n\n
- https://www.evanbrig.ht/BAIRS/
+DESCRIPTION:Elmore discussed the worldview and theory of change behind Pa
+ useAI\, drawing on her background in evolutionary biology.\n\nZoom: http
+ s://berkeley.zoom.us/j/96396540012\n\nRecording: https://www.youtube.com
+ /watch?v=RaBQfgQY6JU\n\nhttps://www.evanbrig.ht/BAIRS/
 LOCATION:621 Sutardja Dai Hall
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:deirdre-mulligan@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20260203T160000
 DTEND;TZID=America/Los_Angeles:20260203T173000
 SUMMARY:Berkeley AI Risk — Deirdre Mulligan (UC Berkeley)
-DESCRIPTION:Mulligan described three competing imaginaries of AI — resp
- onsible\, frontier and pragmatic — and showed how each one quietly pre
- configures the regulation that follows it. Joint work with Victor Z. Wan
- g.\n\nZoom: https://berkeley.zoom.us/j/96396540012\n\nRecording: https:/
- /www.youtube.com/watch?v=Ax1-SzEpDPs\n\nhttps://www.evanbrig.ht/BAIRS/
+DESCRIPTION:Mulligan examined three ways of imagining AI—responsible\, 
+ frontier and pragmatic—and how they shape regulatory approaches. Joint
+  work with Victor Z. Wang.\n\nZoom: https://berkeley.zoom.us/j/963965400
+ 12\n\nRecording: https://www.youtube.com/watch?v=Ax1-SzEpDPs\n\nhttps://
+ www.evanbrig.ht/BAIRS/
 LOCATION:621 Sutardja Dai Hall
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:luke-drago@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20260217T160000
 DTEND;TZID=America/Los_Angeles:20260217T173000
 SUMMARY:Berkeley AI Risk — Luke Drago (Workshop Labs)
-DESCRIPTION:Drago argued that labor displacement\, not abstract risk\, wi
- ll be what finally drives political action on AI — and that the window
-  between visible displacement and a sudden capability takeoff is the bes
- t chance anyone gets to shape what is built.\n\nZoom: https://berkeley.z
- oom.us/j/96396540012\n\nRecording: https://www.youtube.com/watch?v=plJz1
- LtWwIU\n\nhttps://www.evanbrig.ht/BAIRS/
+DESCRIPTION:Drago discussed how AI-driven labor displacement could influe
+ nce public opinion and political action\, and what this might mean for t
+ he development of transformative AI.\n\nZoom: https://berkeley.zoom.us/j
+ /96396540012\n\nRecording: https://www.youtube.com/watch?v=plJz1LtWwIU\n
+ \nhttps://www.evanbrig.ht/BAIRS/
 LOCATION:621 Sutardja Dai Hall
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:helen-toner@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20260305T170000
 DTEND;TZID=America/Los_Angeles:20260305T183000
 SUMMARY:Berkeley AI Risk — Helen Toner (Center for Security and Emergin
  g Technology\, Georgetown University)
-DESCRIPTION:In conversation with Berkeley Law's Rachel Stern\, Toner test
- ed the stories that circulate about Chinese AI — the race\, the export
-  controls\, the case for cooperation — against the available evidence.
- \n\nZoom: https://berkeley.zoom.us/j/96396540012\n\nhttps://www.evanbrig
- .ht/BAIRS/
+DESCRIPTION:In conversation with Berkeley Law’s Rachel Stern\, Toner ex
+ amined common accounts of Chinese AI development\, export controls and p
+ rospects for international cooperation.\n\nZoom: https://berkeley.zoom.u
+ s/j/96396540012\n\nhttps://www.evanbrig.ht/BAIRS/
 LOCATION:306 Soda Hall
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:jacob-steinhardt@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20260317T160000
 DTEND;TZID=America/Los_Angeles:20260317T173000
 SUMMARY:Berkeley AI Risk — Jacob Steinhardt (UC Berkeley)
-DESCRIPTION:Steinhardt made the case for scalable measurement as the leve
- r that shapes AI development\, covering scalable oversight of agent tran
- scripts\, discovery of long-tail behaviors\, and explanation of model in
- ternals — using AI to understand AI.\n\nZoom: https://berkeley.zoom.us
- /j/96396540012\n\nhttps://www.evanbrig.ht/BAIRS/
+DESCRIPTION:Steinhardt discussed tools for measuring and overseeing AI sy
+ stems\, including analysis of agent transcripts\, rare behaviors and mod
+ el internals.\n\nZoom: https://berkeley.zoom.us/j/96396540012\n\nhttps:/
+ /www.evanbrig.ht/BAIRS/
 LOCATION:621 Sutardja Dai Hall
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:chad-jones@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20260414T160000
 DTEND;TZID=America/Los_Angeles:20260414T173000
 SUMMARY:Berkeley AI Risk — Chad Jones (Stanford University)
-DESCRIPTION:Jones asked what economics has to say if machines can eventua
- lly perform every task a human can\, more cheaply: whether AI is simply 
- the next general purpose technology\, or something categorically differe
- nt.\n\nZoom: https://berkeley.zoom.us/j/96396540012\n\nhttps://www.evanb
- rig.ht/BAIRS/
+DESCRIPTION:Jones explored the economic implications of AI systems that c
+ ould perform human tasks at lower cost\, and whether AI differs from ear
+ lier general-purpose technologies.\n\nZoom: https://berkeley.zoom.us/j/9
+ 6396540012\n\nhttps://www.evanbrig.ht/BAIRS/
 LOCATION:621 Sutardja Dai Hall
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:allison-duettmann@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20260428T160000
 DTEND;TZID=America/Los_Angeles:20260428T173000
 SUMMARY:Berkeley AI Risk — Allison Duettmann (Foresight Institute)
-DESCRIPTION:Duettmann argued that AI safety research is over-concentrated
-  — geographically\, institutionally and intellectually — and present
- ed Foresight's AI Nodes as a deliberately distributed alternative.\n\nZo
- om: https://berkeley.zoom.us/j/96396540012\n\nhttps://www.evanbrig.ht/BA
- IRS/
+DESCRIPTION:Duettmann presented Foresight’s AI Nodes and discussed a ge
+ ographically and institutionally distributed approach to AI safety resea
+ rch.\n\nZoom: https://berkeley.zoom.us/j/96396540012\n\nhttps://www.evan
+ brig.ht/BAIRS/
 LOCATION:621 Sutardja Dai Hall
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:nate-soares@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20260908T160000
 DTEND;TZID=America/Los_Angeles:20260908T173000
 SUMMARY:Berkeley AI Risk — Nate Soares (MIRI)
 DESCRIPTION:Drawing on his book with Eliezer Yudkowsky\, Soares argued th
- at the current trajectory toward superintelligence ends predictably in h
- uman extinction — not through malice but through indifference — and 
- that there is still time to change course.\n\nZoom: https://berkeley.zoo
- m.us/j/96396540012\n\nhttps://www.evanbrig.ht/BAIRS/
+ at developing superintelligence on the current trajectory poses an exist
+ ential threat and called for a change in course.\n\nZoom: https://berkel
+ ey.zoom.us/j/96396540012\n\nhttps://www.evanbrig.ht/BAIRS/
 LOCATION:621 Sutardja Dai Hall
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:john-sherman@ai-risk.berkeley.edu
-DTSTAMP:20260910T070522Z
+DTSTAMP:20260910T081127Z
 DTSTART;TZID=America/Los_Angeles:20260922T160000
 DTEND;TZID=America/Los_Angeles:20260922T173000
 SUMMARY:Berkeley AI Risk — John Sherman (The AI Risk Network)
-DESCRIPTION:Title and abstract to be announced. Sherman hosts For Humanit
- y\, the AI Risk Network's podcast on catastrophic and existential risk f
- rom AI.\n\nZoom: https://berkeley.zoom.us/j/96396540012\n\nhttps://www.e
- vanbrig.ht/BAIRS/
+DESCRIPTION:Sherman hosts For Humanity\, a podcast about catastrophic and
+  existential risks from AI. The title and abstract for this talk will be
+  announced.\n\nZoom: https://berkeley.zoom.us/j/96396540012\n\nhttps://w
+ ww.evanbrig.ht/BAIRS/
 LOCATION:621 Sutardja Dai Hall
 URL:https://www.evanbrig.ht/BAIRS/
 STATUS:CONFIRMED
