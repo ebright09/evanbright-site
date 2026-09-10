@@ -132,6 +132,7 @@ function face(t, cls) {
 }
 
 const ICON = {
+  scholar: '<svg aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>',
   linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.4 8.4h4.2V24H.4zM8.5 8.4h4v2.1h.06c.56-1.06 1.93-2.18 3.97-2.18 4.25 0 5.03 2.8 5.03 6.43V24h-4.2v-7.4c0-1.77-.03-4.04-2.46-4.04-2.47 0-2.85 1.93-2.85 3.92V24H8.5z"/></svg>',
   x: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26L22.5 21.75h-6.66l-5.22-6.82-5.97 6.82H1.34l7.73-8.84L1.5 2.25h6.83l4.72 6.23zm-1.16 17.52h1.83L7.01 4.13H5.05z"/></svg>',
   link: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.9 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a7.96 7.96 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4zm.84 2h2.95c.3 1.26.76 2.46 1.38 3.56A8 8 0 0 1 5.1 16zm2.95-8H5.1a8 8 0 0 1 4.33-3.56A15.7 15.7 0 0 0 8.05 8zM12 19.96A13.9 13.9 0 0 1 10.09 16h3.82A13.9 13.9 0 0 1 12 19.96zM14.34 14H9.66a14.9 14.9 0 0 1 0-4h4.68a14.9 14.9 0 0 1 0 4zm.23 5.56c.62-1.1 1.08-2.3 1.38-3.56h2.95a8 8 0 0 1-4.33 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a7.96 7.96 0 0 1 0 4z"/></svg>',
@@ -140,7 +141,7 @@ const ICON = {
 };
 
 function iconLink(href, label, icon, extra = "") {
-  return `<a class="iconbtn ${extra}" href="${attr(href)}" target="_blank" rel="noopener" title="${attr(label)}" aria-label="${attr(label)}">${icon}</a>`;
+  return `<a class="iconbtn ${extra}" href="${attr(href)}"${href.startsWith("mailto:") ? "" : ' target="_blank" rel="noopener"'} title="${attr(label)}" aria-label="${attr(label)}">${icon}</a>`;
 }
 
 /* --- Shared chrome -------------------------------------------------------- */
@@ -353,20 +354,19 @@ function archiveCard(t) {
 
 function personCard(o) {
   const links = [
+    iconLink(`mailto:${o.email}`, `Email ${o.name}: ${o.email}`, ICON.mail, "iconbtn--mail"),
+    o.website && iconLink(o.website, o.name === "Will Fithian" ? "Will Fithian’s Berkeley faculty page" : `${o.name}’s website`, ICON.link, "iconbtn--web"),
+    o.scholar && iconLink(o.scholar, `${o.name} on Google Scholar`, ICON.scholar, "iconbtn--scholar"),
     o.linkedin && iconLink(o.linkedin, `${o.name} on LinkedIn`, ICON.linkedin, "iconbtn--li"),
-    o.x && iconLink(o.x, `${o.name} on Twitter / X`, ICON.x),
-  ].filter(Boolean).join("\n          ");
+    o.x && iconLink(o.x, `${o.name} on Twitter / X`, ICON.x, "iconbtn--x"),
+  ].filter(Boolean).join("\n        ");
 
   return `<div class="person">
     <img class="person__photo" src="${attr(o.photo)}" alt="${attr(o.name)}" width="400" height="400" loading="lazy" decoding="async">
     <div>
-      <div class="person__name">${esc(o.name)}${links ? `\n          ${links}` : ""}</div>
+      <div class="person__name">${esc(o.name)}</div>
       <div class="person__role">${esc(o.role)}</div>
-      <div class="person__links">
-        <a class="btn btn--ghost btn--sm" href="mailto:${attr(o.email)}">${esc(o.email)}</a>
-        ${o.website ? `<a class="btn btn--ghost btn--sm" href="${attr(o.website)}" target="_blank" rel="noopener">${o.name === "Will Fithian" ? "Berkeley page" : "Faculty page"}</a>` : ""}
-        ${o.scholar ? `<a class="btn btn--ghost btn--sm" href="${attr(o.scholar)}" target="_blank" rel="noopener">Google Scholar</a>` : ""}
-      </div>
+      <div class="person__links" role="group" aria-label="${attr(o.name)}’s contact and profiles">${links}</div>
     </div>
   </div>`;
 }

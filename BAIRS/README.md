@@ -68,7 +68,7 @@ New assets:
 - John Sherman: portrait published on https://www.guardrailnow.org/about, downloaded without alteration. CSS crops it to fit the portrait frame.
 - CITRIS: official full-color horizontal mark from https://citris-uc.org/news-events/media/brand-assets/, linked to its homepage.
 
-Wesley's LinkedIn and Will's Google Scholar URLs were supplied by the project owner. Kavli uses the existing text wordmark.
+Organizer links use labeled icons for email, websites, Google Scholar, LinkedIn and Twitter/X. Wesley’s LinkedIn and Will’s Google Scholar URLs were supplied by the project owner. Wesley’s Google Scholar profile was verified from the Google Scholar link on https://wesholliday.net. The Scholar mark is from Simple Icons (https://github.com/simple-icons/simple-icons). Kavli uses the existing text wordmark.
 
 ## Preview and publishing
 
