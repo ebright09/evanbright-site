@@ -12,10 +12,12 @@
    ========================================================================== */
 
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const assetVersion = (p) => createHash("sha256").update(fs.readFileSync(path.join(ROOT, p))).digest("hex").slice(0, 12);
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), "utf8"));
 const write = (p, s) => {
   if (p.endsWith(".html")) s = s.replace(/[ \t]+$/gm, "");
@@ -172,7 +174,7 @@ ${site.noindex ? '<meta name="robots" content="noindex,nofollow">\n' : ""}<link 
 <link rel="preload" href="assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/newsreader-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="alternate" type="text/calendar" href="series.ics" title="${attr(site.name)} — talks">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=${assetVersion("styles.css")}">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -247,7 +249,7 @@ ${modal()}
       startUtc: t.startUtc, endUtc: t.endUtc, rsvpUrl: t.rsvpUrl,
     }))
   ).replace(/</g, "\\u003c")}</script>
-<script src="app.js" defer></script>
+<script src="app.js?v=${assetVersion("app.js")}" defer></script>
 </body>
 </html>
 `;
