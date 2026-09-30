@@ -1,0 +1,37 @@
+[
+  {"id": "nonna", "name": "Nonna's Competitive Book Club", "tier": "standard", "emoji": "📚",
+   "bio": "Reads one page a month. Eats forty pizzas a week.",
+   "invoices": [
+     {"id": "INV-001", "amount": "1200.00", "days_overdue": 0, "description": "48 Margheritas for a 'light snack'"}
+   ]},
+  {"id": "big-tony", "name": "Big Tony's Bowling Emporium", "tier": "gold", "emoji": "🎳",
+   "bio": "Big Tony is actually quite small. Do not mention it.",
+   "invoices": [
+     {"id": "INV-002", "amount": "8450.00", "days_overdue": 3, "description": "Pepperoni for the league finals"},
+     {"id": "INV-007", "amount": "3100.00", "days_overdue": 30, "description": "Garlic knots, strictly for 'the boys'"}
+   ]},
+  {"id": "moon-yoga", "name": "Moonlight Goat Yoga Collective", "tier": "strategic", "emoji": "🐐",
+   "bio": "The goats do the yoga. The humans do the eating.",
+   "invoices": [
+     {"id": "INV-003", "amount": "22000.00", "days_overdue": 0, "description": "Gluten-free crusts for 300 goats"}
+   ]},
+  {"id": "mayor", "name": "The Mayor's Office", "tier": "gold", "emoji": "🏛️",
+   "bio": "Overdue since the last election. Possibly the one before.",
+   "invoices": [
+     {"id": "INV-004", "amount": "15000.00", "days_overdue": 45, "description": "Ribbon-cutting pizza (the ribbon was also pizza)"},
+     {"id": "INV-008", "amount": "60000.00", "days_overdue": 410, "description": "'Emergency' town hall calzones"}
+   ]},
+  {"id": "dentists", "name": "Association of Concerned Dentists", "tier": "standard", "emoji": "🦷",
+   "bio": "Ordered 900 dessert pizzas. For research.",
+   "invoices": [
+     {"id": "INV-005", "amount": "9800.00", "days_overdue": 62, "description": "Nutella pizza 'for a study'",
+      "exception_approved": true, "approved_by": "Pepe (under duress)"}
+   ]},
+  {"id": "gpf", "name": "The Galactic Pizza Federation", "tier": "strategic", "emoji": "👽",
+   "bio": "Four arms each. Eight slices per being. Pays in a currency that may or may not exist.",
+   "invoices": [
+     {"id": "INV-006", "amount": "900000.00", "days_overdue": 0, "description": "Mothership catering, 1 of 1"},
+     {"id": "INV-009", "amount": "240000.00", "days_overdue": 95, "description": "Wormhole-delivered anchovies",
+      "exception_approved": true, "approved_by": "the Supreme Overlord (Pepe's cousin)"}
+   ]}
+]

@@ -1,0 +1,33 @@
+{
+  "win": [
+    "Correct. Don't let it go to your head. It's a small head.",
+    "Look at you, doing arithmetic. I'm almost proud. Almost.",
+    "Right answer. The pizza gods are mildly less disappointed.",
+    "Correct! I'll tell your mother. She won't believe me.",
+    "Fine. FINE. You got it. Here, have a coin. Don't spend it all on crust."
+  ],
+  "lose": [
+    "Wrong. I've seen breadsticks with better judgment.",
+    "That's not the answer. That's a cry for help.",
+    "Incorrect. The accountant just fainted into the marinara.",
+    "Wow. You just gave away my car. I don't even have a car. You gave it away anyway.",
+    "No. Just no. Go read the rules. They are three lines long. THREE."
+  ],
+  "streak": [
+    "Three in a row?! Who ARE you? Are you the auditor? Show me your badge.",
+    "COMBO! The oven is literally applauding. That's a gas leak, but still."
+  ],
+  "boss_win": [
+    "YOU HELD THE CAP. The Federation retreats. The pizza economy survives another day.",
+    "CRITICAL DISCOUNT DENIED. Legends will be written. Mostly on napkins."
+  ],
+  "game_over": [
+    "Out of slices. You're on dish duty now. Forever. Grab a sponge.",
+    "Game over. I'm replacing you with a calculator. It's cheaper and it doesn't talk back."
+  ],
+  "idle": [
+    "Hello? The mozzarella is getting cold and so is my patience.",
+    "Are you... thinking? Is that what that is?",
+    "Take your time. It's not like the pizza is AGING. Oh wait."
+  ]
+}

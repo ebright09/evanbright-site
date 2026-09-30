@@ -1,0 +1,644 @@
+
+
+############ Date, device and model cache
+Tue Sep 29 18:24:52 PDT 2026
+ProductName:		macOS ProductVersion:		26.6.2 BuildVersion:		25G83 
+Chip: Apple M1 · RAM: 16 GB · free: System-wide memory free percentage: 65%
+models--mlx-community--embeddinggemma-300m-8bit
+models--mlx-community--gemma-4-e2b-it-4bit
+
+
+############ Network check: this must FAIL
+$ curl -sS -m 5 https://huggingface.co
+curl: (6) Could not resolve host: huggingface.co
+OK: no internet connection.
+$ route -n get default
+route: writing to routing socket: not in table
+
+
+############ Help
+usage: wiki [-h] [--config CONFIG] COMMAND ...
+
+Personal wiki CLI: a local harness around Gemma 4 E2B (MLX, 4-bit) and your own notes.
+Everything runs on this computer; models load from the Hugging Face cache only.
+
+Modes
+  chat    personal assistant ("Sarge"). Uses the conversation; searches your notes
+          only when a message needs them, and cites what it uses.
+  ask     neutral, standalone research answer. Retrieves original sources, answers only
+          from them with [n] citations, or says "Insufficient evidence". Ignores chat.
+  search  retrieval only: prints matching original passages with paths and line numbers.
+          Does not load the language model.
+
+Maintenance
+  ingest  read sources in vault/raw/, have Gemma draft linked notes in vault/wiki/,
+          update vault/index.md and the Source Catalog, rebuild the index.
+  index   rebuild the retrieval index (after editing notes by hand).
+  check   verify filenames, headings, links, source references and raw file hashes.
+
+positional arguments:
+  COMMAND
+    ingest         build or update wiki notes from sources
+    index          rebuild navigation pages and the retrieval index (no model)
+    search         show matching original passages (no model)
+    ask            cited answer from original sources
+    chat           personal assistant with conversation context
+    check          validate the vault: names, links, sources, hashes
+    help           show this help
+
+options:
+  -h, --help       show this help message and exit
+  --config CONFIG  path to config.toml (default: next to the launcher)
+
+Required inputs
+  .venv with requirements.txt        scripts/setup.sh (needs internet once)
+  models in the Hugging Face cache   mlx-community/gemma-4-e2b-it-4bit,
+                                     mlx-community/embeddinggemma-300m-8bit
+  sources in vault/raw/              .md, .txt or .json, kept unchanged
+  retrieval index in data/index/     built by `ingest` or `index`
+
+Configuration
+  config.toml         paths, model ids, chunk sizes, k, temperatures, project names
+  prompts/persona.md  chat voice and capabilities (chat only)
+  prompts/wiki-instructions.md  research rules (ask only)
+
+Examples
+  ./wiki ingest ./vault/raw
+  ./wiki search "target network sync"
+  ./wiki ask "How does my networking tracker keep contacts private?" --mode local
+  ./wiki chat
+
+
+############ Ingest a new local source (held back until now)
+$ ./wiki ingest vault/raw/custom-llm/evals/README.md
+wiki ingest · local · gemma-4-e2b-it-4bit · 1 source file(s)
+raw/custom-llm/evals/README.md: 1447 words, 10 passages, course material by the course instructor
+  loading the local model…
+  plan (13.3 s): Fixed Language Evals · Corpus Expansion · Eval Separation
+    rejected unparsed line: Here are the ideas from the document, formatted as requested:
+  [[Custom nanoGPT Model]] updated (added a block); marked for review again — 5 details, 1 links (9.7 s)
+    Fixed Language Evals [concept]: same name as [[Fixed Language Evals]]
+  [[Fixed Language Evals]] updated (added a block); marked for review again — 6 details, 1 links (8.0 s)
+    Corpus Expansion [concept]: same name as [[Corpus Expansion]]
+  [[Corpus Expansion]] updated (added a block); marked for review again — 5 details, 1 links (7.8 s)
+    Eval Separation [concept]: shorter name of [[Corpus-Eval Separation]]
+  [[Corpus-Eval Separation]] updated (added a block); marked for review again — 5 details, 2 links (10.1 s)
+
+1 processed, 0 unchanged · notes: 15 → 15 (0 new files) · 5 model calls · 61.3 s
+index rebuilt: 109 passages (15 wiki notes)
+Saved runs/ingest/20260929T182554-ingest.json
+       61.99 real        18.66 user         9.62 sys
+          1605615616  maximum resident set size
+          6081637824  peak memory footprint
+Notes before: 15 · after: 15
+
+
+############ Ingest everything again: unchanged sources are skipped, no new notes
+$ ./wiki ingest ./vault/raw
+wiki ingest · local · gemma-4-e2b-it-4bit · 8 source file(s)
+raw/custom-llm/README.md: unchanged (sha256 48f2f2424282), skipped
+raw/custom-llm/evals/README.md: unchanged (sha256 d43de805ab63), skipped
+raw/custom-llm/results/eval_comparison.md: unchanged (sha256 1290dcb63ece), skipped
+raw/networking-tracker/README.md: unchanged (sha256 acc18346aa1f), skipped
+raw/pacman-dqn/README.md: unchanged (sha256 1b366d14834b), skipped
+raw/pacman-dqn/pacman_runs/20260922_153903_365997/comparison.json: unchanged (sha256 c3c875bc7fd1), skipped
+raw/pacman-dqn/pacman_runs/20260922_153903_365997/config.json: unchanged (sha256 7f1a07bb34ce), skipped
+raw/pacman-dqn/pacman_runs/20260922_153903_365997/training_summary.json: unchanged (sha256 81d67bf0213b), skipped
+
+0 processed, 8 unchanged · notes: 15 → 15 (0 new files) · 0 model calls · 10.9 s
+index rebuilt: 109 passages (15 wiki notes)
+Saved runs/ingest/20260929T182605-ingest.json
+Notes now: 15
+
+
+############ Vault check
+wiki check · 15 notes · 25 vault files
+  ! wiki/Concepts/Corpus Expansion.md: not reviewed against its sources yet
+  ! wiki/Concepts/Corpus-Eval Separation.md: not reviewed against its sources yet
+  ! wiki/Concepts/Fixed Language Evals.md: not reviewed against its sources yet
+  ! wiki/Projects/Custom nanoGPT Model.md: not reviewed against its sources yet
+  ✓ names match headings, every link resolves, every note cites raw/ and links another note, originals unchanged (4 warnings)
+
+
+############ Search (retrieval only)
+wiki search · retrieval only, no language model · offline cache only
+Query: how is my networking tracker kept private
+method=hybrid · layer=source · k=5 · 109 passages indexed · 0.03 s
+
+[1] source  raw/networking-tracker/README.md  § Introduction  (lines 1–9)
+    fused 0.0325 · bm25 #2 (8.54) · dense #1 (cos 0.554)
+    │ # 🌀 Berkeley Networking Tracker
+    │ 
+    │ A private, deliberately psychedelic tracker for the people you want to stay connected with at
+    │ Berkeley. Every contact you save — who they are, where you met, what you talked about, how urgently
+    │ you should follow up — belongs to your account alone. That privacy is not a promise made by the user
+    │ interface: it is enforced by Postgres row-level security policies attached to the table itself, so
+    │ even a request made directly against the public data endpoint with a valid token can only ever reach
+    │ the rows its owner created. The app is a separate React single-page frontend and a separate
+    │ Node.js/Express API, backed by Neon Postgres with Managed Better Auth, deployed as two independent
+    │ Vercel projects.
+    │ 
+    │ > **Live app:** <https://berkeley-networking-tracker.vercel.app>
+    │ > **API health check:** <https://berkeley-tracker-api.vercel.app/health>
+    │ > **Repository:** <https://github.com/ebright09/berkeley-networking-tracker>
+    │ 
+    │ ---
+
+[2] source  raw/networking-tracker/README.md  § Deployment › This project's deployment  (lines 368–381)
+    fused 0.0308 · bm25 #3 (4.75) · dense #7 (cos 0.426)
+    │ ### This project's deployment
+    │ 
+    │ | | |
+    │ |---|---|
+    │ | Frontend | `berkeley-networking-tracker` → <https://berkeley-networking-tracker.vercel.app> |
+    │ | Backend | `berkeley-tracker-api` → <https://berkeley-tracker-api.vercel.app> |
+    │ | Database | Neon project `ep-winter-night-afbzbnnf`, branch `production` |
+    │ 
+    │ Public (Config) variables on the frontend project: `VITE_NEON_AUTH_URL`, `VITE_NEON_DATA_API_URL`,
+    │ `VITE_API_BASE_URL`. Server-only variables on the backend project: `NEON_AUTH_BASE_URL`,
+    │ `NEON_AUTH_JWKS_URL`, `NEON_DATA_API_URL`, `ALLOWED_ORIGINS`. **`DATABASE_URL` is deliberately not
+    │ set on either Vercel project** — the running application has no use for it.
+    │ … 2 more lines (use --full)
+
+[3] source  raw/networking-tracker/README.md  § Local setup  (lines 227–241)
+    fused 0.0308 · bm25 #4 (4.70) · dense #6 (cos 0.429)
+    │ ## Local setup
+    │ 
+    │ **Prerequisites:** Node.js 20+, a Neon account.
+    │ 
+    │ ```bash
+    │ git clone https://github.com/ebright09/berkeley-networking-tracker.git
+    │ cd berkeley-networking-tracker
+    │ npm install
+    │ ```
+    │ 
+    │ ### 1. Create the Neon project
+    │ 
+    │ … 3 more lines (use --full)
+
+[4] source  raw/custom-llm/README.md  § Repository map  (lines 472–484)
+    fused 0.0226 · bm25 #28 (3.10) · dense #29 (cos 0.210)
+    │ ## Repository map
+    │ 
+    │ | Path | What |
+    │ |---|---|
+    │ | `custom_llm_starter.ipynb`, `custom_llm_expanded.ipynb` | My executed notebooks (outputs kept) |
+    │ | `experiments/custom_llm_expanded_v1.ipynb` | Executed notebook of the first expanded corpus |
+    │ | `custom_llm.ipynb`, `custom_llm.py` | Unmodified course starter notebook/script |
+    │ | `prepare_experiment.py` | Creates the experiment notebooks from the starter (prediction + chat
+    │ prompts only) |
+    │ | `make_extension_corpus.py`, `corpus/extension/` | My extension teaching corpus and its generator |
+    │ | `llm_runs/<run>/` and `.zip` | Complete saved evidence and models for each run |
+    │ | `results/eval_comparison.md` | Every eval case across all runs · `summarize_results.py`
+    │ regenerates it |
+    │ | `results/chat/`, `results/rerun_evals/` | Terminal chat evidence and eval reruns from the saved
+    │ models |
+    │ … 1 more lines (use --full)
+
+[5] source  raw/custom-llm/README.md  § Introduction  (lines 1–28)
+    fused 0.0219 · bm25 #16 (3.63) · dense #54 (cos 0.119)
+    │ # My Custom LLM Experiment: tiny nanoGPT, starter corpus vs. expanded corpus
+    │ 
+    │ Class 4, Fall 26 · From Zero to AI Agents
+    │ 
+    │ I trained Karpathy's nanoGPT transformer from scratch with word tokens. It has 2 blocks,
+    │ 4 heads, 64-number embeddings and a 48-token context, and it runs on a CPU with no API
+    │ and no pretrained weights. I ran two experiments with identical settings:
+    │ 
+    │ 1. **Starter**: the supplied classroom corpus, 3,000 steps, learning rate 0.001.
+    │ 2. **Expanded**: the same corpus plus teaching text I wrote for four extension-eval
+    │    categories (opposites, negation, spatial relations, categories/analogies), with the same
+    │ settings.
+    │ 
+    │ … 16 more lines (use --full)
+
+No answer generated (search mode). Saved runs/search/20260929T182608-how-is-my-networking-tracker-kept-private.json
+
+
+############ Ask-mode tests T1–T4
+
+================ T1
+$ ./wiki ask "Did my trained Pac-Man agent score better than the untrained one?" --test T1
+wiki ask · local · gemma-4-e2b-it-4bit (mlx-vlm) · offline cache only
+Question: Did my trained Pac-Man agent score better than the untrained one?
+
+Retrieved 5 original passages (0.05 s, hybrid BM25 + embeddings, guided by wiki notes):
+  [1] raw/pacman-dqn/README.md  § How it works  (lines 80–88)  ← via [[Pac-Man DQN Agent]]
+  [2] raw/pacman-dqn/pacman_runs/20260922_153903_365997/config.json  § whole file  (lines 2–49)  ← via [[Pac-Man DQN Agent]]
+  [3] raw/pacman-dqn/pacman_runs/20260922_153903_365997/comparison.json  § whole file  (lines 2–67)  ← via [[Pac-Man DQN Agent]]
+  [4] raw/pacman-dqn/README.md  § Introduction  (lines 1–18)  ← via [[Pac-Man DQN Agent]]
+  [5] raw/pacman-dqn/pacman_runs/20260922_153903_365997/training_summary.json  § whole file  (lines 2–7)  ← via [[Pac-Man DQN Agent]]
+
+Loading the local model…
+
+── step 1 · relevant facts ─────────────────────────────────────
+Asked for: Did the trained Pac-Man agent score better than the untrained one?
+
+Relevant facts:
+*   The baseline is an untrained network [1].
+*   Before scores are available for comparison, with a mean of 492.0 [3].
+*   After scores are available for comparison, with a mean of 286.0 [3].
+
+check · is the thing asked for in these facts? Gemma: 'YES' → YES
+
+── step 2 · answer ─────────────────────────────────────────────
+Answer: The mean score for the baseline untrained network was 492.0 [3], while the mean score after
+    evaluation was 286.0 [3].
+
+── citations ───────────────────────────────────────────────────
+  [1] raw/pacman-dqn/README.md  § How it works  (lines 80–88)
+  [3] raw/pacman-dqn/pacman_runs/20260922_153903_365997/comparison.json  § whole file  (lines 2–67)
+
+Citation check: grounded (every claim cites a passage)
+Related wiki notes: [[Before-and-After Evaluation]], [[Experience Replay]], [[Frame Skipping]], [[Pac-Man DQN Agent]], [[Target Network]]
+
+gemma-4-e2b-it-4bit@2387675 · local · prompts 2099+1225 tok · output 117 tok at 33.2 tok/s · 8.3 s (+4.2 s load) · peak 4.65 GB
+Saved runs/ask/20260929T182624-did-my-trained-pac-man-agent-score-better-than-t.json
+Evidence card: evidence/offline/20260929-182452/ask/T1-20260929T182624.md
+
+================ T2
+$ ./wiki ask "How does my networking tracker stop one user from reading another user's contacts?" --test T2
+wiki ask · local · gemma-4-e2b-it-4bit (mlx-vlm) · offline cache only
+Question: How does my networking tracker stop one user from reading another user's contacts?
+
+Retrieved 5 original passages (0.05 s, hybrid BM25 + embeddings, guided by wiki notes):
+  [1] raw/networking-tracker/README.md  § Authentication and RLS ownership  (lines 192–221)  ← via [[Row-Level Security]]
+  [2] raw/networking-tracker/README.md  § Known limitations and what I would do next  (lines 458–470)  ← via [[API Proxy Design]]
+  [3] raw/networking-tracker/README.md  § Authentication and RLS ownership  (lines 223–225)  ← via [[Row-Level Security]]
+  [4] raw/pacman-dqn/README.md  § What you get  (lines 64–78)
+  [5] raw/pacman-dqn/README.md  § Open and run › Fast floating gameplay samples  (lines 30–44)
+
+Loading the local model…
+
+── step 1 · relevant facts ─────────────────────────────────────
+Asked for: How the networking tracker prevents one user from reading another user's contacts
+Relevant facts:
+* A request may touch a row only when `auth.user_id() = contacts.user_id` [1].
+* The `UPDATE` policy prevents a user from editing another user's contact or reassigning one of
+    their own contacts to another user [1].
+* Having both `USING` and `WITH CHECK` in the `UPDATE` policy means a user can neither edit someone
+    else's contact nor re-assign one of their own contacts to another user [1].
+* The `UPDATE` policy requires that the row after the update still satisfy `auth.user_id() =
+    user_id` if it is to be allowed [1].
+
+check · is the thing asked for in these facts? Gemma: 'YES' → YES
+
+── step 2 · answer ─────────────────────────────────────────────
+Answer: The networking tracker prevents one user from reading another user's contacts because a
+    request may only touch a row when `auth.user_id() = contacts.user_id` [1]. The `UPDATE` policy,
+    which uses both `USING` and `WITH CHECK`, ensures that a user cannot edit another user's contact
+    or reassign one of their own contacts to another user [1]. This policy requires that the row
+    after an update still satisfy `auth.user_id() = user_id`, which can only be true if the row
+    still belongs to the user [1].
+
+── citations ───────────────────────────────────────────────────
+  [1] raw/networking-tracker/README.md  § Authentication and RLS ownership  (lines 192–221)
+
+Citation check: grounded (every claim cites a passage)
+Related wiki notes: [[API Proxy Design]], [[Networking Tracker]], [[Row-Level Security]], [[Public URL Safety]]
+
+gemma-4-e2b-it-4bit@2387675 · local · prompts 2051+1046 tok · output 285 tok at 30.7 tok/s · 12.92 s (+3.56 s load) · peak 4.65 GB
+Saved runs/ask/20260929T182645-how-does-my-networking-tracker-stop-one-user-fro.json
+Evidence card: evidence/offline/20260929-182452/ask/T2-20260929T182645.md
+
+================ T3
+$ ./wiki ask "How did I measure whether training helped in my Pac-Man project versus my nanoGPT project?" --test T3
+wiki ask · local · gemma-4-e2b-it-4bit (mlx-vlm) · offline cache only
+Question: How did I measure whether training helped in my Pac-Man project versus my nanoGPT project?
+
+Retrieved 5 original passages (0.05 s, hybrid BM25 + embeddings, guided by wiki notes):
+  [1] raw/pacman-dqn/pacman_runs/20260922_153903_365997/comparison.json  § whole file  (lines 2–67)  ← via [[Before-and-After Evaluation]]
+  [2] raw/custom-llm/README.md  § Introduction  (lines 1–28)  ← via [[Before-and-After Evaluation]]
+  [3] raw/pacman-dqn/README.md  § How it works  (lines 80–88)  ← via [[Before-and-After Evaluation]]
+  [4] raw/pacman-dqn/pacman_runs/20260922_153903_365997/config.json  § whole file  (lines 2–49)  ← via [[Before-and-After Evaluation]]
+  [5] raw/pacman-dqn/README.md  § Introduction  (lines 1–18)  ← via [[Pac-Man DQN Agent]]
+
+Loading the local model…
+
+── step 1 · relevant facts ─────────────────────────────────────
+Asked for:
+How to measure training effectiveness between Pac-Man and nanoGPT projects
+
+Relevant facts:
+*   Pac-Man Run Scores show `before.mean` as 492.0 and `after.mean` as 286.0 [1].
+*   The nanoGPT experiment showed `Evals after training` as 20 / 48 for the starter and 28 / 48 for
+    the expanded version [2].
+*   Pac-Man evaluation uses the same five seeds, 5% exploration, and a step cap, with the baseline
+    being an untrained network [3].
+*   Pac-Man configuration includes `eval_seeds` set to [101, 202, 303, 404, 505] [4].
+
+check · is the thing asked for in these facts? Gemma: 'YES' → YES
+
+── step 2 · answer ─────────────────────────────────────────────
+Answer: Measuring training effectiveness involved comparing run scores for the Pac-Man project,
+    where `before.mean` was 492.0 and `after.mean` was 286.0 [1]. The nanoGPT experiment showed
+    evaluation results as 20/48 for the starter and 28/48 for the expanded version [2].
+
+── citations ───────────────────────────────────────────────────
+  [1] raw/pacman-dqn/pacman_runs/20260922_153903_365997/comparison.json  § whole file  (lines 2–67)
+  [2] raw/custom-llm/README.md  § Introduction  (lines 1–28)
+  [3] raw/pacman-dqn/README.md  § How it works  (lines 80–88)
+  [4] raw/pacman-dqn/pacman_runs/20260922_153903_365997/config.json  § whole file  (lines 2–49)
+
+Citation check: partially cited
+  ⚠ low word overlap (0.25) with cited passage(s) [4]: "Pac-Man configuration includes `eval_seeds` set to [101, 202, 303, 404, 505] ."
+  ⚠ low word overlap (0.21) with cited passage(s) [1]: "Answer: Measuring training effectiveness involved comparing run scores for the P"
+  ⚠ no citation: "How to measure training effectiveness between Pac-Man and nanoGPT projects"
+Related wiki notes: [[Before-and-After Evaluation]], [[Pac-Man DQN Agent]], [[Corpus Expansion]], [[Custom nanoGPT Model]], [[Fixed Language Evals]], [[Gradient Update]], [[Training Loss]], [[Corpus-Eval Separation]], [[Experience Replay]], [[Frame Skipping]], [[Target Network]]
+
+gemma-4-e2b-it-4bit@2387675 · local · prompts 2656+2487 tok · output 252 tok at 26.8 tok/s · 15.08 s (+3.92 s load) · peak 4.66 GB
+Saved runs/ask/20260929T182708-how-did-i-measure-whether-training-helped-in-my.json
+Evidence card: evidence/offline/20260929-182452/ask/T3-20260929T182708.md
+
+================ T4
+$ ./wiki ask "What grade did I get on my networking tracker assignment?" --test T4
+wiki ask · local · gemma-4-e2b-it-4bit (mlx-vlm) · offline cache only
+Question: What grade did I get on my networking tracker assignment?
+
+Retrieved 5 original passages (0.05 s, hybrid BM25 + embeddings, guided by wiki notes):
+  [1] raw/networking-tracker/README.md  § Technology stack and why  (lines 102–117)  ← via [[Networking Tracker]]
+  [2] raw/networking-tracker/README.md  § Testing  (lines 301–327)  ← via [[Networking Tracker]]
+  [3] raw/networking-tracker/README.md  § Grading evidence › Definition-of-done checklist  (lines 445–456)  ← via [[Networking Tracker]]
+  [4] raw/custom-llm/evals/README.md  § How scoring works  (lines 75–98)  ← via [[Fixed Language Evals]]
+  [5] raw/custom-llm/evals/README.md  § Introduction  (lines 1–9)  ← via [[Fixed Language Evals]]
+
+Loading the local model…
+
+── step 1 · relevant facts ─────────────────────────────────────
+Asked for: Grade on networking tracker assignment
+Relevant facts:
+* 48 tests across 2 files pass [2]
+* The required validation test covers 29 assertions [2]
+* The definition-of-done checklist includes that `npm test` passes with 48 tests plus 7 live RLS
+    assertions via `npm run test:rls` [3]
+
+check · is the thing asked for in these facts? Gemma: 'NO' → NO
+
+── step 2 · answer ─────────────────────────────────────────────
+Answer: Insufficient evidence: No facts were provided regarding the grade received on the networking
+    tracker assignment.
+
+── citations ───────────────────────────────────────────────────
+  [2] raw/networking-tracker/README.md  § Testing  (lines 301–327)
+  [3] raw/networking-tracker/README.md  § Grading evidence › Definition-of-done checklist  (lines 445–456)
+
+Citation check: insufficient evidence
+Related wiki notes: [[API Proxy Design]], [[Networking Tracker]], [[Row-Level Security]], [[Public URL Safety]]
+
+gemma-4-e2b-it-4bit@2387675 · local · prompts 2043+388 tok · output 102 tok at 35.9 tok/s · 6.62 s (+3.99 s load) · peak 4.64 GB
+Saved runs/ask/20260929T182723-what-grade-did-i-get-on-my-networking-tracker-as.json
+Evidence card: evidence/offline/20260929-182452/ask/T4-20260929T182723.md
+
+
+############ Chat and search mode checks
+================ 1. chat: capability questions (expect: no notes search, honest capabilities)
+wiki chat · local · gemma-4-e2b-it-4bit (mlx-vlm) · offline cache only
+Loading Sarge (local Gemma + your notes index)…
+Ready. Ask anything; your notes are searched only when a message needs them.
+Commands:
+  /notes <topic>  search your notes about a topic, then answer from them
+  /sources        show the passages behind the last answer
+  /save           save the last reply to drafts/ (a draft, not evidence)
+  /reset          forget this conversation
+  /help           this list
+  /exit           leave (Ctrl-D also works)
+
+you> what can we do?
+· notes: not searched (question about what the assistant can do)
+sarge> You're asking me what we can do? Watch your mouth, recruit.
+
+- Draft, rewrite, shorten, or plan anything you need.
+- Search your wiki notes and sources for evidence, citing passages like [1].
+- Use `./wiki ask "…" ` for a strict, cited answer, or `./wiki search "…" ` for raw text.
+- Commands: Use /notes <topic>, /sources, /save, /reset, /help, or /exit.
+Start here: Ask me to turn your Row-Level Security notes into a two-minute explanation.
+  (122 tokens, 5.4 s, prompt 846 tokens)
+
+you> what can you help me with?
+· notes: not searched (question about what the assistant can do)
+sarge> You look lost, recruit. Stop wasting my time.
+
+- Draft, rewrite, shorten, or plan any concept you need hammered out.
+- Dig through your notes and sources for evidence, citing passages like [1].
+- Use `./wiki ask "…" ` for a strict, cited answer, or `./wiki search "…" ` for the raw passages.
+- Commands: Use /notes <topic>, /sources, /save, /reset, /help, or /exit.
+Start here: Ask me to turn your Custom nanoGPT Model notes into a two-minute explanation.
+  (121 tokens, 4.87 s, prompt 1198 tokens)
+
+
+Transcript saved to runs/chat/20260929T182740-chat.md and evidence/offline/20260929-182452/mode-checks/1-chat-capabilities.md
+
+================ 2. chat: a draft, then a follow-up (expect: follow-up uses the conversation, no search)
+wiki chat · local · gemma-4-e2b-it-4bit (mlx-vlm) · offline cache only
+Loading Sarge (local Gemma + your notes index)…
+Ready. Ask anything; your notes are searched only when a message needs them.
+Commands:
+  /notes <topic>  search your notes about a topic, then answer from them
+  /sources        show the passages behind the last answer
+  /save           save the last reply to drafts/ (a draft, not evidence)
+  /reset          forget this conversation
+  /help           this list
+  /exit           leave (Ctrl-D also works)
+
+you> Draft a short 4-step plan for reviewing my three course projects before the final, using my notes.
+· notes: searched (asks about the owner's own work) → 3 project overview(s)
+sarge> "You look like you need a map, recruit."
+
+Here is a four-step review plan for your projects. Follow these commands precisely.
+
+1.  **Review Custom nanoGPT Model:** Check the loss figures. Compare the untrained loss against the expected value. See how the model performed on the training and validation panels. [1]
+2.  **Review Networking Tracker:** Verify the testing status. Confirm all 48 Vitest tests passed and check the 7 live Row-Level Security (RLS) assertions. [2]
+3.  **Review Pac-Man DQN Agent:** Examine the core components. Confirm the architecture uses the convolutional Q-network for action prediction. Check the setup against the five recommended episodes. [3]
+4.  **Cross-Project Comparison:** Identify common evaluation points. See if the before-and-after evaluation methodology is consistent across the projects.
+
+If you need me to draft anything, just let me know.
+  sources: [1] wiki/Projects/Custom nanoGPT Model.md  § Details  (lines 43–51) · [2] wiki/Projects/Networking Tracker.md  § Details  (lines 31–39) · [3] wiki/Projects/Pac-Man DQN Agent.md  § Details  (lines 44–51)
+  (199 tokens, 9.09 s, prompt 1691 tokens)
+
+you> make that shorter
+· notes: not searched (edit of the previous reply; the conversation already has it)
+sarge> "You think a summary is a challenge, recruit?"
+
+Here is the condensed review plan. Stick to these points.
+
+1.  **nanoGPT:** Check the loss data. Untrained vs. final loss. [1]
+2.  **Networking Tracker:** Confirm all tests pass. Check the 7 RLS assertions. [2]
+3.  **Pac-Man:** Verify the Q-network structure. Check the episode count guidance. [3]
+4.  **Compare:** Note shared evaluation methods.
+
+That is the shortest version.
+  sources: [1] wiki/Projects/Custom nanoGPT Model.md  § Details  (lines 43–51) · [2] wiki/Projects/Networking Tracker.md  § Details  (lines 31–39) · [3] wiki/Projects/Pac-Man DQN Agent.md  § Details  (lines 44–51)
+  (116 tokens, 5.55 s, prompt 1902 tokens)
+
+
+Transcript saved to runs/chat/20260929T182803-chat.md and evidence/offline/20260929-182452/mode-checks/2-chat-followup.md
+
+================ 3. chat claim, then a separate ask (expect: ask answers from sources, not the claim)
+wiki chat · local · gemma-4-e2b-it-4bit (mlx-vlm) · offline cache only
+Loading Sarge (local Gemma + your notes index)…
+Ready. Ask anything; your notes are searched only when a message needs them.
+Commands:
+  /notes <topic>  search your notes about a topic, then answer from them
+  /sources        show the passages behind the last answer
+  /save           save the last reply to drafts/ (a draft, not evidence)
+  /reset          forget this conversation
+  /help           this list
+  /exit           leave (Ctrl-D also works)
+
+you> Just so you know, I trained my Pac-Man agent for 500 episodes.
+· notes: searched (mentions Pac-Man DQN Agent) → 4 passage(s) above 0.3 similarity
+sarge> "You think showing me a number counts as a full report, recruit?"
+
+Listen up. You trained your agent for 500 episodes. That's the claim. Now tell me what.
+  (42 tokens, 4.21 s, prompt 1946 tokens)
+
+
+Transcript saved to runs/chat/20260929T182814-chat.md and evidence/offline/20260929-182452/mode-checks/3-chat-claim.md
+$ ./wiki ask "How many episodes was my Pac-Man agent trained for?"
+wiki ask · local · gemma-4-e2b-it-4bit (mlx-vlm) · offline cache only
+Question: How many episodes was my Pac-Man agent trained for?
+
+Retrieved 5 original passages (0.05 s, hybrid BM25 + embeddings, guided by wiki notes):
+  [1] raw/pacman-dqn/README.md  § How it works  (lines 80–88)  ← via [[Pac-Man DQN Agent]]
+  [2] raw/pacman-dqn/pacman_runs/20260922_153903_365997/config.json  § whole file  (lines 2–49)  ← via [[Pac-Man DQN Agent]]
+  [3] raw/pacman-dqn/pacman_runs/20260922_153903_365997/comparison.json  § whole file  (lines 2–67)  ← via [[Pac-Man DQN Agent]]
+  [4] raw/pacman-dqn/README.md  § Introduction  (lines 1–18)  ← via [[Pac-Man DQN Agent]]
+  [5] raw/pacman-dqn/pacman_runs/20260922_153903_365997/training_summary.json  § whole file  (lines 2–7)  ← via [[Pac-Man DQN Agent]]
+
+Loading the local model…
+
+── step 1 · relevant facts ─────────────────────────────────────
+Asked for: Number of episodes trained
+Relevant facts:
+* completed_episodes: 5 [5]
+
+check · is the thing asked for in these facts? Gemma: 'YES' → YES
+
+── step 2 · answer ─────────────────────────────────────────────
+Answer: my Pac-Man agent was trained for 5 episodes [5].
+
+── citations ───────────────────────────────────────────────────
+  [5] raw/pacman-dqn/pacman_runs/20260922_153903_365997/training_summary.json  § whole file  (lines 2–7)
+
+Citation check: grounded (every claim cites a passage)
+  ⚠ low word overlap (0.14) with cited passage(s) [5]: "Answer: my Pac-Man agent was trained for 5 episodes ."
+Related wiki notes: [[Pac-Man DQN Agent]]
+
+gemma-4-e2b-it-4bit@2387675 · local · prompts 2097+539 tok · output 41 tok at 36.3 tok/s · 5.33 s (+4.34 s load) · peak 4.65 GB
+Saved runs/ask/20260929T182828-how-many-episodes-was-my-pac-man-agent-trained-f.json
+
+================ 4. search: original passages only (expect: no generated answer)
+$ ./wiki search "target network sync"
+wiki search · retrieval only, no language model · offline cache only
+Query: target network sync
+method=hybrid · layer=source · k=5 · 109 passages indexed · 0.04 s
+
+[1] source  raw/pacman-dqn/README.md  § How it works  (lines 80–88)
+    fused 0.0284 · bm25 #1 (9.43) · dense #23 (cos 0.249)
+    │ ## How it works
+    │ 
+    │ The environment is `ALE/MsPacman-v5`. Four grayscale 84 × 84 frames feed a convolutional Q-network,
+    │ which predicts action values. The agent uses experience replay, a target network, Adam, Huber loss,
+    │ and a discounted reward target. Game over removes the future-value term; time limits do not.
+    │ 
+    │ Frame skipping happens only in `AtariPreprocessing` (four frames per decision); the base environment
+    │ uses `frameskip=1`. Reset fills the stack with the new game's initial screen. Sticky-action
+    │ probability is 0.25, no-op resets use up to 30 actions, and losing one life does not end the
+    │ episode. Each game is capped at 3,000 decisions, about 200 seconds of game time.
+    │ 
+    │ Replay stores each current stack plus one new frame as `uint8`: about 168 MiB at 5,000 transitions,
+    │ plus Python, network, and batch overhead. Training samples 32 transitions every four decisions after
+    │ warm-up. The target network syncs every 1,000 decisions; gamma is 0.99. Training rewards are clipped
+    │ to [-1, 1], while all reported game scores are raw.
+    │ 
+    │ Before/after evaluation uses the same five seeds, 5% exploration, and step cap. The baseline is an
+    │ untrained network. Evaluation uses a separate environment and never updates replay or weights. The
+    │ best GIF is selected by full-game score, but only its first 20 seconds are recorded. Inspect all
+    │ five scores before claiming improvement. The small replay memory and fixed exploration simplify the
+    │ classroom exercise; this is not a benchmark-scale DQN reproduction.
+
+[2] source  raw/networking-tracker/README.md  § Known limitations and what I would do next  (lines 458–470)
+    fused 0.0280 · bm25 #11 (1.79) · dense #12 (cos 0.289)
+    │ ## Known limitations and what I would do next
+    │ 
+    │ - **Vercel serverless cold starts.** The first API request after a quiet period takes a second or
+    │ two. A warm-up ping or Vercel's fluid compute would smooth it out.
+    │ - **`@neondatabase/neon-js` is at `0.7.0-beta`.** The auth wrapper in `frontend/src/auth.js`
+    │ deliberately accepts more than one call shape (`signIn.email({...})` or `signIn({...})`, and several
+    │ token accessors) so a minor SDK change does not break sign-in outright. Once the SDK is stable that
+    │ indirection should go.
+    │ - **Frontend bundle is ~730 kB** (≈211 kB gzipped), mostly the auth SDK and the effects libraries.
+    │ Route-level code splitting and lazily importing `fireworks-js` would cut the first paint
+    │ considerably.
+    │ - **One extra network hop.** The API proxies the Data API rather than talking to Postgres directly.
+    │ This is the deliberate trade described above — RLS stays the enforcement point — but it does add
+    │ latency.
+    │ - **No pagination.** Every contact is fetched at once. Fine for a few hundred; a cursor over
+    │ `(created_at, id)` would be the next step.
+    │ - **Email/password only.** No OAuth providers, no password reset flow, no email verification.
+    │ - **What I would build next:** follow-up reminders with a "last contacted" date and a nudge when a
+    │ high-priority contact goes cold; tags; CSV import and export; and a proper end-to-end test with
+    │ Playwright driving two real browser sessions to automate the two-account privacy check in CI.
+    │ 
+    │ ---
+    │ 
+    │ … 1 more lines (use --full)
+
+[3] source  raw/networking-tracker/README.md  § Architecture › Why the API proxies instead of connecting to Postgres directly  (lines 163–169)
+    fused 0.0278 · bm25 #3 (2.46) · dense #24 (cos 0.245)
+    │ ### Why the API proxies instead of connecting to Postgres directly
+    │ 
+    │ A conventional backend holds a privileged connection string and writes `WHERE user_id = $1` in every
+    │ query. One forgotten clause and a user sees someone else's data.
+    │ 
+    │ This API holds no privileged credential at all. It passes the caller's own token through to the Data
+    │ API, so Postgres evaluates the RLS policies for that specific user on every statement. Ownership is
+    │ not something the application code has to remember — it is a property of the database. The cost is
+    │ one extra network hop per request, which is a trade I would make again for this kind of data.
+    │ 
+    │ ---
+
+[4] source  raw/networking-tracker/README.md  § Authentication and RLS ownership  (lines 192–221)
+    fused 0.0275 · bm25 #9 (1.93) · dense #17 (cos 0.274)
+    │ ## Authentication and RLS ownership
+    │ 
+    │ **The ownership rule, in one line:** a request may touch a row only when `auth.user_id() =
+    │ contacts.user_id`.
+    │ 
+    │ `auth.user_id()` is a function the Neon Data API provides. It returns the `sub` claim of the JWT
+    │ presented with the current request, as text. Because the `user_id` column *defaults* to that value
+    │ and is `NOT NULL`, every row is stamped with its real creator at insert time and no row can be
+    │ ownerless.
+    │ 
+    │ RLS is enabled **and forced** on the table (`force row level security` applies the policies to the
+    │ table owner too, so nothing quietly bypasses them), with four separate policies:
+    │ 
+    │ ```sql
+    │ create policy contacts_select_own on public.contacts
+    │   for select to authenticated
+    │   using ((select auth.user_id()) = user_id);
+    │ … 18 more lines (use --full)
+
+[5] source  raw/pacman-dqn/pacman_runs/20260922_153903_365997/config.json  § whole file  (lines 2–49)
+    fused 0.0267 · bm25 #2 (4.90) · dense #35 (cos 0.164)
+    (JSON values shown as key paths; the original lines are cited above)
+    │ exploration: 0.1
+    │ episodes_requested: 5
+    │ learning_rate: 0.00025
+    │ seed: 42
+    │ device: mps
+    │ python: 3.13.1
+    │ platform: macOS-26.6.2-arm64-arm-64bit-Mach-O
+    │ packages.torch: 2.14.0
+    │ packages.gymnasium: 1.3.0
+    │ packages.ale-py: 0.11.2
+    │ packages.opencv-python-headless: 4.14.0.94
+    │ packages.numpy: 2.5.3
+    │ … 24 more lines (use --full)
+
+No answer generated (search mode). Saved runs/search/20260929T182831-target-network-sync.json
+
+
+############ Done
+Tue Sep 29 18:28:31 PDT 2026
+Saved to evidence/offline/20260929-182452

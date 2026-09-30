@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noimageindex, noarchive">
+  <title>From Zero to AI Evan</title>
+  <meta name="description" content="Evan Bright's Fundamentals of AI (Fall 2026) work, class by class: the thing he built, then the README, in one scroll.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Lato:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <script>
+    try { const t = localStorage.getItem("zte-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top">
+        <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#bot"/></svg>
+        <span>From Zero to AI Evan</span>
+      </a>
+      <div class="nav-links">
+        <div class="nav-class-links" id="navClasses"></div>
+        <button class="nav-btn" id="toggleAll" type="button">Expand all</button>
+        <button class="nav-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">🌗</button>
+      </div>
+    </div>
+  </nav>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="bot" viewBox="0 0 200 200">
+        <!-- pizza-slice antenna -->
+        <line x1="100" y1="46" x2="100" y2="22" stroke="#5b6b7a" stroke-width="6" stroke-linecap="round"/>
+        <path d="M82 10 L118 10 L100 40 Z" fill="#f4b942" stroke="#e4572e" stroke-width="4" stroke-linejoin="round"/>
+        <circle cx="94" cy="17" r="3.5" fill="#e4572e"/><circle cx="106" cy="20" r="3" fill="#e4572e"/>
+        <!-- head -->
+        <rect x="28" y="46" width="144" height="118" rx="30" fill="#2a76dd"/>
+        <rect x="42" y="60" width="116" height="90" rx="20" fill="#0f1420"/>
+        <!-- ears -->
+        <rect x="14" y="88" width="16" height="36" rx="7" fill="#1db954"/>
+        <rect x="170" y="88" width="16" height="36" rx="7" fill="#8b5cf6"/>
+        <!-- eyes: a zero and a sparkle -->
+        <ellipse cx="76" cy="95" rx="11" ry="14" fill="none" stroke="#7ee0a1" stroke-width="6"/>
+        <path d="M124 81 L128 91 L138 95 L128 99 L124 109 L120 99 L110 95 L120 91 Z" fill="#7ee0a1"/>
+        <!-- smile display -->
+        <text x="100" y="138" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="600" font-size="20" fill="#f5c26b">0→AI</text>
+        <!-- neck + body hint -->
+        <rect x="84" y="164" width="32" height="12" rx="4" fill="#5b6b7a"/>
+        <rect x="58" y="176" width="84" height="18" rx="9" fill="#e4572e"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <main id="top">
+    <header class="hero">
+      <div>
+        <h1>From Zero to AI <span class="strike">Agents</span> Evan</h1>
+        <p class="subtitle">Week 1: “what's a terminal?” Week 6: my laptop runs its own LLM with the Wi-Fi off and roasts me in the process.</p>
+        <p class="dice">
+          <span lang="es">Pepe dice, Evan hace.</span>
+          <span class="pepes" aria-hidden="true">
+            <img src="media/pepe.png" alt="" width="53" height="60">
+            <img src="media/pepe-shades.png" alt="" width="53" height="60">
+            <img src="media/pepe-deal.png" alt="" width="53" height="60">
+          </span>
+        </p>
+        <div class="byline">
+          <span>🧑‍💻 Evan Bright</span>
+          <span>🎓 Fundamentals of AI · Fall 2026</span>
+          <span>👋 For Pepe &amp; Alex</span>
+        </div>
+      </div>
+      <svg class="hero-art" viewBox="0 0 200 200" role="img" aria-label="A robot with a pizza-slice antenna and a 0→AI display"><use href="#bot"/></svg>
+    </header>
+
+    <div class="callout">
+      <strong>How to grade this in one scroll:</strong> every class below opens to
+      <em>① the thing I built</em>, running right here where a browser can run it, then
+      <em>② the README</em>, pulled live from its public GitHub repo. Hit <strong>Expand all</strong> up top and just keep scrolling. 🛼
+    </div>
+
+    <section class="arc">
+      <h2>How the six-class arc went (for me)</h2>
+      <div class="table-wrap">
+        <table class="arc-table">
+          <thead><tr><th>Class</th><th>Focus</th><th>What I shipped</th></tr></thead>
+          <tbody id="arcRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="toolbar">
+        <h2>The work, class by class</h2>
+        <button class="btn" id="toggleAll2" type="button">⬇️ Expand all</button>
+      </div>
+      <div id="classes"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>🤖 Built with Claude Code, from my own repos at <a href="https://github.com/ebright09">github.com/ebright09</a>. The look is borrowed, with love, from Pepe's course site.</p>
+    <p>No servers were harmed: the pizza game's API runs in your browser, and every model output shown here was recorded on my M1.</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>

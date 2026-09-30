@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pepe's Discount Dungeon</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/arcade.css">
+</head>
+<body class="crt">
+  <canvas id="fx-canvas" aria-hidden="true"></canvas>
+
+  <header class="hud" id="hud">
+    <span class="stat lives" id="hud-lives" aria-label="Lives"></span>
+    <span class="stat coins" id="hud-coins">🪙 0</span>
+    <span class="stat combo" id="hud-combo">x0 COMBO</span>
+    <span class="spacer"></span>
+    <button class="icon-btn" id="btn-map" title="Level map">🗺️</button>
+    <button class="icon-btn" id="btn-office" title="Pepe's Back Office (plain calculator)">🧾</button>
+    <button class="icon-btn" id="btn-mute" title="Mute / unmute">🔊</button>
+  </header>
+
+  <main id="app">
+    <!-- TITLE -->
+    <section class="screen active" id="title">
+      <div class="logo-pepe" id="title-pepe"></div>
+      <h1>PEPE'S PIZZA<br>DISCOUNT DUNGEON</h1>
+      <p class="tagline">Eight levels. Three rules. One very tired pizza chef who trusts you with his money for some reason.</p>
+      <p class="blink">▶ INSERT COIN ◀</p>
+      <div class="title-buttons">
+        <button class="btn gold" id="btn-start">Press Start</button>
+        <button class="btn alt" id="btn-title-office">Back Office</button>
+      </div>
+      <p class="muted" style="margin-top:28px;font-size:9px">Pro tip: ↑↑↓↓←→←→BA. Pepe regrets telling you that.</p>
+    </section>
+
+    <!-- MAP -->
+    <section class="screen" id="map">
+      <div class="panel pepe-row">
+        <div class="pepe" id="map-pepe"></div>
+        <div class="speech" id="map-speech"></div>
+      </div>
+      <h2>🗺️ THE DUNGEON</h2>
+      <div class="map" id="map-grid"></div>
+      <div class="actions">
+        <button class="btn alt" id="btn-reset">Rage Quit (reset progress)</button>
+      </div>
+    </section>
+
+    <!-- BATTLE -->
+    <section class="screen" id="battle">
+      <h2 id="battle-title"></h2>
+      <h3 id="battle-sub"></h3>
+      <div class="boss-bar" id="boss-bar" hidden>
+        <div class="label"><span id="boss-name"></span><span id="boss-hp-text"></span></div>
+        <div class="track"><div class="fill" id="boss-fill"></div></div>
+      </div>
+      <div class="boss-sprite" id="boss-sprite" hidden></div>
+      <div class="panel pepe-row">
+        <div class="pepe" id="battle-pepe"></div>
+        <div class="speech" id="battle-speech"></div>
+      </div>
+      <div class="invoice" id="invoice"></div>
+      <p class="question">What discount does this invoice get?</p>
+      <div class="choices" id="choices"></div>
+      <form class="exact-row" id="exact-form">
+        <label for="exact-input" class="muted" style="font-size:9px">Big brain? Type the exact amount for 2× coins:</label>
+        <input id="exact-input" inputmode="decimal" placeholder="$0.00" autocomplete="off">
+        <button class="btn gold" type="submit">Bake it</button>
+      </form>
+    </section>
+
+    <!-- VERDICT -->
+    <section class="screen" id="verdict">
+      <div class="verdict-banner" id="verdict-banner"></div>
+      <div class="panel pepe-row">
+        <div class="pepe" id="verdict-pepe"></div>
+        <div class="speech" id="verdict-speech"></div>
+      </div>
+      <div class="panel">
+        <h3 id="audit-title">THE ENGINE'S RECEIPTS</h3>
+        <ul class="audit" id="audit"></ul>
+        <p id="verdict-answer"></p>
+      </div>
+      <div class="actions" id="verdict-actions"></div>
+    </section>
+
+    <!-- GAME OVER -->
+    <section class="screen" id="gameover" style="text-align:center">
+      <h1>GAME OVER</h1>
+      <div class="logo-pepe" id="gameover-pepe" style="width:140px;height:140px;margin:auto"></div>
+      <div class="panel"><div class="speech" id="gameover-speech" style="text-align:left"></div></div>
+      <p class="muted">Lives refilled. Half your coins went to "consulting fees".</p>
+      <button class="btn gold" id="btn-continue">Continue? (it's free, Pepe isn't)</button>
+    </section>
+
+    <!-- VICTORY -->
+    <section class="screen" id="victory" style="text-align:center">
+      <h1>YOU BEAT THE DUNGEON</h1>
+      <div class="logo-pepe" id="victory-pepe" style="width:160px;height:160px;margin:auto"></div>
+      <div class="panel"><div class="speech" id="victory-speech" style="text-align:left"></div></div>
+      <p class="coins" id="victory-coins"></p>
+      <div class="title-buttons">
+        <button class="btn gold" id="btn-victory-map">Back to map</button>
+        <button class="btn alt" id="btn-victory-office">Visit the Back Office</button>
+      </div>
+    </section>
+
+    <!-- BACK OFFICE: the plain engine UI -->
+    <section class="screen" id="office">
+      <h2>🧾 PEPE'S BACK OFFICE</h2>
+      <p class="muted">The boring version. Same engine, no dragons. Pick an invoice or type your own.</p>
+      <form class="panel" id="office-form">
+        <div class="form-grid">
+          <label>Load an invoice
+            <select id="office-invoice"><option value="">Custom…</option></select>
+          </label>
+          <label>Amount ($)
+            <input id="office-amount" inputmode="decimal" value="10000" required>
+          </label>
+          <label>Tier
+            <select id="office-tier">
+              <option value="standard">Standard (5%)</option>
+              <option value="gold">Gold (10%)</option>
+              <option value="strategic">Strategic (15%)</option>
+            </select>
+          </label>
+          <label>Days overdue
+            <input id="office-days" type="number" value="0" min="0">
+          </label>
+          <label class="check">
+            <input id="office-approved" type="checkbox"> Exception approved
+          </label>
+          <label>Approved by
+            <input id="office-approver" placeholder="Pepe, probably">
+          </label>
+        </div>
+        <div class="actions"><button class="btn gold" type="submit">Calculate</button></div>
+        <div class="quote-out" id="office-out" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <script src="mock-api.js"></script>
+  <script type="module" src="js/game.js"></script>
+</body>
+</html>

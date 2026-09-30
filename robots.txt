@@ -1,2 +1,5 @@
 User-agent: *
 Allow: /
+# pepe_dice pages carry a noindex meta tag (crawlers must be able to read it);
+# its media files have no tag, so keep crawlers out of them directly.
+Disallow: /pepe_dice/media/
