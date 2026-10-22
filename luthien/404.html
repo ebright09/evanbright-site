@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html class="staticrypt-html">
+<html class="staticrypt-html" lang="en">
     <head><meta name="robots" content="noindex, nofollow">
         <meta charset="utf-8" />
-        <title>Luthien (preview)</title>
+        <title>Luthien website preview</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <!-- do not cache this page -->
@@ -12,165 +12,39 @@
         <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
         <meta http-equiv="pragma" content="no-cache" />
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Lora&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
         <style>
-            .staticrypt-hr {
-                margin-top: 20px;
-                margin-bottom: 20px;
-                border: 0;
-                border-top: 1px solid #eee;
-            }
-
-            .staticrypt-page {
-                width: 360px;
-                padding: 8% 0 0;
-                margin: auto;
-                box-sizing: border-box;
-            }
-
-            .staticrypt-form {
-                position: relative;
-                z-index: 1;
-                background: #ffffff;
-                max-width: 360px;
-                margin: 0 auto 100px;
-                padding: 45px;
-                text-align: center;
-                box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-            }
-
-            .staticrypt-form input[type="password"],
-            input[type="text"] {
-                background: inherit;
-                border: 0;
-                box-sizing: border-box; /* This ensures padding is included in the total width */
-                font-size: 14px;
-                outline: 0;
-                padding: 15px 30px 15px 15px; /* Adjust the padding to ensure there is space for the icon */
-                width: 100%;
-            }
-
-            .staticrypt-password-container {
-                position: relative;
-                outline: 0;
-                background: #f2f2f2;
-                width: 100%;
-                border: 0;
-                margin: 0 0 15px;
-                box-sizing: border-box;
-            }
-
-            .staticrypt-toggle-password-visibility {
-                cursor: pointer;
-                height: 20px;
-                opacity: 60%;
-                padding: 13px;
-                position: absolute;
-                right: 0;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 20px;
-            }
-
-            .staticrypt-form .staticrypt-decrypt-button {
-                text-transform: uppercase;
-                outline: 0;
-                background: #3B9494;
-                width: 100%;
-                border: 0;
-                padding: 15px;
-                color: #ffffff;
-                font-size: 14px;
-                cursor: pointer;
-            }
-
-            .staticrypt-form .staticrypt-decrypt-button:hover,
-            .staticrypt-form .staticrypt-decrypt-button:active,
-            .staticrypt-form .staticrypt-decrypt-button:focus {
-                background: #3B9494;
-                filter: brightness(92%);
-            }
-
-            .staticrypt-html {
-                height: 100%;
-            }
-
-            .staticrypt-body {
-                height: 100%;
-                margin: 0;
-            }
-
-            .staticrypt-content {
-                height: 100%;
-                margin-bottom: 1em;
-                background: #141216;
-                font-family: "Arial", sans-serif;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-            }
-
-            .staticrypt-instructions {
-                margin-top: -1em;
-                margin-bottom: 1em;
-            }
-
-            .staticrypt-title {
-                font-size: 1.5em;
-            }
-
-            label.staticrypt-remember {
-                display: flex;
-                align-items: center;
-                margin-bottom: 1em;
-            }
-
-            .staticrypt-remember input[type="checkbox"] {
-                transform: scale(1.5);
-                margin-right: 1em;
-            }
-
-            .hidden {
-                display: none !important;
-            }
-
-            .staticrypt-spinner-container {
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .staticrypt-spinner {
-                display: inline-block;
-                width: 2rem;
-                height: 2rem;
-                vertical-align: text-bottom;
-                border: 0.25em solid gray;
-                border-right-color: transparent;
-                border-radius: 50%;
-                -webkit-animation: spinner-border 0.75s linear infinite;
-                animation: spinner-border 0.75s linear infinite;
-                animation-duration: 0.75s;
-                animation-timing-function: linear;
-                animation-delay: 0s;
-                animation-iteration-count: infinite;
-                animation-direction: normal;
-                animation-fill-mode: none;
-                animation-play-state: running;
-                animation-name: spinner-border;
-            }
-
-            @keyframes spinner-border {
-                100% {
-                    transform: rotate(360deg);
-                }
-            }
-
-            @media screen and (-webkit-min-device-pixel-ratio: 0) {
-                .staticrypt-form input[type="password"],
-                input[type="text"] {
-                    font-size: 16px;
-                }
-            }
+            /* Luthien look: matches luthienresearch.org (Lumen palette) */
+            :root { --bg: #141216; --card: #18151C; --border: #28243A; --text: #EDE5D8; --muted: #9A92AE; --teal: #3B9494; --amber: #C47B42; }
+            .staticrypt-html { height: 100%; }
+            .staticrypt-body { height: 100%; margin: 0; background: var(--bg); }
+            .staticrypt-content { min-height: 100%; display: flex; align-items: center; justify-content: center; padding: 24px 16px; box-sizing: border-box;
+                background: radial-gradient(ellipse at 50% 0%, rgba(59,148,148,0.10), rgba(20,18,22,0) 60%), var(--bg);
+                font-family: 'Lora', Georgia, serif; color: var(--text); -webkit-font-smoothing: antialiased; }
+            .staticrypt-page { width: 100%; max-width: 400px; }
+            .staticrypt-form { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 40px 32px 32px; text-align: center; }
+            .lu-logo { display: block; height: 40px; width: auto; margin: 0 auto 28px; }
+            .lu-kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); margin: 0 0 10px; }
+            .staticrypt-title { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: -0.01em; margin: 0 0 10px; }
+            .staticrypt-instructions p:last-child { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin: 0 0 28px; }
+            .staticrypt-password-container { position: relative; margin: 0 0 16px; }
+            .staticrypt-form input[type="password"], .staticrypt-form input[type="text"] {
+                width: 100%; box-sizing: border-box; padding: 14px 44px 14px 16px; font-size: 16px; font-family: 'JetBrains Mono', monospace;
+                background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 6px; outline: 0; transition: border-color 0.2s; }
+            .staticrypt-form input[type="password"]:focus, .staticrypt-form input[type="text"]:focus { border-color: var(--teal); }
+            .staticrypt-form input::placeholder { color: #6E6782; }
+            .staticrypt-toggle-password-visibility { cursor: pointer; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; filter: invert(0.75); opacity: 0.7; }
+            label.staticrypt-remember { display: flex; align-items: center; gap: 10px; margin: 0 0 20px; font-size: 0.9rem; color: var(--muted); cursor: pointer; }
+            .staticrypt-remember input[type="checkbox"] { width: 16px; height: 16px; margin: 0; accent-color: var(--teal); }
+            .staticrypt-form .staticrypt-decrypt-button { width: 100%; padding: 13px; border: 0; border-radius: 4px; background: var(--teal); color: var(--bg);
+                font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+            .staticrypt-form .staticrypt-decrypt-button:hover, .staticrypt-form .staticrypt-decrypt-button:focus { background: #2A8080; }
+            .hidden { display: none !important; }
+            .staticrypt-spinner-container { height: 100%; display: flex; align-items: center; justify-content: center; }
+            .staticrypt-spinner { width: 2rem; height: 2rem; border: 0.25em solid var(--teal); border-right-color: transparent; border-radius: 50%; animation: spinner-border 0.75s linear infinite; }
+            @keyframes spinner-border { 100% { transform: rotate(360deg); } }
         </style>
     </head>
 
@@ -182,12 +56,56 @@
         <div id="staticrypt_content" class="staticrypt-content hidden">
             <div class="staticrypt-page">
                 <div class="staticrypt-form">
+                    <svg class="lu-logo" role="img" aria-label="Luthien" viewBox="0 0 1605 412" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:bevel;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-937.841071,-1410.345194)">
+        <g id="luthnew-LINII" transform="matrix(1,0,0,1.002727,53,394.166122)">
+            <g transform="matrix(0.462203,0.462203,-0.468657,0.468657,1141.851731,116.649514)">
+                <path d="M932.026,1029.754L932,1432L1262,1432" style="fill:none;stroke:rgb(252,252,252);stroke-width:50.5px;"/>
+            </g>
+            <g transform="matrix(-0.462834,-0.461575,0.468017,-0.469293,1016.439175,2320.96219)">
+                <clipPath id="_clip1">
+                    <path d="M906.537,1029.872L957.463,1029.735L957.463,1406.888L1262.069,1406.888L1261.931,1457.112L931.931,1457.112L906.537,1432.068L906.537,1029.872Z"/>
+                </clipPath>
+                <g clip-path="url(#_clip1)">
+                    <g transform="matrix(-1.083245,1.065428,-1.07736,-1.065428,1555.09354,1256.688816)">
+                        <use xlink:href="#_Image2" x="170.385" y="41.372" width="212px" height="366px"/>
+                    </g>
+                </g>
+            </g>
+            <g transform="matrix(0.16152,0.161534,-0.163776,0.16379,1067.497858,833.492427)">
+                <path d="M932.026,1029.754L932,1432L1337.05,1431.984" style="fill:none;stroke:rgb(59,148,148);stroke-width:117.41px;"/>
+            </g>
+            <g transform="matrix(-0.161741,-0.161314,0.163552,-0.164012,1090.043537,1602.93859)">
+                <clipPath id="_clip3">
+                    <path d="M872.816,1029.949L991.216,1029.626L991.202,1373.615L1337.303,1373.615L1336.97,1490.385L931.834,1490.385L872.8,1432.162L872.816,1029.949Z"/>
+                </clipPath>
+                <g clip-path="url(#_clip3)">
+                    <g transform="matrix(-3.099785,3.048802,-3.082689,-3.048549,2458.357997,1176.471636)">
+                        <use xlink:href="#_Image4" x="213.28" y="129.763" width="85px" height="151px"/>
+                    </g>
+                </g>
+            </g>
+            <g transform="matrix(1.352096,0,0,1.39709,587.207186,846.1791)">
+                <path d="M606.432,330.452L606.432,220.641L625.384,220.641L625.384,315.077L689.33,315.077L689.33,330.452L606.432,330.452Z" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+                <path d="M767.945,331.259C758.411,331.259 750.354,329.755 743.777,326.746C737.199,323.737 731.904,319.646 727.893,314.473C723.882,309.3 720.955,303.419 719.112,296.831C717.269,290.242 716.348,283.421 716.348,276.366L716.348,220.641L735.301,220.641L735.301,276.366C735.301,281.349 735.847,286.198 736.94,290.913C738.033,295.627 739.816,299.84 742.291,303.55C744.766,307.26 748.091,310.207 752.267,312.389C756.443,314.571 761.625,315.662 767.814,315.662C774.116,315.662 779.361,314.551 783.548,312.327C787.736,310.104 791.06,307.112 793.523,303.351C795.985,299.59 797.763,295.372 798.856,290.697C799.949,286.023 800.495,281.246 800.495,276.366L800.495,220.641L819.45,220.641L819.45,276.366C819.45,283.833 818.488,290.887 816.565,297.527C814.641,304.167 811.624,310.002 807.513,315.031C803.402,320.061 798.086,324.023 791.563,326.917C785.04,329.812 777.168,331.259 767.945,331.259Z" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+                <path d="M949.091,236.016L909.356,236.016L909.356,330.452L890.401,330.452L890.401,236.016L850.629,236.016L850.629,220.641L949.091,220.641L949.091,236.016Z" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+                <path d="M1080.095,220.641L1080.095,330.452L1061.142,330.452L1061.142,281.997L1000.906,281.997L1000.906,330.452L981.954,330.452L981.954,220.641L1000.906,220.641L1000.906,266.622L1061.142,266.622L1061.142,220.641L1080.095,220.641Z" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+                <rect x="1123.785" y="220.641" width="18.953" height="109.81" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+                <path d="M1268.396,315.077L1268.396,330.452L1186.426,330.452L1186.426,220.641L1266.882,220.641L1266.882,236.016L1205.378,236.016L1205.378,267.253L1258.687,267.253L1258.687,281.622L1205.378,281.622L1205.378,315.077L1268.396,315.077Z" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+                <path d="M1323.709,252.821L1323.709,330.452L1304.757,330.452L1304.757,220.641L1320.302,220.641L1387.918,300.007L1387.918,220.762L1406.871,220.762L1406.871,330.452L1390.426,330.452L1323.709,252.821Z" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+            </g>
+        </g>
+    </g>
+    <defs>
+        <image id="_Image2" width="212px" height="366px" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAFuANQDAREAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAIBAwj/xAAaEAEBAQEBAQEAAAAAAAAAAAAAAgERQXEh/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/APYwAAKnO/AWACarzASC53oNAAAAAAAAAAAAAAAAAByABU534CwATVeYCAAaC53oNAAAAAAAAAAAAAAAAByBU534CwATVeYCAAAAaC53oNAAAAAAAAAAAAAAABE534CwATVeYCAAAAAAaC53oNAAAAAAAAAAAAAAAABNV5gIAAAAAAABoLneg0AAAAAAAAAAAAAAE1XmAgAAAAAAAAAGgud6DQAAAAAAAAAAAATVeYCAAAAAAAAAAAAaC53oNAAAAAAAAAAAByAAAAAAAAAAAAABoLneg0AAAAAAAAAAHIAAAAAAAAAAAAAAGgud6DQAAAAAAAAAcgAAAAAAAAAAAAAAAaC53oNAAAAAAAAByAAAAAAAAAAAAAAAABoLneg0AAAAAAAHIAAAAAAAAAAAAAAAAAGgud6DQAAAAAAcgAAAAAAAAAAAAAAAAAAaC53oNAAAAAByAAAAAAAAAAAAAAAAAAABoLneg0AAAAHIAAAAAAAAAAAAAAAAAAAAGgud6DQAAAcgAAAAAAAAAAAAAAAAAAAAAaC53oNAAByAAAAAAAAAAAAAAAAAAAAAABoLneg0AHIAAAAAAAAAAAAAAAAAAAAAAAGgud6DQcgAAAAAAAAAAAAAAAAAAAAAAAAaC8rOfoOYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALyfz9BAAAAAAAAAAAAAAAAAAAAAAAAAOkzz6DQcgAAAAAAAAAAAAAAAAAAAAAAAdJnn0GgA5AAAAAAAAAAAAAAAAAAAAAAA6TPPoNAAByAAAAAAAAAAAAAAAAAAAAAB0mefQaAAADkAAAAAAAAAAAAAAAAAAAADpM8+g0AAAAHIAAAAAAAAAAAAAAAAAAAHSZ59BoAAAAAOQAAAAAAAAAAAAAAAAAAOkzz6DQAAAAAAcgAAAAAAAAAAAAAAAAAdJnn0GgAAAAAAA5AAAAAAAAAAAAAAAAA6TPPoNAAAAAAAAByAAAAAAAAAAAAAAAB0nOfvoNAAAAAAAAAByAAAAAAAAAAAAAABcz7oKAAAAAAAAAAByAAAAAAAAAAAAABcz7oKAAAAAAAAAAAByAAAAAAAAAAAABcz7oKAAAAAAAAAAAAByAAAAAAAAAAABcz7oKAAAAAAAAAAAAAByAAAAAAAAAABcz7oKAAAAAAAAAAAAAAByAAAAAAAAABcz7oKAAAAAAAAAAAAAAAByAAAAAAAABcz7oKAAAAAAAAAAAAAAAAByAAAAAAABcz7oKAAAAAAAAAAAAAAAAAByAAAAAABcz7oKAAAAAAAAAAAAAAAAAAByAAAAABcz7oKAAAAAAAAAAAAAAAAAAABNT7gIAAABcz7oKAAAAAAAAAAAAAAAAAAAAABNT7gIABcz7oKAAAAAAAAAAAAAAAAAAAAAAABF5z9wGxnoKAAAAAAAAAAAAAAAAAAAAAAB//2Q=="/>
+        <image id="_Image4" width="85px" height="151px" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFUAAACXCAYAAABk1RflAAAACXBIWXMAAA7EAAAOxAGVKw4bAAADWklEQVR4nO3dy3HqQBBG4XMhLWdEPGTktCjuxnZhLMS8etTd85+lXVjTXwnrsZl/9/v9Tkcf1+vmzz8vl54/O7Tb7Tb1eKeeD78Cffe72Z3P56nHa0YtQVsVtgm1BmtF2GrUFqTVYKtQe3BWgi1GHYGyCmwR6kiMFWDfologZIfdRbUcPjPsS9QZQ2eF3USdOWxG2D+oRwyZDbbr2X9kmWB/oR492NHHf6wH9gfVy0Be1gHtsCfwNQj4Wk8L7MnTAI95WlctrJsL1VZRYV2jQkxY96gQDzYEKsSCDYMKcWBDoUIM2HCo4B82JCr4hg2LCn5hQ6OCT9jwqOAPNgUq+IJNgwp+YFOhgg/YdKhwPGxKVDgWNi0qHAebGhWOgU2PCvNhl0CFubDLoMI82KVQYQ7scqhgD7skKtjCLosKdrBLo4IN7PKoMB5WqF+NhBXqQ6NghfrUCFihbtQLK9QX9cAKdadWWKG+qQVWqAXVwgq1sBpYoVZUCivUykpghdrQO1ihNrYHK9SOXsEKtbMtWKEO6BlWqIN6hBXqwL5hhTq4j+tVqBYJ1SChGiRUg4RqkFANEqpBQjVIqAYJ1SChGiRUg4RqkFANEqpBQjVIqAYJ1SChGiRUg4RqkFANEqpBQjVIqIP7vFyEOrLvDXiFOqjHHY2FOqDnLaKF2tnWnttC7ejVJuZCbWxvV3ihNrQHCkKt7h0oCLWqElAQanGloCDUompAQahvqwUFoe7WAgpCfVkrKAh1sx5QEOqfekFBqL8aAQpC/WkUKAgVGAsKQh0OCoujWoDCwqhWoLAoqiUoLIhqDQqLoc4AhYVQZ4HCIqgzQWEB1NmgkBz1CFBIjHoUKCRFPRIUEqIeDQrJUD2AQiJUL6CQBNUTKCRA9QYKwVE9gt5ut7ioXkEh6JnqGRQConoHhWCoEUAhEGoUUAiCGgkUAqBGAwXnqBFBwTFqVFCAk8fFe1xTKSh8namehvC0lu9qQOHh6+9hGA9reK4WFJ7+px45VBZQ2LhQHTFcJlB4cfWfOWQ2UNi5pZoxbEZQeHOfajl0VlAouPm3GD4zKBQ+UY1EyA4KFY+pIzBWAIXKZ/8elFVAoeGFSgvOSqDQ+JaqBmk1UOh49VeCtSIodL5P3UNbFRTgPweSRkLW2GjNAAAAAElFTkSuQmCC"/>
+    </defs>
+</svg>
                     <div class="staticrypt-instructions">
-                        <p class="staticrypt-title">Luthien (preview)</p>
-                        <p>Draft preview of the Luthien site by Evan Bright. Enter the password you were given.</p>
+                        <p class="lu-kicker">Private draft</p>
+                        <p class="staticrypt-title">Luthien website preview</p>
+                        <p>Copy and design edits by Evan Bright. Enter the password you were given to view the site.</p>
                     </div>
-
-                    <hr class="staticrypt-hr" />
 
                     <form id="staticrypt-form" action="#" method="post">
                         <div class="staticrypt-password-container">
@@ -212,7 +130,7 @@
                             Remember me for 30 days
                         </label>
 
-                        <input type="submit" class="staticrypt-decrypt-button" value="Open preview" />
+                        <input type="submit" class="staticrypt-decrypt-button" value="View the site" />
                     </form>
                 </div>
             </div>
@@ -820,7 +738,7 @@ exports.init = init;
                 templateToggleAltShow = "Show password",
                 templateToggleAltHide = "Hide password",
                 isRememberEnabled = true,
-                staticryptConfig = {"staticryptEncryptedMsgUniqueVariableName":"f88819039a2fbc68093751ab3c80a114583a6440eaee5a7aaef1fcef0aef6a8f9fe8b5619ee0b88b2f4a87679305d1fac77dab67bd9bdb4fac4ece0db4fb2d4de667c34707e2c189348ca6c17c1ab5fc458f39a157dd84ea61331bf3d4739f7ef5c4405cb37dc9deb8679d2c0534236ae38681183d65b27586bca3f2cfdf0b9576bca95bb8117665e3a5d20c541f44578a27ad3674c6b057432c292f3d9ffd830fab9123fa708c63775a26674572b52293d188a0f817a8345cab89c3f274c090d368bc4817012aa880fb7a3316bb2af4591ca3b4d0ac947bd5bb5e6708b5cedcbf499598153bb516366cb7de14d6fd548ca0557e473588de966c92df2792e0d9a715cb91db74b5bcf1eed90f9ff717595b0610ef0a9798ae7f059d07d24b7f0f7b4eb40720f9525dc646e4744b3d90d7ae5d7af151147b7e9333ab48eebdd4d6918fcfee9dfbb4dba3c1930cd5276c02861efe81fc3ef4ad9a885a82110de55719857744ff9b015ea5364792604b1fb6c5ba33cec357dab5a0fd6f8a7724e1883912c49be39f30dbe6b708c55f4912cc5814321fa07b3eb9658dd10cd501f0ce98e5305d55618cc6bbc8bea1f40e984dd1e9295590bf8c2f7204b3d660db39fdd14f3244f095fe92c8fd86a43ca1197efe6e2955a5db15f869d7d792eb4800abce72dbe95c7ecdeaabb98aad117a8fbdb5dc063170ded16125da55ff4ca81fed3e4d107d78c57e3b00dcd7d500f1b2b1197c25e477d2283199db157765fcfc5a7e20959bd8fc82c6b257c988660cc116bfa4745823c912c7662943426ddabcb2a3f6e7fee8a54e3fa81a78ccd307c797ad55ee65e56de3dd951aabaa1fc311f01a6f45adc89b0479024b9df63789eaa91127789d0e3de2f7d1a9d5de0f1ecf4a0724fef86fa75db549bd7123eea77cbec849e0e9b0429d7cb8d4c520c512122fd8c5d8d75ca909c39be9f1fd9b31a0ff4e127de0c5ce591c360a3d0fe0ccaaff8c8c7a125974bbe0739a3a32fc8de85b723fa0097d314b9ebcff2e0ccfd5813ed44578f8513dba00603c4e14650252fc734a89b7ea5c23f8a4c5633c0c52fc8217c9761e90d69ef6bf66e47fda042f984eae0a78ef6877115d2b66a84af5e321a8a4702d46e5761fd4f85a9568adcee6d8003a13ba2b1203ff53c890396284279bd980659f400b3b50e180c97fd022ca919635fc3f0825aeb89efea970ea0eb5e71fdbfe53906814cbd2e65f7f9e8b6432c05886cbea1bde6a838c225ae38d4c0e10e78c966a4e495b4989cd69d51c3bbd7771f11a764e4f14e779e91cfeb18131c95f54ea16f30367d13499f0dcea28aeeb07074811dc6d3d78b5f095ee3404340624bf6fbc97b363d7048c5e624226dbcc1ed9b679ddea2bf5dea864e92f00617098c519185f36020a51be035c283180fb93146286bfaecd65f3b61a058f3bb162fe798580b60342ce825506f4b12fe8bc856dec2cfcd382ccd9b802c5e9f216c6be63364588023ae885362274cbf9458ce58a196b50435c916f1b1b0953567f93351de2e497344637966cc181083d3f1cd5b9523b975177c5709c17513d344f03f79c9d90492e9a5fa45ee2d1d4963b7871e6f89980ee7f8631064671261a6594b5f8fc627e6982da3946cdc1873d09c5ac70d287841894b52d8f3efbf55063330423f0623f885ede3d43178fa40c1a5604d60a09c4cf893d3d40e6a5372c956916af0bdaae4c9b11df0a33b0df924b31bbeaf4cfd46d4b0e0e81652c792c9bf5c0ef888965477ef8770c0bec2a0b64a5bdab0718d708b952d3a1f8f9360fd37bed799dcc9dfd4d4deea49a9d67b8ac76db1831d7e83eb76f919ff8c384e47efe408a1b32efa692d64cca33de26d6b958cd62741223ba3284b7ed77728340ad1ef0e093022dd87aee7f63f9c87e879cde41324d255f8c7d0496950ccad3c6ac1dbe8caa6cc66d3f46fc6c85dc8d30c0f416c90f9edd665cf69682e9a170b18f3eb1ef0d245836f602c7bb3e5af5b8327f2fdfecf93f86bf28564f5acba4202a097c13ed1f9eabf4e6fa7f902d6f62b492be7ca14cd1f5eb5946d5f7e63b52c3c67503bce97e055fc61f7a34f34794a2cc0d43dc9e53464232357c74d513cac44141ac844081d38b7bd1a6667c1d5260f50da07d85f2210f392432cf7b89d578a6d12459c0d7d34e72bc11f0ea98329d62076df7bb5f340679a0fedd680fd41dfa444adab3350324d618bcdc587d5dfc54723787b3c97a08704f07c1ace91fbb370a083c491d703f23881eff6b56ced2d794da3a6097210dd1efbfd5b286f57b1873e2e15b26995df611b3a6de0fd96d24355707181560691231b1e238acea44e9319963d0b016f11dcd0a19453137d911364782fd360c548cc74b28c6b3c1786367f369a4cbf902bc5d2d4a7d459a58ab4858600c5a870097307688761b795e919d7d594e10b72509b84538e9e7391752a1ef2e5cefb5f070b9da017f52658e78eac2fcc921a88286911a5dbf61ead4a133addbfa787036553ff63f13093785effe275cb04693688fabc6c8d963d2db01e5604ea4b47e9bb19304c596c48f4d37140466f3d9658642b20669b09de18d84b7db6f4ec04cb8d55f2ef8d0450accf6d2cd811a4194bbc93e48148b97548927f349a15861c25796607b378e93f9114c62bcf1d7334cf72b538adb3c7cb9a5e731097734718cf650c5ca90c8f106c8b2925bde29a2c933065660de11c1f6fddd4865167853eb11d6e22ad3f704ad2d081c941f333e002af23c3936a199d593c1ece915a0ca9cc3f108f0a00b60e5b4d577d072959341ccf6d0cb09e9bd1d4bcac38955a76d84c8e77a135f10823012315f7a365864d035ea52ce52ed7110e7456acd887d363a98b16f816ff69386fd2911cc3de3c1aed72f308d8dcca640c5b667dfc4fc2768588002cc4861a6ed0fc32a36ff4baf0b31c6de59551756a9bdce99fc86d7e0e8a36f700c2268cc5d26f35d49f8a6151d1a0e4c6e7a0db2ce831480034d565bb89c1b9454ed7433f4095efb5b5966565ced8daca343e682db32a31eb2890fd80999441469e39d1a20ec8daf3785f435bee8b5bf471330638789dcf417e7b0a27301bad29fa1fd866e343afd0b12f88e6cb97bad8216c6985063497dcad2a470f92b6219ba30ca9c029eb0b590dc98667837990e1e08fd98b53240e4ef3cccb54fed3fde9b276d4cde53fad37218c75a8253e33347b2478b2d5aec8db8ab1e2cbd9baf1e6a00c734e9a801b2aac6fd30f5a62bf8b6ba45ddece59be03f5d3b88e3d015a0311eff2115de785d87359143e9e1895fcd68e2faa4","isRememberEnabled":true,"rememberDurationInDays":30,"staticryptSaltUniqueVariableName":"870fc465f9f07b7d6d58763646d8ccf5"};
+                staticryptConfig = {"staticryptEncryptedMsgUniqueVariableName":"31a185b9327806d3fd7e45cf77aa5fc9f38e1d10a09c0214482a7fe1f42b9c4d11ada845c18fe73108431af53f3d899a51715c5ec210eefcdc24ff49f24e9010030d533d2169cf8deea8c5ee49b7ed3866d51a434ce21951c293127ec8b1406a7947d695930868822426f071760f05969c916ae8994f508c37c533ac2a34825a513a0fae47db0d9a9df547753eb7ef29b1d2b714f15d06a834c37d78cd2afc3cecb4fa75c848fa51fd87d4a7ad29453fcd601749b28df55d762cc84fb9d890f37533e3b5a80bbd170ac3adf62c024dcee2766bceaf132073a8a99d6e2139eda786e2a37d59c2143d5b1557bcda244678a5723b5113e3e65f10bca0d8ce1e3f9df62c24f5e083d4816d77a9259831704a98feff2cb80b13ec5b01d278dd493a9ef8ed69bed058eea11e45371e9c4014721a0414a2c3e201a5fde0ce9f8519c4e7e30c56d412ad0ebb636326bfa6e6e5de8ff49ca465b5593f75b4fc9d8459c8848135eda04ede1e7a8b3bcb4b9408772d8cabc935a22141129e98343b52282322f918b47169e1ee91f08f063da846a5036f35df2f2733248dda38e4eaad55a191a9e890fa9f85f4931762dfbcbbde5f418adbe27e3a8ffe4715e98247dd27ee5b9c7eefbf5a9cff39311060acaadbea18acf4b62f3f4a4e2e4ed7c186841aadade1b3cc60be76438d2094a1428e2ed9ab338de90a674b24cbe16269d5a97260ed768f2937de5705d0ab6a3ae78e71d46d5fca390febef5e99ad32d656ced98489973c659ef8be4eeee0f506611588c2a0df6daef7d9990fba9f296c0e9c275bd33f825d931213f5f042e190b6ce93f4f0f9e323300a5ea6be70d2e89b9a23494dad442ff0213a94603b0bc8c990e05761dd5c35a9bd67cade86f69def07eea443790361f41b0849a69a01dcf53180ee56f9dab3a50fc6a7de1917d0e4b2c9e704af6ed0e4fe2204b586d0b447dd5ec1868a2bb027ddaff1ea6cdbf1775e0a2ec91668fc5b8ba84f0bd4561e37a3cd077cebe491da0e523eb7286289b6bcc3d4c8cad5d68dc93fbbc263942a3b0e10c5b056311777ec6b189f8d5a644b8421a3dd1bbc63e938a9b27879109f047235206ce0c8b27f3db2c81b787b46f8ff214a06c32570655ef8ae975337d4995cfe2c70ec7be72ab4515405eefb8b5d4eb30c383a8cf7433d3e4667eb3e313c754ae4b8a261e61d3a2fb8030d8d3828645707e95527a77e99faeeee06efd9376364325bfe609603ab230d61dc0c901e958beddb38d1975c8e08e0dbe468484fd8ec1309c1be75353c787c156dc842b48ab0566b6034485c35f268ad586a2ed464ceb3f4478a8332860c733cda75dda09778c0a9cd2ee0d56a1370e811227fb8ca41f03748d922826d0e0338977fb28006b4d4e4bf20b70fd2f66976c81ad3fb546a71ec7deb09972ed41c31bd1502eb427dc8b7b7a0953c36b6184ffb0f4cbb947828d8c11603853be57f8b19a17ea3e2e874f49f0d5147e76208acf7e3a5234be113542d3f1117e9b50c1a05f809b6fff95985ad3c848ef2ab7f04b11fef76361d7261d4f0d86cd22635bf9481387a9d48cf8e164e86dad9d4f570b7f8d5cad64491f0a5f23992995504c60c618129178fcd2de8a1b2921359f73115bdb6e505b031e1779bd8ab2a84a713ed01bec03b9d7c86061639b35461c5402fbac6e7b426d97018afaa4bdf1c5097f96ca4292143802bd44e404e3218f54f5078cabf9b3da0ff0f7ca17c0aaffd5d2a76b83ffb9de04ed6b8d344285b9cc97dd22c0983e2ff276c14c8d6cfdbaed5febd536a01363404a31882ca1d2e278fdff1578899e3484d08a1667cae55cd4c6825b0646e7729d586013bbc8d36e6ba9a49c284162e60590befe6a32efdf9306aa1fa3c93a1bce43edec38f9c5a641a221d51368c23f4c922923738fc833b6be68a2a6e9f8cb7e5c595a8c067813fc639e8f1e6bf3fb794e47b482fbeee37fe21c7ed41ae82733883e57d7370e061b84ed18457f55b81060b55a890837201ea893a8c66cebb367e14604bd55271505e25f3999414e467b74bab8e744b74ea898edfedab73917e015a96bdb28e7ffa77be2d1e988066433be080f5ebf68f30c952a0fe6a64e4e55a964beb035a0de58dd6bd4b7ace439ddf9bb32a7cd5b63e5bb821d7a7f3b95388f734307ccee9792fdbc705f4e45c7e1f9ce282bb63b173f5805cfe41edd07e37022c70cd2c47dacb4264c2a53c32899b87eb9532decce1f316c301a161f8cc963d5df5522cb9258ab36a2347842a4c2a652cb1a0bc3f358e62d3223a4280a31389c65408cfef7533538e9fe7fd8fdc095aa601e613add05ae412c69020e7ce5408da423a47a09e4832fa2de876c9b42b4b8bd5c8d27d9fa0385d23146eb2cc34cea720165176d3a89673fd982780a7cb7aa23728addd63fcbbbd1f890c4da98aa03b2fa0bc1ddd1cb6b4cd79b008da83c4ef079487724ec3f2ec9b9c8eb7d0d0ae53da7e4d8ae0a53303dbdc992760576cd1e4550dc913dcc539fc8652889ece06b788c8bda9ced02badd8c465d6db28f51eedadf44001553a1165dc47b29c0843708bd025ad52699a3a60846f2ef0ef3fe8f4c9629babbc7c4cc9c2a5367322626f5c14b3d30ebe6b75278bdee4adc4b674b643bb71be50b83c372c32fb806a12bfe9ea313a42780bdb3edf889af8287be68d85c534f23f69656cea0d393c65cd3f4847e4efc57f374581da40716bae9931681f7089ed154191b35bbcad6355ce02af2012a2420ff906abc9d86c6f93cd50748ef3546125424a81418c34594feb2b72791fc3bc2452ccd2d15d9a8e446e6080dac9d575417a30b64fa231e60d2397961881375cc4921e3c6cf5af50c71954f3a63793d9b6d110d400103e618b57c0fe2df372b6425a1f77fbd2d1e4c4c51cc3782daccfe05ee9a365e0803a14ed59bc11f39475e5b317dd731a1cada61ed1165c63b5a0072b719ac5afaff9fcb6b2f5035253157f72065a3dd641eed8431bfb86a0b622b81011667a1a163278d411598adbf22504b9184973504a37e504273ea906f8a7890517669fa98fb119eb3cf93070a382f70049c8e047f0431d3d8a0e4ae014c8e350ef791cc71df866b5ccc1e5a719f8288f19c233d933ec2ead7a563f1fe0c9b6a5653e58744827d4f1e3d3aa1e075fe5c9e07240f3addd044c576060a3afe654d0db4600cb6362dcb3b0b818d3c5e5cb01c2a57fda6916346612cf48a810add3d23ec6e30a55b03b1406f33b0a0bc4d684787b45ee1ad40da7fd6f7e115aee4941519719b613739c04d453e1e2cb9f78c81222db2689760c","isRememberEnabled":true,"rememberDurationInDays":30,"staticryptSaltUniqueVariableName":"870fc465f9f07b7d6d58763646d8ccf5"};
 
             // you can edit these values to customize some of the behavior of StatiCrypt
             const templateConfig = {

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html class="staticrypt-html">
+<html class="staticrypt-html" lang="en">
     <head><meta name="robots" content="noindex, nofollow">
         <meta charset="utf-8" />
-        <title>Luthien (preview)</title>
+        <title>Luthien website preview</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <!-- do not cache this page -->
@@ -12,165 +12,39 @@
         <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
         <meta http-equiv="pragma" content="no-cache" />
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Lora&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
         <style>
-            .staticrypt-hr {
-                margin-top: 20px;
-                margin-bottom: 20px;
-                border: 0;
-                border-top: 1px solid #eee;
-            }
-
-            .staticrypt-page {
-                width: 360px;
-                padding: 8% 0 0;
-                margin: auto;
-                box-sizing: border-box;
-            }
-
-            .staticrypt-form {
-                position: relative;
-                z-index: 1;
-                background: #ffffff;
-                max-width: 360px;
-                margin: 0 auto 100px;
-                padding: 45px;
-                text-align: center;
-                box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-            }
-
-            .staticrypt-form input[type="password"],
-            input[type="text"] {
-                background: inherit;
-                border: 0;
-                box-sizing: border-box; /* This ensures padding is included in the total width */
-                font-size: 14px;
-                outline: 0;
-                padding: 15px 30px 15px 15px; /* Adjust the padding to ensure there is space for the icon */
-                width: 100%;
-            }
-
-            .staticrypt-password-container {
-                position: relative;
-                outline: 0;
-                background: #f2f2f2;
-                width: 100%;
-                border: 0;
-                margin: 0 0 15px;
-                box-sizing: border-box;
-            }
-
-            .staticrypt-toggle-password-visibility {
-                cursor: pointer;
-                height: 20px;
-                opacity: 60%;
-                padding: 13px;
-                position: absolute;
-                right: 0;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 20px;
-            }
-
-            .staticrypt-form .staticrypt-decrypt-button {
-                text-transform: uppercase;
-                outline: 0;
-                background: #3B9494;
-                width: 100%;
-                border: 0;
-                padding: 15px;
-                color: #ffffff;
-                font-size: 14px;
-                cursor: pointer;
-            }
-
-            .staticrypt-form .staticrypt-decrypt-button:hover,
-            .staticrypt-form .staticrypt-decrypt-button:active,
-            .staticrypt-form .staticrypt-decrypt-button:focus {
-                background: #3B9494;
-                filter: brightness(92%);
-            }
-
-            .staticrypt-html {
-                height: 100%;
-            }
-
-            .staticrypt-body {
-                height: 100%;
-                margin: 0;
-            }
-
-            .staticrypt-content {
-                height: 100%;
-                margin-bottom: 1em;
-                background: #141216;
-                font-family: "Arial", sans-serif;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-            }
-
-            .staticrypt-instructions {
-                margin-top: -1em;
-                margin-bottom: 1em;
-            }
-
-            .staticrypt-title {
-                font-size: 1.5em;
-            }
-
-            label.staticrypt-remember {
-                display: flex;
-                align-items: center;
-                margin-bottom: 1em;
-            }
-
-            .staticrypt-remember input[type="checkbox"] {
-                transform: scale(1.5);
-                margin-right: 1em;
-            }
-
-            .hidden {
-                display: none !important;
-            }
-
-            .staticrypt-spinner-container {
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .staticrypt-spinner {
-                display: inline-block;
-                width: 2rem;
-                height: 2rem;
-                vertical-align: text-bottom;
-                border: 0.25em solid gray;
-                border-right-color: transparent;
-                border-radius: 50%;
-                -webkit-animation: spinner-border 0.75s linear infinite;
-                animation: spinner-border 0.75s linear infinite;
-                animation-duration: 0.75s;
-                animation-timing-function: linear;
-                animation-delay: 0s;
-                animation-iteration-count: infinite;
-                animation-direction: normal;
-                animation-fill-mode: none;
-                animation-play-state: running;
-                animation-name: spinner-border;
-            }
-
-            @keyframes spinner-border {
-                100% {
-                    transform: rotate(360deg);
-                }
-            }
-
-            @media screen and (-webkit-min-device-pixel-ratio: 0) {
-                .staticrypt-form input[type="password"],
-                input[type="text"] {
-                    font-size: 16px;
-                }
-            }
+            /* Luthien look: matches luthienresearch.org (Lumen palette) */
+            :root { --bg: #141216; --card: #18151C; --border: #28243A; --text: #EDE5D8; --muted: #9A92AE; --teal: #3B9494; --amber: #C47B42; }
+            .staticrypt-html { height: 100%; }
+            .staticrypt-body { height: 100%; margin: 0; background: var(--bg); }
+            .staticrypt-content { min-height: 100%; display: flex; align-items: center; justify-content: center; padding: 24px 16px; box-sizing: border-box;
+                background: radial-gradient(ellipse at 50% 0%, rgba(59,148,148,0.10), rgba(20,18,22,0) 60%), var(--bg);
+                font-family: 'Lora', Georgia, serif; color: var(--text); -webkit-font-smoothing: antialiased; }
+            .staticrypt-page { width: 100%; max-width: 400px; }
+            .staticrypt-form { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 40px 32px 32px; text-align: center; }
+            .lu-logo { display: block; height: 40px; width: auto; margin: 0 auto 28px; }
+            .lu-kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); margin: 0 0 10px; }
+            .staticrypt-title { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: -0.01em; margin: 0 0 10px; }
+            .staticrypt-instructions p:last-child { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin: 0 0 28px; }
+            .staticrypt-password-container { position: relative; margin: 0 0 16px; }
+            .staticrypt-form input[type="password"], .staticrypt-form input[type="text"] {
+                width: 100%; box-sizing: border-box; padding: 14px 44px 14px 16px; font-size: 16px; font-family: 'JetBrains Mono', monospace;
+                background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 6px; outline: 0; transition: border-color 0.2s; }
+            .staticrypt-form input[type="password"]:focus, .staticrypt-form input[type="text"]:focus { border-color: var(--teal); }
+            .staticrypt-form input::placeholder { color: #6E6782; }
+            .staticrypt-toggle-password-visibility { cursor: pointer; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; filter: invert(0.75); opacity: 0.7; }
+            label.staticrypt-remember { display: flex; align-items: center; gap: 10px; margin: 0 0 20px; font-size: 0.9rem; color: var(--muted); cursor: pointer; }
+            .staticrypt-remember input[type="checkbox"] { width: 16px; height: 16px; margin: 0; accent-color: var(--teal); }
+            .staticrypt-form .staticrypt-decrypt-button { width: 100%; padding: 13px; border: 0; border-radius: 4px; background: var(--teal); color: var(--bg);
+                font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+            .staticrypt-form .staticrypt-decrypt-button:hover, .staticrypt-form .staticrypt-decrypt-button:focus { background: #2A8080; }
+            .hidden { display: none !important; }
+            .staticrypt-spinner-container { height: 100%; display: flex; align-items: center; justify-content: center; }
+            .staticrypt-spinner { width: 2rem; height: 2rem; border: 0.25em solid var(--teal); border-right-color: transparent; border-radius: 50%; animation: spinner-border 0.75s linear infinite; }
+            @keyframes spinner-border { 100% { transform: rotate(360deg); } }
         </style>
     </head>
 
@@ -182,12 +56,56 @@
         <div id="staticrypt_content" class="staticrypt-content hidden">
             <div class="staticrypt-page">
                 <div class="staticrypt-form">
+                    <svg class="lu-logo" role="img" aria-label="Luthien" viewBox="0 0 1605 412" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:bevel;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-937.841071,-1410.345194)">
+        <g id="luthnew-LINII" transform="matrix(1,0,0,1.002727,53,394.166122)">
+            <g transform="matrix(0.462203,0.462203,-0.468657,0.468657,1141.851731,116.649514)">
+                <path d="M932.026,1029.754L932,1432L1262,1432" style="fill:none;stroke:rgb(252,252,252);stroke-width:50.5px;"/>
+            </g>
+            <g transform="matrix(-0.462834,-0.461575,0.468017,-0.469293,1016.439175,2320.96219)">
+                <clipPath id="_clip1">
+                    <path d="M906.537,1029.872L957.463,1029.735L957.463,1406.888L1262.069,1406.888L1261.931,1457.112L931.931,1457.112L906.537,1432.068L906.537,1029.872Z"/>
+                </clipPath>
+                <g clip-path="url(#_clip1)">
+                    <g transform="matrix(-1.083245,1.065428,-1.07736,-1.065428,1555.09354,1256.688816)">
+                        <use xlink:href="#_Image2" x="170.385" y="41.372" width="212px" height="366px"/>
+                    </g>
+                </g>
+            </g>
+            <g transform="matrix(0.16152,0.161534,-0.163776,0.16379,1067.497858,833.492427)">
+                <path d="M932.026,1029.754L932,1432L1337.05,1431.984" style="fill:none;stroke:rgb(59,148,148);stroke-width:117.41px;"/>
+            </g>
+            <g transform="matrix(-0.161741,-0.161314,0.163552,-0.164012,1090.043537,1602.93859)">
+                <clipPath id="_clip3">
+                    <path d="M872.816,1029.949L991.216,1029.626L991.202,1373.615L1337.303,1373.615L1336.97,1490.385L931.834,1490.385L872.8,1432.162L872.816,1029.949Z"/>
+                </clipPath>
+                <g clip-path="url(#_clip3)">
+                    <g transform="matrix(-3.099785,3.048802,-3.082689,-3.048549,2458.357997,1176.471636)">
+                        <use xlink:href="#_Image4" x="213.28" y="129.763" width="85px" height="151px"/>
+                    </g>
+                </g>
+            </g>
+            <g transform="matrix(1.352096,0,0,1.39709,587.207186,846.1791)">
+                <path d="M606.432,330.452L606.432,220.641L625.384,220.641L625.384,315.077L689.33,315.077L689.33,330.452L606.432,330.452Z" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+                <path d="M767.945,331.259C758.411,331.259 750.354,329.755 743.777,326.746C737.199,323.737 731.904,319.646 727.893,314.473C723.882,309.3 720.955,303.419 719.112,296.831C717.269,290.242 716.348,283.421 716.348,276.366L716.348,220.641L735.301,220.641L735.301,276.366C735.301,281.349 735.847,286.198 736.94,290.913C738.033,295.627 739.816,299.84 742.291,303.55C744.766,307.26 748.091,310.207 752.267,312.389C756.443,314.571 761.625,315.662 767.814,315.662C774.116,315.662 779.361,314.551 783.548,312.327C787.736,310.104 791.06,307.112 793.523,303.351C795.985,299.59 797.763,295.372 798.856,290.697C799.949,286.023 800.495,281.246 800.495,276.366L800.495,220.641L819.45,220.641L819.45,276.366C819.45,283.833 818.488,290.887 816.565,297.527C814.641,304.167 811.624,310.002 807.513,315.031C803.402,320.061 798.086,324.023 791.563,326.917C785.04,329.812 777.168,331.259 767.945,331.259Z" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+                <path d="M949.091,236.016L909.356,236.016L909.356,330.452L890.401,330.452L890.401,236.016L850.629,236.016L850.629,220.641L949.091,220.641L949.091,236.016Z" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+                <path d="M1080.095,220.641L1080.095,330.452L1061.142,330.452L1061.142,281.997L1000.906,281.997L1000.906,330.452L981.954,330.452L981.954,220.641L1000.906,220.641L1000.906,266.622L1061.142,266.622L1061.142,220.641L1080.095,220.641Z" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+                <rect x="1123.785" y="220.641" width="18.953" height="109.81" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+                <path d="M1268.396,315.077L1268.396,330.452L1186.426,330.452L1186.426,220.641L1266.882,220.641L1266.882,236.016L1205.378,236.016L1205.378,267.253L1258.687,267.253L1258.687,281.622L1205.378,281.622L1205.378,315.077L1268.396,315.077Z" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+                <path d="M1323.709,252.821L1323.709,330.452L1304.757,330.452L1304.757,220.641L1320.302,220.641L1387.918,300.007L1387.918,220.762L1406.871,220.762L1406.871,330.452L1390.426,330.452L1323.709,252.821Z" style="fill:rgb(252,252,252);fill-rule:nonzero;"/>
+            </g>
+        </g>
+    </g>
+    <defs>
+        <image id="_Image2" width="212px" height="366px" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAFuANQDAREAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAIBAwj/xAAaEAEBAQEBAQEAAAAAAAAAAAAAAgERQXEh/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/APYwAAKnO/AWACarzASC53oNAAAAAAAAAAAAAAAAAByABU534CwATVeYCAAaC53oNAAAAAAAAAAAAAAAAByBU534CwATVeYCAAAAaC53oNAAAAAAAAAAAAAAABE534CwATVeYCAAAAAAaC53oNAAAAAAAAAAAAAAAABNV5gIAAAAAAABoLneg0AAAAAAAAAAAAAAE1XmAgAAAAAAAAAGgud6DQAAAAAAAAAAAATVeYCAAAAAAAAAAAAaC53oNAAAAAAAAAAAByAAAAAAAAAAAAABoLneg0AAAAAAAAAAHIAAAAAAAAAAAAAAGgud6DQAAAAAAAAAcgAAAAAAAAAAAAAAAaC53oNAAAAAAAAByAAAAAAAAAAAAAAAABoLneg0AAAAAAAHIAAAAAAAAAAAAAAAAAGgud6DQAAAAAAcgAAAAAAAAAAAAAAAAAAaC53oNAAAAAByAAAAAAAAAAAAAAAAAAABoLneg0AAAAHIAAAAAAAAAAAAAAAAAAAAGgud6DQAAAcgAAAAAAAAAAAAAAAAAAAAAaC53oNAAByAAAAAAAAAAAAAAAAAAAAAABoLneg0AHIAAAAAAAAAAAAAAAAAAAAAAAGgud6DQcgAAAAAAAAAAAAAAAAAAAAAAAAaC8rOfoOYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALyfz9BAAAAAAAAAAAAAAAAAAAAAAAAAOkzz6DQcgAAAAAAAAAAAAAAAAAAAAAAAdJnn0GgA5AAAAAAAAAAAAAAAAAAAAAAA6TPPoNAAByAAAAAAAAAAAAAAAAAAAAAB0mefQaAAADkAAAAAAAAAAAAAAAAAAAADpM8+g0AAAAHIAAAAAAAAAAAAAAAAAAAHSZ59BoAAAAAOQAAAAAAAAAAAAAAAAAAOkzz6DQAAAAAAcgAAAAAAAAAAAAAAAAAdJnn0GgAAAAAAA5AAAAAAAAAAAAAAAAA6TPPoNAAAAAAAAByAAAAAAAAAAAAAAAB0nOfvoNAAAAAAAAAByAAAAAAAAAAAAAABcz7oKAAAAAAAAAAByAAAAAAAAAAAAABcz7oKAAAAAAAAAAAByAAAAAAAAAAAABcz7oKAAAAAAAAAAAAByAAAAAAAAAAABcz7oKAAAAAAAAAAAAAByAAAAAAAAAABcz7oKAAAAAAAAAAAAAAByAAAAAAAAABcz7oKAAAAAAAAAAAAAAAByAAAAAAAABcz7oKAAAAAAAAAAAAAAAAByAAAAAAABcz7oKAAAAAAAAAAAAAAAAAByAAAAAABcz7oKAAAAAAAAAAAAAAAAAAByAAAAABcz7oKAAAAAAAAAAAAAAAAAAABNT7gIAAABcz7oKAAAAAAAAAAAAAAAAAAAAABNT7gIABcz7oKAAAAAAAAAAAAAAAAAAAAAAABF5z9wGxnoKAAAAAAAAAAAAAAAAAAAAAAB//2Q=="/>
+        <image id="_Image4" width="85px" height="151px" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFUAAACXCAYAAABk1RflAAAACXBIWXMAAA7EAAAOxAGVKw4bAAADWklEQVR4nO3dy3HqQBBG4XMhLWdEPGTktCjuxnZhLMS8etTd85+lXVjTXwnrsZl/9/v9Tkcf1+vmzz8vl54/O7Tb7Tb1eKeeD78Cffe72Z3P56nHa0YtQVsVtgm1BmtF2GrUFqTVYKtQe3BWgi1GHYGyCmwR6kiMFWDfologZIfdRbUcPjPsS9QZQ2eF3USdOWxG2D+oRwyZDbbr2X9kmWB/oR492NHHf6wH9gfVy0Be1gHtsCfwNQj4Wk8L7MnTAI95WlctrJsL1VZRYV2jQkxY96gQDzYEKsSCDYMKcWBDoUIM2HCo4B82JCr4hg2LCn5hQ6OCT9jwqOAPNgUq+IJNgwp+YFOhgg/YdKhwPGxKVDgWNi0qHAebGhWOgU2PCvNhl0CFubDLoMI82KVQYQ7scqhgD7skKtjCLosKdrBLo4IN7PKoMB5WqF+NhBXqQ6NghfrUCFihbtQLK9QX9cAKdadWWKG+qQVWqAXVwgq1sBpYoVZUCivUykpghdrQO1ihNrYHK9SOXsEKtbMtWKEO6BlWqIN6hBXqwL5hhTq4j+tVqBYJ1SChGiRUg4RqkFANEqpBQjVIqAYJ1SChGiRUg4RqkFANEqpBQjVIqAYJ1SChGiRUg4RqkFANEqpBQjVIqIP7vFyEOrLvDXiFOqjHHY2FOqDnLaKF2tnWnttC7ejVJuZCbWxvV3ihNrQHCkKt7h0oCLWqElAQanGloCDUompAQahvqwUFoe7WAgpCfVkrKAh1sx5QEOqfekFBqL8aAQpC/WkUKAgVGAsKQh0OCoujWoDCwqhWoLAoqiUoLIhqDQqLoc4AhYVQZ4HCIqgzQWEB1NmgkBz1CFBIjHoUKCRFPRIUEqIeDQrJUD2AQiJUL6CQBNUTKCRA9QYKwVE9gt5ut7ioXkEh6JnqGRQConoHhWCoEUAhEGoUUAiCGgkUAqBGAwXnqBFBwTFqVFCAk8fFe1xTKSh8namehvC0lu9qQOHh6+9hGA9reK4WFJ7+px45VBZQ2LhQHTFcJlB4cfWfOWQ2UNi5pZoxbEZQeHOfajl0VlAouPm3GD4zKBQ+UY1EyA4KFY+pIzBWAIXKZ/8elFVAoeGFSgvOSqDQ+JaqBmk1UOh49VeCtSIodL5P3UNbFRTgPweSRkLW2GjNAAAAAElFTkSuQmCC"/>
+    </defs>
+</svg>
                     <div class="staticrypt-instructions">
-                        <p class="staticrypt-title">Luthien (preview)</p>
-                        <p>Draft preview of the Luthien site by Evan Bright. Enter the password you were given.</p>
+                        <p class="lu-kicker">Private draft</p>
+                        <p class="staticrypt-title">Luthien website preview</p>
+                        <p>Copy and design edits by Evan Bright. Enter the password you were given to view the site.</p>
                     </div>
-
-                    <hr class="staticrypt-hr" />
 
                     <form id="staticrypt-form" action="#" method="post">
                         <div class="staticrypt-password-container">
@@ -212,7 +130,7 @@
                             Remember me for 30 days
                         </label>
 
-                        <input type="submit" class="staticrypt-decrypt-button" value="Open preview" />
+                        <input type="submit" class="staticrypt-decrypt-button" value="View the site" />
                     </form>
                 </div>
             </div>
@@ -820,7 +738,7 @@ exports.init = init;
                 templateToggleAltShow = "Show password",
                 templateToggleAltHide = "Hide password",
                 isRememberEnabled = true,
-                staticryptConfig = {"staticryptEncryptedMsgUniqueVariableName":"73975d1924d6d791f3de15beaa45023d8b112a7919397edba7ac36c60d8c5df2d506e513b6a90d85f2d5024164399bc61e3ee7bb3cbabf6db54ef8cb20ecc50725b02cd5485e89c6616f8d251f57dde995be5a6e4aa25bded45e2cc3d96d36b25fe50098487d349f15303b8442bf6fad879f9fea27c4c5728808daf370e14e57d2cd950104460a730e8084924bf549bff5e4d5a62c64384dafd951247fb03bf3afe3aacc78b9672758243f6dafe6dabbd6d3fc80bd1289334899860e673b0705f10f08c3a9ee3c631a2843c286a7f8903cc9f81035105814e858e1e04385070e7bbe53b3153d682cbe3067a68bc9ff625c173adc80be489fe5c86686dbdb02b1182e331f7f3c44bbf059d26a7f729a83e24f99905ec9063d7329f48505906f1b764109a0ca3b9010eb8f11339079ac30edb30e86d2390c497135640b27e248825f0afd8dfca8bb0a58e8ae8ef5a9ea6fb10c13d345aaea305eb54aaf362b147697e14ab0be419afdbde7227319285628e904a8dbfc188e92bc1d29afab080e6b5d37a60fbd5c50c53653c64d436833e6bf797a9a197e3d9fdeab3b3ee7a16e01bbd2e0745abf99f40aea4a1a6d7e4bcfb3171b328aba7a376dbd52f616a065fca8429aa9cb236b37fcfe01a6e08b9b514076d095319ba5aa9cc14c02c3e2a2a61ebefb9fca12cff8aa5b994efbc3a314fc0b316ca9097d65b51cdeed35be1103552de53c7d71d5cc5d562fcdb8c94e80b75aea660297382c86bc303c5aea1a076117702a69ec08450d486ffdbb9748a8298af82d525baaeb007e821f102431448167e42657b419c37fc66bd934aee793f719b2be1ea22b1aceb30c51faa74db595cb9034b6f7c5ff9989133eb4f41bac8393c96b86101902a797e6d4f46b1160c2726bad5ab5810cd2699faac1598e2a76ac1d7af0012f18eb558f5f7726e64bf0186d29414d69f49f89a346e065f91014bb5d24ec80effc49c10c7355b3b92b989e235be3936e62e5923c8f1b3d30073d187722ffd50176c9e82438e7abe9fc2ebf423034e1346ea1211ec75940549878b5efc22d630f9a289a7fe53921eb9ac71cb6a917bf36ca0317fdbf301b87eb397a6ae8d4e38e6f8d6ecc3381d9655fd745abcfabfbf464345071e6980338ea905656a528b3fd1819ed0f995a72cb66eee43a3ddc43ba402aaa10ef11a086970db5c37926e03e7820889eef9d6d5c8f2bf63d90fec1ec0bd27452ce658912c1","isRememberEnabled":true,"rememberDurationInDays":30,"staticryptSaltUniqueVariableName":"870fc465f9f07b7d6d58763646d8ccf5"};
+                staticryptConfig = {"staticryptEncryptedMsgUniqueVariableName":"659add1dca7a52282d235739deb856330014ca6c723fd402740ad465aa8886768c0a0ec71c78ee491feab03a4d01f4e82cdac9d53ca3391194a8c1f4e6afca572709ccd4e13ee5b492b6c83a3002b3c4552de4e37d039814d768f7bd9dcd6b7a672a447b61f8b566e638171ed95649a6ef48f2b452c81f0e47f574bf538ab34597221cb163377c77efca39094ff9fdff64b29ceab13d8cce24526fd415b675d606e0e027fd49dc697af62e35b797f5cf8e993e24dd5b19f4841a5b756212212e97fcfe67e8918f30d6ca925e95492cb9cb22ec2e63aea3f216989084487fb8d2474a854195ae2d0804e2de291d56f00b0c3c4876f08e8739da1fd65482508f19f1ac71c88bef094b57f978e382dafd4d03e3e95ed09ce902749aca9501264a1eac75f24604ee4cb84f35d0f41d45c0f19f73909d6ffae666995fc0de980d1e47dc4a78fc421bd8dd3e942e2a9b0e387d4427f584f17e6dd4f38246ade0c41ceaf84742a9a2644c3462f2b9231eb8f868da4cbaf2dfccfbc46f30ce7d4c95969e84b91e3f1ec0f852e4b84ae038ca7ee8c08b001e353f358ff7c511b7e0118f0d3750a2252c988e3e47d66ee4644154ce6b7415e24ad18ca23de6d9767f8bbbdd6195cc6ee1afa717bda1154db84720073ea179466809c8e83420a964c5cd4cf2bb9067c79e13edc5692e5f086bfb923aa8495653ef581dad84ceabdf437b7727cc6d1370829f759b9af37c6fa12f30a996e22d4bf195b592dfa78c4c63b7efcd64f65d0695b66d8db1fae63651d687be1482d2e948b74ca6eecd363721d3ef66a1f9d17ba69f29ba91390d73fd457c838773793f580f3dfe60fb21921c1f64a667ec654419f80ffde266c267424a708f1ef100459029acc8700155730f426f0180ffa2ff5b94f8e6aa7de317a7c1deaf09d92749960a5a01d33f7f9d1688148ac00e6dc73f5ac12587daa6d42249141300a30a2fe92be0d25b6f14811a75e0ad9ffa9d832dc17e65c759a05e9a141e5057949e175f08f3445df7a0c3ec7e02b29ef2bab6455b104da078a06d4d1e9e71e78c5d59dbf3cd4f9e52508c4dcafbed5669c151769d6b5f7fd306fb17b4c57754954545ab0625d3e3a1067df184f5fe4c21896a46572b9aaf4e2869b3eca5c0768dcec40832d3c403e6bec9c4adeef4e9a3e2783d0219c24ec6cb95a3aa82a273d13ce3061c8950abae79bdb6a0be956fbd7a8267d5eb465b2b93b9fa3f7521","isRememberEnabled":true,"rememberDurationInDays":30,"staticryptSaltUniqueVariableName":"870fc465f9f07b7d6d58763646d8ccf5"};
 
             // you can edit these values to customize some of the behavior of StatiCrypt
             const templateConfig = {
