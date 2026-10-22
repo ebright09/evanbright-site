@@ -42,6 +42,8 @@
                 font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
             .staticrypt-form .staticrypt-decrypt-button:hover, .staticrypt-form .staticrypt-decrypt-button:focus { background: #2A8080; }
             .hidden { display: none !important; }
+            /* One entry unlocks every page: remember is always on, so the checkbox is hidden */
+            #staticrypt-remember-label { display: none !important; }
             .staticrypt-spinner-container { height: 100%; display: flex; align-items: center; justify-content: center; }
             .staticrypt-spinner { width: 2rem; height: 2rem; border: 0.25em solid var(--teal); border-right-color: transparent; border-radius: 50%; animation: spinner-border 0.75s linear infinite; }
             @keyframes spinner-border { 100% { transform: rotate(360deg); } }
@@ -126,7 +128,7 @@
                         </div>
 
                         <label id="staticrypt-remember-label" class="staticrypt-remember hidden">
-                            <input id="staticrypt-remember" type="checkbox" name="remember" />
+                            <input id="staticrypt-remember" type="checkbox" name="remember" checked />
                             Remember me for 30 days
                         </label>
 
@@ -738,7 +740,7 @@ exports.init = init;
                 templateToggleAltShow = "Show password",
                 templateToggleAltHide = "Hide password",
                 isRememberEnabled = true,
-                staticryptConfig = {"staticryptEncryptedMsgUniqueVariableName":"02a1047444f95a9b7d87fa14badabad358ece55346b8e8c108c37d059686e5059b8c52b8b2c158fadfad508a2a8c6518d6dd0a916326e776f03bac179c7d5bb62cd3c8ea5a5cbeb4795db8795582fea67bb7b2c1ff160f77f751df95dc68b270464b2ff95dc24947048316927de26f7303525820e06b09ccd4aafac0c71f0eeca4651eb845faa0c062fcf290ec7338c3618955dfa5a38833593d06e3051ebcb30924d380749d2a24dc208aec05aa5d04888a1ac76b9b34b3e9a8de876e69151f9c1fc26902b3e982223cf779733b5f67efe5f35c47f8f31b37d9ef467b40d938c12db9dbc2fb15b910235decc53510b8a18ddc2e3c112ab543a20152f50bb409","isRememberEnabled":true,"rememberDurationInDays":30,"staticryptSaltUniqueVariableName":"870fc465f9f07b7d6d58763646d8ccf5"};
+                staticryptConfig = {"staticryptEncryptedMsgUniqueVariableName":"8b6b3421bd93486a5c1686474f11b187c0cd7ffc5dabc047fabbdfa6133d70769185b1a2919806a44a36f3249cbb8baf604fda116340435eacc268856fad0d20f39f22aca5a0631d678aa6f7e4f1892e482ac0c82a034d1bba087e1cb11ef77a0bf0b53572c1d0ddc7eccc9153b114d44eacdf146f0df1cd2ccae88ea42e8032952f9383cfc2cae4b50889145e063642b910cb6800d271ed87b718baffa490993cfa536f20be2355fe05ea8e09b816674370816e30047fae5f89f6484b2f66902d08029a1478ffe7b17577453c764064916a80ea4d5933ca9a7e995730d927bf0990377b1b21387415144147ac0aa179aba44e9afa8b0d1177f2b904ce997a1c","isRememberEnabled":true,"rememberDurationInDays":30,"staticryptSaltUniqueVariableName":"870fc465f9f07b7d6d58763646d8ccf5"};
 
             // you can edit these values to customize some of the behavior of StatiCrypt
             const templateConfig = {
